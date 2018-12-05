@@ -4,26 +4,26 @@
     {
       "target_name": "lymuilib",
       "sources": [
-        "lymui/binding/bootstrap.c",
-        "lymui/binding/binding_util.c",
-        "lymui/binding/bridge.c",
-        "lymui/binding/factory.c",
-        "lymui/binding/convert_xyz.c",
-        "lymui/binding/convert_rgb.c",
-        "lymui/binding/convert_regular.c",
-        "lymui/binding/convert_space.c",
-        "lymui/binding/deserializer.c",
-        "lymui/binding/deserializer_space.c",
-        "lymui/binding/deserializer_opts.c",
-        "lymui/binding/normalizer/normalizer_rgb.c",
-        "lymui/binding/normalizer/normalizer_xyz.c",
+        "src/bootstrap.c",
+        "src/binding_util.c",
+        "src/bridge.c",
+        "src/factory.c",
+        "src/convert_xyz.c",
+        "src/convert_rgb.c",
+        "src/convert_regular.c",
+        "src/convert_space.c",
+        "src/deserializer.c",
+        "src/deserializer_space.c",
+        "src/deserializer_opts.c",
+        "src/normalizer/normalizer_rgb.c",
+        "src/normalizer/normalizer_xyz.c",
       ],
       "include_dirs": [
-        "bin/include",
-        "lymui/binding/include"
+        "lymui/bin/include",
+        "src/include"
       ],
       "libraries": [
-        "<(module_root_dir)/bin/liblymui.a"
+        "<(module_root_dir)/lymui/bin/liblymui.a"
       ]
     }
   ]

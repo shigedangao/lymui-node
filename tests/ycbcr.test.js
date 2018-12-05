@@ -1,6 +1,6 @@
 const { expect } = require('chai')
 const SegfaultHandler = require('segfault-handler')
-const lib = require('../build/Debug/lymuilib')
+const lib = require('../build/Release/lymuilib')
 
 SegfaultHandler.registerHandler('ycbcr_crash.log')
 
