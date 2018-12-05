@@ -1,0 +1,3 @@
+[submodule "lymui"]
+	path = lymui
+	url = https://github.com/MarcInthaamnouay/lymui.git
