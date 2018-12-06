@@ -1,5 +1,4 @@
 const { expect } = require('chai');
-const { toFixed } = require('./util')
 const SegfaultHandler = require('segfault-handler')
 const lib = require('../build/Release/lymuilib')
 
@@ -15,11 +14,11 @@ describe('Creating HSL from RGB', () => {
     
     const hsl = await lib.convertRegular({
       input: rgb,
-      output: 'hsl'
+      output: 'hsl',
+      clamp: 100
     })
 
-    const data = toFixed(hsl.data)
-    expect(data).to.be.deep.equal({
+    expect(hsl.data).to.be.deep.equal({
       h: 237,
       s: 90,
       l: 19.6

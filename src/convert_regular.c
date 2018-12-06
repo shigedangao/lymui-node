@@ -6,12 +6,12 @@
 //  Copyright © 2018 Marc. All rights reserved.
 //
 
+#include <node_api.h>
 #include "convert_regular.h"
 #include "binding_error.h"
 #include "factory.h"
 #include "deserializer.h"
 #include "bridge.h"
-#include <node_api.h>
 
 /**
  * @brief Generate the napi_value containing the color type
@@ -32,7 +32,7 @@ static napi_value generateTypeJSObj(napi_env env, BridgeObj *bridge) {
         case hsv:
             return HsvJSObjFactory(env, rgb, bridge->clamp);
         case cymk:
-            return CymkJSObjFactory(env, rgb);
+            return CymkJSObjFactory(env, rgb, bridge->clamp);
         case ycbcr:
             return YcbcrJSObjFactory(env, rgb);
         case yuv:

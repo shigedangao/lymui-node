@@ -86,7 +86,7 @@ napi_value HexJSObjFactory(napi_env env, Rgb *rgb) {
     return object;
 }
 
-napi_value CymkJSObjFactory(napi_env env, Rgb *rgb) {
+napi_value CymkJSObjFactory(napi_env env, Rgb *rgb, double clamp) {
     napi_status status;
     napi_value object, data;
     
@@ -110,12 +110,17 @@ napi_value CymkJSObjFactory(napi_env env, Rgb *rgb) {
         assignPropToJSObj(&object, env, string, "error", cymk->error);
         return object;
     }
+
+    double c = clampValue(cymk->c, clamp);
+    double y = clampValue(cymk->y, clamp);
+    double m = clampValue(cymk->m, clamp);
+    double k = clampValue(cymk->k, clamp);
     
     // assign the cymk object
-    assignPropToJSObj(&data, env, numberDouble, "c", &cymk->c);
-    assignPropToJSObj(&data, env, numberDouble, "y", &cymk->y);
-    assignPropToJSObj(&data, env, numberDouble, "m", &cymk->m);
-    assignPropToJSObj(&data, env, numberDouble, "k", &cymk->k);
+    assignPropToJSObj(&data, env, numberDouble, "c", &c);
+    assignPropToJSObj(&data, env, numberDouble, "y", &y);
+    assignPropToJSObj(&data, env, numberDouble, "m", &m);
+    assignPropToJSObj(&data, env, numberDouble, "k", &k);
     
     assignJSObjtoJSObj(env, &object, data, "data");
     
