@@ -56,9 +56,10 @@ napi_value HexJSObjFactory(napi_env env, Rgb *rgb);
  * @brief Factory creating Cymk JS Object
  * @param env napi_env
  * @param rgb Rgb struct pointer
+ * @param clamp double
  * @return napi_value
  */
-napi_value CymkJSObjFactory(napi_env env, Rgb *rgb);
+napi_value CymkJSObjFactory(napi_env env, Rgb *rgb, double clamp);
 
 /**
  * @brief Factory creating Ycbcr Object

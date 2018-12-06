@@ -1,5 +1,4 @@
 const { expect } = require('chai')
-const { toFixed } = require('./util')
 const SegfaultHandler = require('segfault-handler')
 const lib = require('../build/Release/lymuilib')
 
@@ -15,11 +14,11 @@ describe('Creating Cymk from RGB', () => {
 
     const cymk = await lib.convertRegular({
       input: rgb,
-      output: 'cymk'
+      output: 'cymk',
+      clamp: 10000
     })
 
-    const data = toFixed(cymk.data)
-    expect(data).to.be.deep.equal({
+    expect(cymk.data).to.be.deep.equal({
       c: 0.9747,
       y: 0,
       m: 0.9495,
