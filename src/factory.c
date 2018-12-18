@@ -295,7 +295,7 @@ napi_value XyzJSObjFactory(napi_env env, Rgb *rgb, char *matrix, double clamp) {
     }
     
     Matrix m = getEnumFromStr(matrix);
-    Xyz *xyz = generateXyzFromRgb(rgb, m);
+    Xyz *xyz = getXyzFromRgb(rgb, m);
     
     if (xyz == NULL) {
         assignPropToJSObj(&object, env, string, "error", OBJ_MAKE_ERR);
@@ -572,7 +572,7 @@ napi_value SrgbJSObjFactory(napi_env env, Xyz *xyz, double clamp) {
         return NULL;
     }
     
-    SRgb *srgb = getSRgbFromXyz(xyz);
+    SRgb *srgb = getSrgbFromXyz(xyz);
     if (srgb == NULL) {
         assignPropToJSObj(&object, env, string, "error", OBJ_MAKE_ERR);
         return object;

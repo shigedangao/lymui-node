@@ -65,7 +65,7 @@ napi_value normalizeYcbcr(napi_env env, napi_value color) {
         return NULL;
     }
     
-    Rgb *rgb = getRGBFromYcbcr(ycbcr);
+    Rgb *rgb = getRgbFromYcbcr(ycbcr);
     napi_value object = RgbJSObjFactory(env, rgb);
     
     return object;
@@ -90,7 +90,7 @@ napi_value normalizeXyz(napi_env env, napi_value color, char *m) {
         return NULL;
     }
     
-    Rgb *rgb = generateRgbFromXyz(xyz, mx);
+    Rgb *rgb = getRgbFromXyz(xyz, mx);
     napi_value object = RgbJSObjFactory(env, rgb);
     
     return object;
