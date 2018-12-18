@@ -1,0 +1,17 @@
+language: c
+
+os:
+  - osx
+  - linux
+
+env:
+  global:
+    - VERSION=1.0.0
+
+before_install:
+  - npm install
+  - python installer.py
+
+script:
+  - npm run build:dev
+  - npm run test
