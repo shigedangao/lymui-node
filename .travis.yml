@@ -8,10 +8,9 @@ env:
   global:
     - VERSION=1.0.0
 
-before_install:
+before_script:
   - npm install
-  - python installer.py
+  - npm run build:dev
 
 script:
-  - npm run build:dev
   - npm run test
