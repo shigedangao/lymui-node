@@ -9,8 +9,8 @@
   },
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha tests/*.test.js",
-    "build:dev": "python installer.py && node-gyp build --debug",
-    "build": "python installer.py && node-gyp build",
+    "build:dev": "node-gyp build --debug",
+    "build": "node-gyp build",
     "rebuild:dev": "node-gyp rebuild --debug",
     "rebuild": "node-gyp rebuild",
     "clean": "node-gyp clean"

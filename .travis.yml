@@ -9,6 +9,7 @@ env:
     - VERSION=1.0.0
 
 before_script:
+  - python installer.py
   - npm install
   - npm run build:dev
 
