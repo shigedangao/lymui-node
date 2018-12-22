@@ -65,6 +65,7 @@ describe('Creating YUV from RGB', () => {
         g: 255,
         b: 255
       },
+      clamp: 1,
       output: 'yuv'
     })
 
