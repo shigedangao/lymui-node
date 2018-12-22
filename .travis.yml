@@ -3,9 +3,11 @@ node_js:
   - "iojs"
   - "lts/*"
 
-os:
-  - osx
-  - linux
+matrix:
+  include:
+  - os: linux
+    dist: xenial
+  - os: osx
 
 sudo: true
 
