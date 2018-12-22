@@ -5,7 +5,7 @@ import zipfile
 import io, shutil
 
 _platform = platform.system()
-_version = "1.1.0"
+_version = "1.1.1"
 _bin_path = "lymui/bin"
 
 def update_progress(progress):
