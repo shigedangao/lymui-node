@@ -1,7 +1,8 @@
-## Lymui binding
+## Lymui-node
 
-Binding for my lymui library.
-With this library you are able to convert asynchrnously color
+Lib based on my Lymui lib that allow you to convert colors with async, promises.
+
+![Travis logo](https://travis-ci.org/MarcInthaamnouay/lymui-node.svg?branch=master)
 
 ## Test it locally
 
