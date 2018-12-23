@@ -1,6 +1,6 @@
 {
-  "name": "lymui",
-  "version": "1.1.0",
+  "name": "lymui-node",
+  "version": "1.0.0",
   "description": "Lymui is a small color conversion library. It's my first project in C !.",
   "main": "index.js",
   "directories": {
@@ -8,6 +8,7 @@
     "test": "tests"
   },
   "scripts": {
+    "install": "python installer.py && node-gyp rebuild",
     "test": "./node_modules/mocha/bin/mocha tests/*.test.js",
     "build:dev": "node-gyp build --debug",
     "build": "node-gyp build",
@@ -17,15 +18,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MarcInthaamnouay/lymui.git"
+    "url": "git+https://github.com/MarcInthaamnouay/lymui-node.git"
   },
   "author": "marc intha-amnouay",
   "license": "MIT",
   "gypfile": true,
   "bugs": {
-    "url": "https://github.com/MarcInthaamnouay/lymui/issues"
+    "url": "https://github.com/MarcInthaamnouay/lymui-node/issues"
   },
-  "homepage": "https://github.com/MarcInthaamnouay/lymui#readme",
+  "homepage": "https://github.com/MarcInthaamnouay/lymui-node#readme",
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^5.2.0",
