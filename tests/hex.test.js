@@ -55,7 +55,7 @@ describe('Creating HEX from RGB', () => {
 describe('Creating an RGB from an Hex', () => {
   it('Expect an Hex to return an RGB JS Object', async () => {
     const rgb = await lib.toRGB({
-      input: '050A62',
+      input: '050a62',
       type: 'hex'
     })
 

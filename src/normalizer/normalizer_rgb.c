@@ -20,7 +20,6 @@ napi_value normalizeHex(napi_env env, napi_value color) {
     }
     
     Rgb *rgb = getRGBFromHex(hex);
-    
     napi_value object = RgbJSObjFactory(env, rgb);
     return object;
 }

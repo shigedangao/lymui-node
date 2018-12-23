@@ -12,6 +12,7 @@ describe('Creating HSV Object from RGB', () => {
         g: 10,
         b: 98
       },
+      clamp: 10,
       output: 'hsv'
     })
 
@@ -63,6 +64,7 @@ describe('Creating HSV Object from RGB', () => {
         g: 200,
         b: 120
       },
+      clamp: 10,
       output: 'hsv'
     })
 
@@ -97,6 +99,7 @@ describe('Creating RGB Object from HSV Object', () => {
         s: 94.9,
         v: 38.4
       },
+      clamp: 10,
       type: 'hsv'
     });
 

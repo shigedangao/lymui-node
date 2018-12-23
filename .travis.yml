@@ -1,0 +1,29 @@
+language: node_js
+node_js:
+  - "lts/*"
+
+matrix:
+  include:
+  - os: linux
+    dist: xenial
+  - os: osx
+
+sudo: true
+
+env:
+  global:
+    - VERSION=1.0.0
+
+before_install:
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo easy_install pip; fi
+  - pip install requests
+  - python installer.py
+  - npm install -g node-gyp
+  - node-gyp configure
+
+before_script:
+  - npm install
+  - npm run rebuild
+
+script:
+  - npm run test

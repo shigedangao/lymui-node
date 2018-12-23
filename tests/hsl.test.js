@@ -15,7 +15,7 @@ describe('Creating HSL from RGB', () => {
     const hsl = await lib.convertRegular({
       input: rgb,
       output: 'hsl',
-      clamp: 100
+      clamp: 10
     })
 
     expect(hsl.data).to.be.deep.equal({
@@ -72,6 +72,7 @@ describe('Creating HSL from RGB', () => {
 
     const hsl = await lib.convertRegular({
       input: rgb,
+      clamp: 10,
       output: 'hsl'
     })
 

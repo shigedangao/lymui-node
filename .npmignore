@@ -1,0 +1,13 @@
+lymui/docs
+lymui/lib
+lymui/lymui
+lymui/lymui.xcodeproj
+lymui.obj
+lymui/*.yml
+lymui/*.md
+lymui/*.sh
+lymui/makefile
+build
+bin
+.vscode
+PULL_REQUEST_TEMPLATE.md

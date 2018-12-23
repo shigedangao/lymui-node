@@ -22,7 +22,7 @@ void assignPropToJSObj(napi_value * jsObj, napi_env env, JSType t, char *name, v
         status = napi_create_uint32(env, v, &value);
     } else if (t == numberDouble) {
         double v = *(double *) arg;
-        status = napi_create_double(env, (double) v, &value);
+        status = napi_create_double(env, v, &value);
     } else {
         char * v = (char *) arg;
         status = napi_create_string_utf8(env, v, strlen(v), &value);
