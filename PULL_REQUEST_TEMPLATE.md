@@ -1,21 +1,18 @@
-## Lymui
+## Lymui-node
 
-### Totoro is going to review your PR
+### Mitsuha is reviewing this PR
 
-![Totoro](https://cdn.dribbble.com/users/77598/screenshots/3893621/totoro_family.png)
+![Mitsuha](https://vignette.wikia.nocookie.net/kiminonawa/images/7/74/Mitsuha_Miyamizu_13.png/revision/latest/scale-to-width-down/2000?cb=20181114193828)
 
 ### What does this PR accomplish
 
-- [ ] Add a new feature supporting a new color type
-- [ ] Add a new binding supporting for a type color
-- [ ] Provide a fix to the current project
-- [ ] Add new test
+- [ ] Add a new binding
+- [ ] Provide bug fixes
+- [ ] Update ci or docs files
 
 ### We will check that
 
-- [ ] Make sure to have unit test
-- [ ] Make sure that any test is passing
-- [ ] Make sure to respect that when converting a ```type T``` to return a ```type T Rgb``` 
+- [ ] Unit test are fullfill
 
 🐷 Thanks for contributing ! 🐷
 
