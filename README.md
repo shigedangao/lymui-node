@@ -38,7 +38,7 @@ const hsl = lib.convertRegular({
 .catch(err => console.log(err))
 ```
 
-For more examples please take a look at the docs: [Lymui-node docs]()
+For more examples please take a look at the docs: [Lymui-node docs](https://marcinthaamnouay.github.io/lymui-node/docs/)
 
 ## Test it locally
 

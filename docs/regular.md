@@ -1,6 +1,6 @@
 # convertRegular
 
-This api allow you to convert a colortype from RGB to the followings types:
+This api allow you to convert an RGB to the followings colors foramts:
 
 - hex
 - hsl
@@ -12,12 +12,12 @@ This api allow you to convert a colortype from RGB to the followings types:
 
 # Usage
 
-Usage is pretty simple. The method take 2 parameters, 2 which are optionals
+Usage is pretty simple. The method take 4 parameters, 2 which are optionals
 
-- input: an Object representing an RGB object
-- output: a string representing the supported colors (list above)
-- clamp: An **optional** value which allow you to limit the precision of final value
-- profile: An **optional** string that is **only used for converting Rgb to Xyz** it can either take the value 'srgb' or 'adobe'. By default it is set to 'srgb'
+- **input**: An Object representing an RGB object
+- **output**: a string representing the supported colors (list above)
+- **clamp**: An **optional** integer value which allow you to limit the precision of final value
+- **profile**: An **optional** string that is **only used for converting Rgb to Xyz** it can either take the value 'srgb' or 'adobe'. By default it is set to 'srgb'
 
 # Eample
 
