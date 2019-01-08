@@ -12,6 +12,7 @@
 #include "binding_error.h"
 #include "binding_util.h"
 #include "bridge.h"
+#include "deserializer.h"
 #include "hex.h"
 
 Rgb *getRGBFromJSObj(napi_env env, napi_value obj) {
@@ -147,6 +148,7 @@ Hsv *getHsvFromJSObj(napi_env env, napi_value obj) {
 Yuv *getYuvFromJSObj(napi_env env, napi_value obj) {
     char *prop = "y:u:v";
     napi_value value[3];
+
     if (!hasPropInJSObj(env, obj, prop, MIN_PARAM_VALUE)) {
         return NULL;
     }
@@ -161,6 +163,27 @@ Yuv *getYuvFromJSObj(napi_env env, napi_value obj) {
     yuv->v = getDoubleValue(env, value[2]);
     
     return yuv;
+}
+
+Hwb *getHwbFromJSObj(napi_env env, napi_value obj) {
+    char *prop = HWB_PROPS;
+    napi_value value[3];
+
+    if (!hasPropInJSObj(env, obj, prop, MIN_PARAM_VALUE)) {
+        return NULL;
+    }
+
+    getNamedPropArray(env, prop, obj, MIN_PARAM_VALUE, value);
+    Hwb *hwb = malloc(sizeof(Hwb));
+    if (hwb == NULL) {
+        return NULL;
+    }
+
+    hwb->h = getDoubleValue(env, value[0]);
+    hwb->w = getDoubleValue(env, value[1]);
+    hwb->b = getDoubleValue(env, value[2]);
+
+    return hwb;
 }
 
 Xyz *getXyzFromJSObj(napi_env env, napi_value args) {
