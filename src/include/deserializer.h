@@ -18,6 +18,7 @@
 #define HSV_PROPS "h:s:v"
 #define YCBCR_PROPS "y:cb:cr"
 #define YUV_PROPS "y:u:v"
+#define HWB_PROPS "h:w:b"
 #define XYZ_PROPS "x:y:z"
 
 /**
@@ -30,6 +31,7 @@ typedef enum Output {
     cymk,
     ycbcr,
     yuv,
+    hwb,
     xyz
 } OType;
 

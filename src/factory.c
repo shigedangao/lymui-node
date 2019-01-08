@@ -18,6 +18,7 @@
 #include "hsl.h"
 #include "hsv.h"
 #include "yuv.h"
+#include "hwb.h"
 #include "xyz.h"
 
 napi_value RgbJSObjFactory(napi_env env, Rgb *rgb) {
@@ -82,6 +83,7 @@ napi_value HexJSObjFactory(napi_env env, Rgb *rgb) {
     assignJSObjtoJSObj(env, &object, data, "data");
     
     free(hex);
+    free(rgb);
     
     return object;
 }
@@ -125,6 +127,7 @@ napi_value CymkJSObjFactory(napi_env env, Rgb *rgb, double clamp) {
     assignJSObjtoJSObj(env, &object, data, "data");
     
     free(cymk);
+    free(rgb);
     
     return object;
 }
@@ -161,6 +164,7 @@ napi_value YcbcrJSObjFactory(napi_env env, Rgb *rgb) {
     assignJSObjtoJSObj(env, &object, data, "data");
     
     free(ycb);
+    free(rgb);
     
     return object;
 }
@@ -201,6 +205,7 @@ napi_value HslJSObjFactory(napi_env env, Rgb *rgb, double clamp) {
     assignJSObjtoJSObj(env, &object, data, "data");
     
     free(hsl);
+    free(rgb);
     
     return object;
 }
@@ -241,6 +246,7 @@ napi_value HsvJSObjFactory(napi_env env, Rgb *rgb, double clamp) {
     assignJSObjtoJSObj(env, &object, data, "data");
     
     free(hsv);
+    free(rgb);
     
     return object;
 }
@@ -281,7 +287,49 @@ napi_value YuvJSObjFactory(napi_env env, Rgb *rgb, double clamp) {
     assignJSObjtoJSObj(env, &object, data, "data");
     
     free(yuv);
+    free(rgb);
     
+    return object;
+}
+
+napi_value HwbJSObjFactory(napi_env env, Rgb *rgb, double clamp) {
+    napi_status status;
+    napi_value object, data;
+
+    status = napi_create_object(env, &object);
+    if (status != napi_ok) {
+        return NULL;
+    }
+    
+    status = napi_create_object(env, &data);
+    if (status != napi_ok) {
+        return NULL;
+    }
+
+    Hwb *hwb = getHwbFromRgb(rgb);
+    if (hwb == NULL) {
+        assignPropToJSObj(&object, env, string, "error", OBJ_MAKE_ERR);
+        return object;
+    }
+
+    if (hwb->error != NULL) {
+        assignPropToJSObj(&object, env, string, "error", hwb->error);
+        return object;
+    }
+
+    double h = clampValue(hwb->h, clamp);
+    double w = clampValue(hwb->w, clamp);
+    double b = clampValue(hwb->b, clamp);
+
+    assignPropToJSObj(&data, env, numberDouble, "h", &h);
+    assignPropToJSObj(&data, env, numberDouble, "w", &w);
+    assignPropToJSObj(&data, env, numberDouble, "b", &b);
+    
+    assignJSObjtoJSObj(env, &object, data, "data");
+
+    free(hwb);
+    free(rgb);
+
     return object;
 }
 
@@ -323,6 +371,7 @@ napi_value XyzJSObjFactory(napi_env env, Rgb *rgb, char *matrix, double clamp) {
     assignJSObjtoJSObj(env, &object, data, "data");
     
     free(xyz);
+    free(rgb);
     
     return object;
 }
@@ -397,6 +446,7 @@ napi_value LabJSObjFactory(napi_env env, Xyz *xyz, double clamp) {
     assignJSObjtoJSObj(env, &object, data, "data");
     
     free(lab);
+    free(xyz);
     
     return object;
 }
@@ -437,6 +487,7 @@ napi_value LchJSObjFactory(napi_env env, Xyz *xyz, double clamp) {
     assignJSObjtoJSObj(env, &object, data, "data");
     
     free(lch);
+    free(xyz);
     
     return object;
 }
@@ -477,6 +528,7 @@ napi_value LchLabJSObjFactory(napi_env env, Xyz *xyz, double clamp) {
     assignJSObjtoJSObj(env, &object, data, "data");
     
     free(lchlab);
+    free(xyz);
     
     return object;
 }
@@ -517,6 +569,7 @@ napi_value LuvJSObjFactory(napi_env env, Xyz *xyz, double clamp) {
     assignJSObjtoJSObj(env, &object, data, "data");
     
     free(luv);
+    free(xyz);
     
     return object;
 }
@@ -558,6 +611,7 @@ napi_value ArgbJSObjFactory(napi_env env, Xyz *xyz, double clamp) {
     assignJSObjtoJSObj(env, &object, data, "data");
     
     free(argb);
+    free(xyz);
     
     return object;
 }
@@ -599,6 +653,7 @@ napi_value SrgbJSObjFactory(napi_env env, Xyz *xyz, double clamp) {
     assignJSObjtoJSObj(env, &object, data, "data");
     
     free(srgb);
+    free(xyz);
     
     return object;
 }
@@ -639,6 +694,7 @@ napi_value XyyJSObjFactory(napi_env env, Xyz *xyz, double clamp) {
     assignJSObjtoJSObj(env, &object, data, "data");
     
     free(xyy);
+    free(xyz);
     
     return object;
 }
