@@ -1,8 +1,8 @@
-const { expect } = require('chai');
+const { expect } = require('chai')
 const SegfaultHandler = require('segfault-handler')
 const lib = require('../build/Release/lymuilib')
 
-SegfaultHandler.registerHandler('hsl_crash.log');
+SegfaultHandler.registerHandler('hsl_crash.log')
 
 describe('Creating HSL from RGB', () => {
   it('Expect to create HSL object from RGB object', async () => {

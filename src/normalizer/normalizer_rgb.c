@@ -87,7 +87,7 @@ napi_value normalizeHwb(napi_env env, napi_value color) {
     if (hwb == NULL) {
         return NULL;
     }
-
+  
     Rgb *rgb = getRgbFromHwb(hwb);
     napi_value object = RgbJSObjFactory(env, rgb);
 

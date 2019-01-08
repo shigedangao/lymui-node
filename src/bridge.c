@@ -181,7 +181,7 @@ Hwb *getHwbFromJSObj(napi_env env, napi_value obj) {
 
     hwb->h = getDoubleValue(env, value[0]);
     hwb->w = getDoubleValue(env, value[1]);
-    hwb->b = getDoubleValue(env, value[1]);
+    hwb->b = getDoubleValue(env, value[2]);
 
     return hwb;
 }
