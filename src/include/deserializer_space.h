@@ -11,15 +11,7 @@
 
 #include <stdio.h>
 #include <node_api.h>
-
-#define XYZ_PROPS "x:y:z"
-#define LAB_PROPS "l:a:b"
-#define LCH_PROPS "l:c:h"
-#define LUV_PROPS "l:u:v"
-#define ARGB_PROPS "r:g:b"
-#define SRGB_PROPS "r:g:b"
-#define LCHLAB_PROPS "l:c:h"
-#define XYY_PROPS "x:y:Y"
+#include "format_props.h"
 
 /**
  * @brief list of color supported color space

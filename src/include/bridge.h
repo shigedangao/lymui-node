@@ -18,6 +18,7 @@
 #include "hsv.h"
 #include "yuv.h"
 #include "hwb.h"
+#include "tsl.h"
 #include "xyz.h"
 #include "lab.h"
 #include "lch.h"
@@ -93,6 +94,14 @@ Yuv *getYuvFromJSObj(napi_env env, napi_value args);
  * @return hwb
  */
 Hwb *getHwbFromJSObj(napi_env env, napi_value args);
+
+/**
+ * @brief Extract Tsl struct from JS Object
+ * @param env napi_env
+ * @param args napi_value
+ * @return tsl
+ */ 
+Tsl *getTslFromJSObj(napi_env env, napi_value args);
 
 /**
  * @brief Extract Xyz struct from a JS Object

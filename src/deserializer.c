@@ -21,9 +21,9 @@
  * @return OType
  */
 static OType strToOTypeEnum(char *str) {
-    char *type[] = {"hex", "hsl", "hsv", "cymk", "ycbcr", "yuv", "hwb", "xyz"};
+    char *type[] = {"hex", "hsl", "hsv", "cymk", "ycbcr", "yuv", "hwb", "tsl","xyz"};
     uint8_t idx = 0;
-    size_t size = 8;
+    size_t size = 9;
     OType t = hsl;
     
     if (str == NULL) {
@@ -77,6 +77,8 @@ static char *getValidationPropsFromOType(OType o) {
             return YUV_PROPS;
         case hwb:
             return HWB_PROPS;
+        case tsl:
+            return TSL_PROPS;
         case xyz:
             return XYZ_PROPS;
         default:
