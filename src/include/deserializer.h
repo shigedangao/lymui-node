@@ -11,15 +11,7 @@
 
 #include <stdio.h>
 #include <node_api.h>
-
-#define RGB_PROPS "r:g:b"
-#define CMYK_PROPS "c:y:m:k"
-#define HSL_PROPS "h:s:l"
-#define HSV_PROPS "h:s:v"
-#define YCBCR_PROPS "y:cb:cr"
-#define YUV_PROPS "y:u:v"
-#define HWB_PROPS "h:w:b"
-#define XYZ_PROPS "x:y:z"
+#include "format_props.h"
 
 /**
  * @brief define the supported output by the based deserializer
@@ -32,6 +24,7 @@ typedef enum Output {
     ycbcr,
     yuv,
     hwb,
+    tsl,
     xyz
 } OType;
 

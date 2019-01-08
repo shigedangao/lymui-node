@@ -17,6 +17,7 @@
 #include "hsl.h"
 #include "hsv.h"
 #include "yuv.h"
+#include "tsl.h"
 #include "xyz.h"
 #include "lab.h"
 #include "lch.h"
@@ -104,6 +105,15 @@ napi_value YuvJSObjFactory(napi_env env, Rgb *rgb, double clamp);
  * @return napi_value
  */
 napi_value HwbJSObjFactory(napi_env env, Rgb *rgb, double clamp);
+
+/**
+ * @brief Creating TSL JS Object
+ * @param env napi_env
+ * @param rgb Rgb
+ * @param clamp double
+ * @return napi_value
+ */ 
+napi_value TslJSObjFactory(napi_env env, Rgb *rgb, double clamp);
 
 /**
  * @brief Creating Xyz JS Object

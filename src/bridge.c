@@ -12,19 +12,17 @@
 #include "binding_error.h"
 #include "binding_util.h"
 #include "bridge.h"
-#include "deserializer.h"
+#include "format_props.h"
 #include "hex.h"
 
 Rgb *getRGBFromJSObj(napi_env env, napi_value obj) {
-    napi_value value[3];
-    char *prop = "r:g:b";
-    
+    napi_value value[MIN_PARAM_VALUE];    
     // check if the object has the property
-    if (!hasPropInJSObj(env, obj, prop, MIN_PARAM_VALUE)) {
+    if (!hasPropInJSObj(env, obj, RGB_PROPS, MIN_PARAM_VALUE)) {
         return NULL;
     }
     
-    getNamedPropArray(env, prop, obj, MIN_PARAM_VALUE, value);
+    getNamedPropArray(env, RGB_PROPS, obj, MIN_PARAM_VALUE, value);
     
     // convert the data to the wanted type
     uint8_t red = getUintValue(env, value[0]);
@@ -60,14 +58,13 @@ char * getHEXFromJSObj(napi_env env, napi_value obj) {
 }
 
 Cymk *getCymkFromJSObj(napi_env env, napi_value obj) {
-    napi_value value[4];
-    char *prop = "c:y:m:k";
+    napi_value value[MAX_PARAM_VALUE];
     
-    if (!hasPropInJSObj(env, obj, prop, MAX_PARAM_VALUE)) {
+    if (!hasPropInJSObj(env, obj, CMYK_PROPS, MAX_PARAM_VALUE)) {
         return NULL;
     }
     
-    getNamedPropArray(env, prop, obj, MAX_PARAM_VALUE, value);
+    getNamedPropArray(env, CMYK_PROPS, obj, MAX_PARAM_VALUE, value);
     Cymk *cymkSt = malloc(sizeof(Cymk));
     if (cymkSt == NULL) {
         return NULL;
@@ -82,14 +79,12 @@ Cymk *getCymkFromJSObj(napi_env env, napi_value obj) {
 }
 
 Ycbcr *getYcbcrFromJSObj(napi_env env, napi_value obj) {
-    napi_value value[3];
-    char *prop = "y:cb:cr";
-    
-    if (!hasPropInJSObj(env, obj, prop, MIN_PARAM_VALUE)) {
+    napi_value value[MIN_PARAM_VALUE];    
+    if (!hasPropInJSObj(env, obj, YCBCR_PROPS, MIN_PARAM_VALUE)) {
         return NULL;
     }
     
-    getNamedPropArray(env, prop, obj, MIN_PARAM_VALUE, value);
+    getNamedPropArray(env, YCBCR_PROPS, obj, MIN_PARAM_VALUE, value);
     
     Ycbcr *ycb = malloc(sizeof(Ycbcr));
     if (ycb == NULL) {
@@ -104,14 +99,12 @@ Ycbcr *getYcbcrFromJSObj(napi_env env, napi_value obj) {
 }
 
 Hsl *getHslFromJSObj(napi_env env, napi_value obj) {
-    napi_value value[3];
-    char *prop = "h:s:l";
-    
-    if (!hasPropInJSObj(env, obj, prop, MIN_PARAM_VALUE)) {
+    napi_value value[MIN_PARAM_VALUE];    
+    if (!hasPropInJSObj(env, obj, HSL_PROPS, MIN_PARAM_VALUE)) {
         return NULL;
     }
     
-    getNamedPropArray(env, prop, obj, MIN_PARAM_VALUE, value);
+    getNamedPropArray(env, HSL_PROPS, obj, MIN_PARAM_VALUE, value);
     Hsl *hsl = malloc(sizeof(Hsl));
     if (hsl == NULL) {
         return NULL;
@@ -125,14 +118,12 @@ Hsl *getHslFromJSObj(napi_env env, napi_value obj) {
 }
 
 Hsv *getHsvFromJSObj(napi_env env, napi_value obj) {
-    napi_value value[3];
-    char *prop = "h:s:v";
-    
-    if (!hasPropInJSObj(env, obj, prop, MIN_PARAM_VALUE)) {
+    napi_value value[MIN_PARAM_VALUE];    
+    if (!hasPropInJSObj(env, obj, HSV_PROPS, MIN_PARAM_VALUE)) {
         return NULL;
     }
     
-    getNamedPropArray(env, prop, obj, MIN_PARAM_VALUE, value);
+    getNamedPropArray(env, HSV_PROPS, obj, MIN_PARAM_VALUE, value);
     Hsv *hsv = malloc(sizeof(Hsv));
     if (hsv == NULL) {
         return NULL;
@@ -146,14 +137,13 @@ Hsv *getHsvFromJSObj(napi_env env, napi_value obj) {
 }
 
 Yuv *getYuvFromJSObj(napi_env env, napi_value obj) {
-    char *prop = "y:u:v";
-    napi_value value[3];
+    napi_value value[MIN_PARAM_VALUE];
 
-    if (!hasPropInJSObj(env, obj, prop, MIN_PARAM_VALUE)) {
+    if (!hasPropInJSObj(env, obj, YUV_PROPS, MIN_PARAM_VALUE)) {
         return NULL;
     }
     
-    getNamedPropArray(env, prop, obj, MIN_PARAM_VALUE, value);
+    getNamedPropArray(env, YUV_PROPS, obj, MIN_PARAM_VALUE, value);
     Yuv *yuv = malloc(sizeof(Yuv));
     if (yuv == NULL) {
         return NULL;
@@ -166,14 +156,13 @@ Yuv *getYuvFromJSObj(napi_env env, napi_value obj) {
 }
 
 Hwb *getHwbFromJSObj(napi_env env, napi_value obj) {
-    char *prop = HWB_PROPS;
-    napi_value value[3];
+    napi_value value[MIN_PARAM_VALUE];
 
-    if (!hasPropInJSObj(env, obj, prop, MIN_PARAM_VALUE)) {
+    if (!hasPropInJSObj(env, obj, HWB_PROPS, MIN_PARAM_VALUE)) {
         return NULL;
     }
 
-    getNamedPropArray(env, prop, obj, MIN_PARAM_VALUE, value);
+    getNamedPropArray(env, HWB_PROPS, obj, MIN_PARAM_VALUE, value);
     Hwb *hwb = malloc(sizeof(Hwb));
     if (hwb == NULL) {
         return NULL;
@@ -186,15 +175,33 @@ Hwb *getHwbFromJSObj(napi_env env, napi_value obj) {
     return hwb;
 }
 
+Tsl *getTslFromJSObj(napi_env env, napi_value obj) {
+    napi_value value[MIN_PARAM_VALUE];
+    if (!hasPropInJSObj(env, obj, TSL_PROPS, MIN_PARAM_VALUE)) {
+        return NULL;
+    }
+
+    getNamedPropArray(env, TSL_PROPS, obj, MIN_PARAM_VALUE, value);
+    Tsl *tsl = malloc(sizeof(Tsl));
+    if (tsl == NULL) {
+        return NULL;
+    }
+
+    tsl->t = getDoubleValue(env, value[0]);
+    tsl->s = getDoubleValue(env, value[1]);
+    tsl->l = getDoubleValue(env, value[2]);
+
+    return tsl;
+}
+
 Xyz *getXyzFromJSObj(napi_env env, napi_value args) {
-    char *prop = "x:y:z";
-    napi_value value[3];
+    napi_value value[MIN_PARAM_VALUE];
     
-    if (!hasPropInJSObj(env, args, prop, MIN_PARAM_VALUE)) {
+    if (!hasPropInJSObj(env, args, XYZ_PROPS, MIN_PARAM_VALUE)) {
         return NULL;
     }
     
-    getNamedPropArray(env, prop, args, MIN_PARAM_VALUE, value);
+    getNamedPropArray(env, XYZ_PROPS, args, MIN_PARAM_VALUE, value);
     Xyz *xyz = malloc(sizeof(Xyz));
     if (xyz == NULL) {
         return NULL;
@@ -208,14 +215,12 @@ Xyz *getXyzFromJSObj(napi_env env, napi_value args) {
 }
 
 Lab *getLabFromJSObj(napi_env env, napi_value args) {
-    char *prop = "l:a:b";
-    napi_value value[3];
-    
-    if (!hasPropInJSObj(env, args, prop, MIN_PARAM_VALUE)) {
+    napi_value value[MIN_PARAM_VALUE];    
+    if (!hasPropInJSObj(env, args, LAB_PROPS, MIN_PARAM_VALUE)) {
         return NULL;
     }
     
-    getNamedPropArray(env, prop, args, MIN_PARAM_VALUE, value);
+    getNamedPropArray(env, LAB_PROPS, args, MIN_PARAM_VALUE, value);
     Lab *lab = malloc(sizeof(Lab));
     if (lab == NULL) {
         return NULL;
@@ -229,14 +234,12 @@ Lab *getLabFromJSObj(napi_env env, napi_value args) {
 }
 
 Lch *getLchFromJSObj(napi_env env, napi_value args) {
-    char *prop = "l:c:h";
-    napi_value value[3];
-    
-    if (!hasPropInJSObj(env, args, prop, MIN_PARAM_VALUE)) {
+    napi_value value[MIN_PARAM_VALUE];
+    if (!hasPropInJSObj(env, args, LCH_PROPS, MIN_PARAM_VALUE)) {
         return NULL;
     }
     
-    getNamedPropArray(env, prop, args, MIN_PARAM_VALUE, value);
+    getNamedPropArray(env, LCH_PROPS, args, MIN_PARAM_VALUE, value);
     Lch *lch = malloc(sizeof(Lch));
     if (lch == NULL) {
         return NULL;
@@ -250,14 +253,12 @@ Lch *getLchFromJSObj(napi_env env, napi_value args) {
 }
 
 LchLab *getLchlabFromJSObj(napi_env env, napi_value args) {
-    char *prop = "l:c:h";
-    napi_value value[3];
-    
-    if (!hasPropInJSObj(env, args, prop, MIN_PARAM_VALUE)) {
+    napi_value value[MIN_PARAM_VALUE];
+    if (!hasPropInJSObj(env, args, LCHLAB_PROPS, MIN_PARAM_VALUE)) {
         return NULL;
     }
     
-    getNamedPropArray(env, prop, args, MIN_PARAM_VALUE, value);
+    getNamedPropArray(env, LCHLAB_PROPS, args, MIN_PARAM_VALUE, value);
     LchLab *lch = malloc(sizeof(LchLab));
     if (lch == NULL) {
         return NULL;
@@ -271,14 +272,12 @@ LchLab *getLchlabFromJSObj(napi_env env, napi_value args) {
 }
 
 Luv *getLuvFromJSObj(napi_env env, napi_value args) {
-    char *prop = "l:u:v";
-    napi_value value[3];
-    
-    if (!hasPropInJSObj(env, args, prop, MIN_PARAM_VALUE)) {
+    napi_value value[MIN_PARAM_VALUE];
+    if (!hasPropInJSObj(env, args, LUV_PROPS, MIN_PARAM_VALUE)) {
         return NULL;
     }
     
-    getNamedPropArray(env, prop, args, MIN_PARAM_VALUE, value);
+    getNamedPropArray(env, LUV_PROPS, args, MIN_PARAM_VALUE, value);
     Luv *luv = malloc(sizeof(Luv));
     if (luv == NULL) {
         return NULL;
@@ -292,14 +291,12 @@ Luv *getLuvFromJSObj(napi_env env, napi_value args) {
 }
 
 Argb *getArgbFromJSObj(napi_env env, napi_value args) {
-    char *prop = "r:g:b";
-    napi_value value[3];
-    
-    if (!hasPropInJSObj(env, args, prop, MIN_PARAM_VALUE)) {
+    napi_value value[MIN_PARAM_VALUE];
+    if (!hasPropInJSObj(env, args, ARGB_PROPS, MIN_PARAM_VALUE)) {
         return NULL;
     }
     
-    getNamedPropArray(env, prop, args, MIN_PARAM_VALUE, value);
+    getNamedPropArray(env, ARGB_PROPS, args, MIN_PARAM_VALUE, value);
     Argb *argb = malloc(sizeof(Argb));
     if (argb == NULL) {
         return NULL;
@@ -313,14 +310,12 @@ Argb *getArgbFromJSObj(napi_env env, napi_value args) {
 }
 
 SRgb *getSrgbFromJSObj(napi_env env, napi_value args) {
-    char *prop = "r:g:b";
-    napi_value value[3];
-    
-    if (!hasPropInJSObj(env, args, prop, MIN_PARAM_VALUE)) {
+    napi_value value[MIN_PARAM_VALUE];
+    if (!hasPropInJSObj(env, args, SRGB_PROPS, MIN_PARAM_VALUE)) {
         return NULL;
     }
     
-    getNamedPropArray(env, prop, args, MIN_PARAM_VALUE, value);
+    getNamedPropArray(env, SRGB_PROPS, args, MIN_PARAM_VALUE, value);
     SRgb *srgb = malloc(sizeof(SRgb));
     if (srgb == NULL) {
         return NULL;
@@ -334,14 +329,12 @@ SRgb *getSrgbFromJSObj(napi_env env, napi_value args) {
 }
 
 Xyy *getXyyFromJSObj(napi_env env, napi_value args) {
-    char *prop = "x:y:Y";
-    napi_value value[3];
-    
-    if (!hasPropInJSObj(env, args, prop, MIN_PARAM_VALUE)) {
+    napi_value value[MIN_PARAM_VALUE];
+    if (!hasPropInJSObj(env, args, XYY_PROPS, MIN_PARAM_VALUE)) {
         return NULL;
     }
     
-    getNamedPropArray(env, prop, args, MIN_PARAM_VALUE, value);
+    getNamedPropArray(env, XYY_PROPS, args, MIN_PARAM_VALUE, value);
     Xyy *xyy = malloc(sizeof(Xyy));
     if (xyy == NULL) {
         return NULL;
