@@ -41,6 +41,8 @@ static napi_value generateTypeJSObj(napi_env env, BridgeObj *bridge) {
             return XyzJSObjFactory(env, rgb, bridge->matrix, bridge->clamp);
         case hwb:
             return HwbJSObjFactory(env, rgb, bridge->clamp);
+        case tsl:
+            return TslJSObjFactory(env, rgb, bridge->clamp);
         default:
             return NULL;
     }

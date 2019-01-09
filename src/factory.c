@@ -333,13 +333,55 @@ napi_value HwbJSObjFactory(napi_env env, Rgb *rgb, double clamp) {
     return object;
 }
 
+
+napi_value TslJSObjFactory(napi_env env, Rgb *rgb, double clamp) {
+    napi_status status;
+    napi_value object, data;
+
+    status = napi_create_object(env, &object);
+    if (status != napi_ok) {
+        return NULL;
+    }
+
+    status = napi_create_object(env, &data);
+    if (status != napi_ok) {
+        return NULL;
+    }
+
+    Tsl *tsl = getTslFromRgb(rgb);
+    if (tsl == NULL) {
+        assignPropToJSObj(&object, env, string, "error", OBJ_MAKE_ERR);
+        return object;
+    }
+
+    if (tsl->error != NULL) {
+        assignPropToJSObj(&object, env, string, "error", tsl->error);
+        return object;
+    }
+
+    double t = clampValue(tsl->t, clamp);
+    double s = clampValue(tsl->s, clamp);
+    double l = clampValue(tsl->l, clamp);
+
+    assignPropToJSObj(&data, env, numberDouble, "t", &t);
+    assignPropToJSObj(&data, env, numberDouble, "s", &s);
+    assignPropToJSObj(&data, env, numberDouble, "l", &l);
+    
+    assignJSObjtoJSObj(env, &object, data, "data");
+
+    free(tsl);
+    free(rgb);
+
+    return object;
+}
+
 napi_value XyzJSObjFactory(napi_env env, Rgb *rgb, char *matrix, double clamp) {
     napi_status status;
     napi_value object, data;
     
     status = napi_create_object(env, &object);
     if (status != napi_ok) {
-        napi_throw_error(env, NULL, OBJ_MAKE_ERR);
+        return NULL;
     }
     
     status = napi_create_object(env, &data);

@@ -94,6 +94,18 @@ napi_value normalizeHwb(napi_env env, napi_value color) {
     return object;
 }
 
+napi_value normalizeTsl(napi_env env, napi_value color) {
+    Tsl *tsl = getTslFromJSObj(env, color);
+    if (tsl == NULL) {
+        return NULL;
+    }
+
+    Rgb *rgb = getRgbFromTsl(tsl);
+    napi_value object = RgbJSObjFactory(env, rgb);
+
+    return object;
+}
+
 napi_value normalizeXyz(napi_env env, napi_value color, char *m) {
     Matrix mx = getEnumFromStr(m);
     Xyz *xyz = getXyzFromJSObj(env, color);
