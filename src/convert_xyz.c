@@ -11,7 +11,7 @@
 #include "convert_xyz.h"
 #include "binding_error.h"
 #include "factory.h"
-#include "deserializer_space.h"
+#include "normalizer_space.h"
 #include "normalizer_xyz.h"
 
 /**

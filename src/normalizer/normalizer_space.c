@@ -1,16 +1,15 @@
 //
-//  deserializer.c
+//  normalizer_space.c
 //  lymui
 //
-//  Created by Marc Intha on 24/11/2018.
-//  Copyright © 2018 Marc. All rights reserved.
+//  Created by Marc Intha on 10/01/2019.
+//  Copyright © 2019 Marc. All rights reserved.
 //
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <node_api.h>
-#include "deserializer.h"
+#include "normalizer_space.h"
+#include "format_props.h"
 #include "binding_util.h"
 #include "binding_error.h"
 #include "deserializer_opts.h"
@@ -19,24 +18,12 @@
 napi_env envglobal;
 
 /**
- * @brief Set Bridge Opt Field
+ * @brief Set BridgeSpace Opt Field
  * @param obj napi_value
  * @param br * BridgeObj
  * @void
  */
-static void setBridgeOptField(napi_value obj, BridgeObj *br) {
-    OptField *opt = getOptField(envglobal, obj, "profile");
-    if (opt == NULL) {
-        return;
-    }
-    
-    if (opt->has) {
-        char *value = getStringValue(envglobal, opt->field, MAX_LEN_TYPE);
-        br->matrix = value;
-    }
-
-    free(opt);
-    
+static void setBridgeOptField(napi_value obj, BridgeSpaceObj *br) {
     OptField *clamp = getOptField(envglobal, obj, "clamp");
     if (clamp == NULL) {
         return;
@@ -48,28 +35,16 @@ static void setBridgeOptField(napi_value obj, BridgeObj *br) {
     }
 
     free(clamp);
-
-    OptField *scale = getOptField(envglobal, obj, "scale");
-    if (scale == NULL) {
-        return;
-    }
-
-    if (scale->has) {
-        char *value = getStringValue(envglobal, opt->field, MAX_LEN_TYPE);
-        br->matrix = value;
-    }
-
-    free(scale);
 }
 
-BridgeObj *deserialize(napi_env env, napi_value obj) {
+BridgeSpaceObj *normalizeSpace(napi_env env, napi_value obj) {
     envglobal = env;
-    BridgeObj *br = malloc(sizeof(BridgeObj));
+    BridgeSpaceObj *br = malloc(sizeof(BridgeSpaceObj));
     if (br == NULL) {
         return NULL;
     }
     
-    char *inputProps = "input:output";
+    char *inputProps = "input:type";
     napi_value params[2];
     
     if (!hasPropInJSObj(env, obj, inputProps, CONVERT_BASIC_LEN)) {
@@ -77,13 +52,7 @@ BridgeObj *deserialize(napi_env env, napi_value obj) {
         return br;
     }
     
-    // retrieve the param of the function
     getNamedPropArray(env, inputProps, obj, CONVERT_BASIC_LEN, params);
-    if (!hasPropInJSObj(env, params[0], RGB_PROPS, MIN_LEN_TYPE)) {
-        br->error = ARG_TYPE_ERR;
-        return br;
-    }
-    
     char *type = getStringValue(env, params[1], MAX_LEN_TYPE);
     if (type == NULL) {
         br->error = CONVERT_ERR;
@@ -92,19 +61,22 @@ BridgeObj *deserialize(napi_env env, napi_value obj) {
     
     Validation *validator = getValidationProps(type);
     if (validator == NULL) {
-        br->error = OTYPE_TYPE_ERR;
+      br->error = OTYPE_TYPE_ERR;
+      return br;
+    }
+    
+    // Get a validation character in order to check if the data is present
+    if (!hasPropInJSObj(env, params[0], validator->schema, MIN_LEN_TYPE)) {
+        br->error = ARG_TYPE_ERR;
         return br;
     }
-
-    // set the struct
+    
     br->color  = params[0];
     br->output = validator->output;
     br->error  = NULL;
-    br->matrix = NULL;
     br->clamp  = 0.0;
-
+    
     free(validator);
-    setBridgeOptField(obj, br);
     
     return br;
 }

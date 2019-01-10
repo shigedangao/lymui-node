@@ -27,10 +27,10 @@
 #define LCHLAB_PROPS "l:c:h"
 #define XYY_PROPS "x:y:Y"
 
-#define SUPPORTED_FORMAT_LEN 15
+#define SUPPORTED_FORMAT_LEN 17
 
-extern const char* validator_props[15];
-extern const char* supported_type[15];
+extern const char* validator_props[17];
+extern const char* supported_type[17];
 
 typedef enum Ouput {
   hex,
@@ -59,10 +59,10 @@ typedef struct Validation {
 
 /**
  * @brief Get Validation Props
- * @param o OType
+ * @param c char
  * @return validation Validation
  */
-Validation *getValidationProps(OType o);
+Validation *getValidationProps(char *c);
 
 
 #endif /* format_props_h */

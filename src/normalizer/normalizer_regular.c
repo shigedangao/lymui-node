@@ -29,6 +29,23 @@ static void setBridgeOptField(napi_value obj, BridgeObj *br) {
     free(profile);
 }
 
+/**
+ * @brief Is Hex
+ * @param type char array
+ * @return uint8_t
+ */
+static uint8_t isHex(char *type) {
+    if (type == NULL) {
+        return 0;
+    }
+    
+    if (!strcmp("hex", type)) {
+        return 1;
+    }
+    
+    return 0;
+}
+
 BridgeObj *normalize(napi_env env, napi_value obj) {
     envglobal = env;
     uint8_t hex = 0;

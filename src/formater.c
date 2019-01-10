@@ -4,6 +4,7 @@
 #include "format_props.h"
 
 const char* validator_props[SUPPORTED_FORMAT_LEN] = {
+    "",
     CMYK_PROPS,
     HSL_PROPS,
     HSV_PROPS,
