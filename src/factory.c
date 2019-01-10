@@ -11,15 +11,6 @@
 #include <node_api.h>
 #include "binding_error.h"
 #include "binding_util.h"
-#include "rgb.h"
-#include "hex.h"
-#include "cymk.h"
-#include "ycbcr.h"
-#include "hsl.h"
-#include "hsv.h"
-#include "yuv.h"
-#include "hwb.h"
-#include "xyz.h"
 
 napi_value RgbJSObjFactory(napi_env env, Rgb *rgb) {
     napi_status status;
@@ -333,7 +324,6 @@ napi_value HwbJSObjFactory(napi_env env, Rgb *rgb, double clamp) {
     return object;
 }
 
-
 napi_value TslJSObjFactory(napi_env env, Rgb *rgb, double clamp) {
     napi_status status;
     napi_value object, data;
@@ -371,6 +361,23 @@ napi_value TslJSObjFactory(napi_env env, Rgb *rgb, double clamp) {
 
     free(tsl);
     free(rgb);
+
+    return object;
+}
+
+napi_value GrayScaleJSObjFactory(napi_env env, Rgb *rgb) {
+    napi_status status;
+    napi_value object, data;
+
+    status = napi_create_object(env, &object);
+    if (status != napi_ok) {
+        return NULL;
+    }
+
+    status = napi_create_object(env, &data);
+    if (status != napi_ok) {
+        return NULL;
+    }
 
     return object;
 }

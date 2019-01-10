@@ -16,6 +16,7 @@
         "src/deserializer_space.c",
         "src/deserializer_opts.c",
         "src/normalizer/normalizer_rgb.c",
+        "src/normalizer/regular.c",
         "src/normalizer/normalizer_xyz.c",
       ],
       "include_dirs": [

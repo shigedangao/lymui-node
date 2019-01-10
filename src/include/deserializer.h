@@ -13,20 +13,7 @@
 #include <node_api.h>
 #include "format_props.h"
 
-/**
- * @brief define the supported output by the based deserializer
- */
-typedef enum Output {
-    hex,
-    hsl,
-    hsv,
-    cymk,
-    ycbcr,
-    yuv,
-    hwb,
-    tsl,
-    xyz
-} OType;
+extern napi_env envglobal;
 
 /**
  * @brief structure which will be used to calculate other value
@@ -46,13 +33,5 @@ typedef struct BridgeObj {
  * @return BridgeObj pointer
  */
 BridgeObj *deserialize(napi_env env, napi_value obj);
-
-/**
- * @brief normalize the value of regular color for being prepare into being convet into RGB (broken english am sick).
- * @param env napi_env
- * @param obj napi_value
- * @return BridgeObj pointer
- */
-BridgeObj *normalize(napi_env env, napi_value obj);
 
 #endif /* deserializer_h */

@@ -14,24 +14,11 @@
 #include "format_props.h"
 
 /**
- * @brief list of color supported color space
- */
-typedef enum OutputSpace {
-    lab,
-    lch,
-    llab,
-    luv,
-    argb,
-    Srgb,
-    xyy
-} OSpaceType;
-
-/**
  * @brief struct that will be used to calculate value
  */
 typedef struct BridgeSpaceObj {
     napi_value color;
-    OSpaceType output;
+    OType output;
     char *error;
     double clamp;
 } BridgeSpaceObj;

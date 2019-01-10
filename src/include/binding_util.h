@@ -15,7 +15,7 @@
 
 #define CONVERT_BASIC_LEN 2
 #define MIN_LEN_TYPE 3
-#define MAX_LEN_TYPE 5
+#define MAX_LEN_TYPE 10
 
 /**
  * @brief Enum struct that represent some JavaScript type. Note in JS int and float use the same type we just separate the 2 values for usability purposes

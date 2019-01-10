@@ -6,8 +6,9 @@
 //  Copyright © 2018 Marc. All rights reserved.
 //
 
-#include "convert_xyz.h"
 #include <node_api.h>
+#include <stdlib.h>
+#include "convert_xyz.h"
 #include "binding_error.h"
 #include "factory.h"
 #include "deserializer_space.h"
@@ -94,6 +95,7 @@ napi_value toXYZ(napi_env env, napi_callback_info info) {
     }
     
     napi_resolve_deferred(env, def, JSObject);
+    free(bridge);
     
     return promise;
 }

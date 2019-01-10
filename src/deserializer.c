@@ -15,31 +15,8 @@
 #include "binding_error.h"
 #include "deserializer_opts.h"
 
-/**
- * @brief return an enum based on the input string
- * @param str char array
- * @return OType
- */
-static OType strToOTypeEnum(char *str) {
-    char *type[] = {"hex", "hsl", "hsv", "cymk", "ycbcr", "yuv", "hwb", "tsl","xyz"};
-    uint8_t idx = 0;
-    size_t size = 9;
-    OType t = hsl;
-    
-    if (str == NULL) {
-        return t;
-    }
-    
-    while(idx < size) {
-        if (!strcmp(str, type[idx])) {
-            t = idx;
-            idx = size + 1;
-        }
-        idx++;
-    }
-    
-    return t;
-}
+// Global varaible referencing the napi_env
+napi_env envglobal;
 
 /**
  * @brief Is Hex
@@ -59,34 +36,48 @@ static uint8_t isHex(char *type) {
 }
 
 /**
- * @brief get the validation props for validating the input color
- * @param o OType
- * @return char *
+ * @brief Set Bridge Opt Field
+ * @param obj napi_value
+ * @param br * BridgeObj
+ * @void
  */
-static char *getValidationPropsFromOType(OType o) {
-    switch (o) {
-        case cymk:
-            return CMYK_PROPS;
-        case hsl:
-            return HSL_PROPS;
-        case hsv:
-            return HSV_PROPS;
-        case ycbcr:
-            return YCBCR_PROPS;
-        case yuv:
-            return YUV_PROPS;
-        case hwb:
-            return HWB_PROPS;
-        case tsl:
-            return TSL_PROPS;
-        case xyz:
-            return XYZ_PROPS;
-        default:
-            return NULL;
+static void setBridgeOptField(napi_value obj, BridgeObj *br) {
+    OptField *opt = getOptField(envglobal, obj, "profile");
+    if (opt == NULL) {
+        return;
+    }
+    
+    if (opt->has) {
+        char *value = getStringValue(envglobal, opt->field, MAX_LEN_TYPE);
+        br->matrix = value;
+        free(opt);
+    }
+    
+    OptField *clamp = getOptField(envglobal, obj, "clamp");
+    if (clamp == NULL) {
+        return;
+    }
+    
+    if (clamp->has) {
+        double clampValue = getDoubleValue(envglobal, clamp->field);
+        br->clamp = clampValue;
+        free(clamp);
+    }
+
+    OptField *scale = getOptField(envglobal, obj, "scale");
+    if (scale == NULL) {
+        return;
+    }
+
+    if (scale->has) {
+        char *value = getStringValue(envglobal, opt->field, MAX_LEN_TYPE);
+        br->matrix = value;
+        free(scale);
     }
 }
 
 BridgeObj *deserialize(napi_env env, napi_value obj) {
+    envglobal = env;
     BridgeObj *br = malloc(sizeof(BridgeObj));
     if (br == NULL) {
         return NULL;
@@ -113,90 +104,21 @@ BridgeObj *deserialize(napi_env env, napi_value obj) {
         return br;
     }
     
+    Validation *validator = getValidationProps(type);
+    if (validator == NULL) {
+        br->error = OTYPE_TYPE_ERR;
+        return br;
+    }
+
     // set the struct
     br->color  = params[0];
-    br->output = strToOTypeEnum(type);
+    br->output = validator->output;
     br->error  = NULL;
     br->matrix = NULL;
     br->clamp  = 0.0;
 
-    OptField *opt = getOptField(env, obj, "profile");
-    if (opt == NULL) {
-        return br;
-    }
-    
-    if (opt->has) {
-        char *value = getStringValue(env, opt->field, MAX_LEN_TYPE);
-        br->matrix = value;
-    }
-    
-    OptField *clamp = getOptField(env, obj, "clamp");
-    if (clamp == NULL) {
-        return br;
-    }
-    
-    if (clamp->has) {
-        double clampValue = getDoubleValue(env, clamp->field);
-        br->clamp = clampValue;
-    }
-    
-    free(opt);
-    
-    return br;
-}
-
-BridgeObj *normalize(napi_env env, napi_value obj) {
-    uint8_t hex = 0;
-    BridgeObj *br = malloc(sizeof(BridgeObj));
-    if (br == NULL) {
-        return NULL;
-    }
-    
-    char *inputProps = "input:type";
-    napi_value params[2];
-    
-    if (!hasPropInJSObj(env, obj, inputProps, CONVERT_BASIC_LEN)) {
-        br->error = ARG_NB_ERR;
-        return br;
-    }
-    
-    getNamedPropArray(env, inputProps, obj, CONVERT_BASIC_LEN, params);
-    char *type = getStringValue(env, params[1], MAX_LEN_TYPE);
-    hex = isHex(type);
-    OType o = strToOTypeEnum(type);
-    
-    br->color  = params[0];
-    br->output = o;
-    br->error  = NULL;
-    br->matrix = NULL;
-    
-    // Special case for the HEX format as it doesn't have any object
-    // We test if the type is Hex and if correct we then forward to the converter
-    if (hex) {
-        return br;
-    }
-    
-    // add an other step of validation
-    char *validation = getValidationPropsFromOType(o);
-    if (validation == NULL) {
-        br->error = ARG_TYPE_ERR;
-        return br;
-    }
-    
-    if (!hasPropInJSObj(env, params[0], validation, MIN_LEN_TYPE)) {
-        br->error = ARG_TYPE_ERR;
-        return br;
-    }
-
-    OptField *profile = getOptField(env, obj, "profile");
-    if (profile == NULL) {
-        return br;
-    }
-    
-    if (profile->has) {
-        char *value = getStringValue(env, profile->field, MAX_LEN_TYPE);
-        br->matrix = value;
-    }
+    free(validator);
+    setBridgeOptField(obj, br);
     
     return br;
 }

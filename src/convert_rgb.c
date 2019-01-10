@@ -6,11 +6,12 @@
 //  Copyright © 2018 Marc. All rights reserved.
 //
 
-#include "convert_rgb.h"
 #include <node_api.h>
+#include <stdlib.h>
+#include "convert_rgb.h"
 #include "binding_error.h"
 #include "factory.h"
-#include "deserializer.h"
+#include "normalizer_regular.h"
 #include "normalizer_rgb.h"
 
 /**
@@ -101,6 +102,7 @@ napi_value toRGB(napi_env env, napi_callback_info info) {
     }
     
     napi_resolve_deferred(env, def, JSObject);
-    
+    free(bridge);
+
     return promise;
 }
