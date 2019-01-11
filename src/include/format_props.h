@@ -29,14 +29,14 @@
 
 #define SUPPORTED_FORMAT_LEN 17
 
-extern const char* validator_props[17];
-extern const char* supported_type[17];
+extern char* validator_props[SUPPORTED_FORMAT_LEN];
+extern char* supported_type[SUPPORTED_FORMAT_LEN];
 
 typedef enum Ouput {
   hex,
+  cymk,
   hsl,
   hsv,
-  cymk,
   ycbcr,
   yuv,
   hwb,
@@ -45,10 +45,10 @@ typedef enum Ouput {
   xyz,
   lab,
   lch,
-  llab,
   luv,
   argb,
   Srgb,
+  llab,
   xyy
 } OType;
 

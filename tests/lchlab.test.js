@@ -59,22 +59,22 @@ describe('Creating LchLab from XYZ', () => {
     })
   })
 
-  it('Expect to output a Lab when the output is not within the list of supported type', async () => {
-    const { data } = await lib.convertSpace({
-      input: {
-        x: 0,
-        y: 0,
-        z: 0
-      },
-      output: 'lol',
-      clamp: 1
-    })
-
-    expect(data).to.be.deep.equal({
-      l: 0,
-      a: 0,
-      b: 0
-    })
+  it('Expect to throw when the output is not supported', async () => {
+    try {
+      await lib.convertSpace({
+        input: {
+          x: 0,
+          y: 0,
+          z: 0
+        },
+        output: 'lol',
+        clamp: 1
+      })
+    } catch (e) {
+      expect(e).to.be.deep.equal({
+        err: 'Error while creating JS Value'
+      })
+    }
   })
 })
 

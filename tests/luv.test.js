@@ -88,7 +88,7 @@ describe('Creating LUV from RGB', () => {
 
     expect(luv.data).to.be.deep.equal({
       l: 100,
-      u: 0,
+      u: -0,
       v: 0
     })
   })

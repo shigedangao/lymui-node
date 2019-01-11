@@ -75,7 +75,8 @@ BridgeSpaceObj *normalizeSpace(napi_env env, napi_value obj) {
     br->output = validator->output;
     br->error  = NULL;
     br->clamp  = 0.0;
-    
+
+    setBridgeOptField(obj, br);
     free(validator);
     
     return br;

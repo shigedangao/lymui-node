@@ -3,7 +3,11 @@
 #include <string.h>
 #include "format_props.h"
 
-const char* validator_props[SUPPORTED_FORMAT_LEN] = {
+// Not the best idea though
+// As the type should be in the right order
+// for OType enum, validator_props & supported_type
+// /!\ Might consider a list ?
+char* validator_props[SUPPORTED_FORMAT_LEN] = {
     "",
     CMYK_PROPS,
     HSL_PROPS,
@@ -23,11 +27,11 @@ const char* validator_props[SUPPORTED_FORMAT_LEN] = {
     XYY_PROPS
 };
 
-const char *supported_type[SUPPORTED_FORMAT_LEN] = {
+char *supported_type[SUPPORTED_FORMAT_LEN] = {
     "hex",
+    "cymk",
     "hsl",
     "hsv",
-    "cymk",
     "ycbcr",
     "yuv",
     "hwb",
@@ -36,16 +40,16 @@ const char *supported_type[SUPPORTED_FORMAT_LEN] = {
     "xyz",
     "lab",
     "lch",
-    "llab",
     "luv",
     "argb",
     "Srgb",
+    "llab",
     "xyy"
 };
 
 Validation *getValidationProps(char *str) {
     Validation *validate = malloc(sizeof(Validation));
-    if (validate == NULL) {
+    if (validate == NULL || str == NULL) {
         return NULL;
     }
 

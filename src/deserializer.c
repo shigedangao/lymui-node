@@ -89,7 +89,7 @@ BridgeObj *deserialize(napi_env env, napi_value obj) {
         br->error = CONVERT_ERR;
         return br;
     }
-    
+
     Validation *validator = getValidationProps(type);
     if (validator == NULL) {
         br->error = OTYPE_TYPE_ERR;

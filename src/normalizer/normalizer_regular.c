@@ -72,7 +72,6 @@ BridgeObj *normalize(napi_env env, napi_value obj) {
         return br;
     }
 
-    
     br->color  = params[0];
     br->output = validator->output;
     br->error  = NULL;
@@ -83,7 +82,7 @@ BridgeObj *normalize(napi_env env, napi_value obj) {
     if (hex) {
         return br;
     }
-    
+
     if (!hasPropInJSObj(env, params[0], validator->schema, MIN_LEN_TYPE)) {
         br->error = ARG_TYPE_ERR;
         return br;

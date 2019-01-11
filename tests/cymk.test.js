@@ -263,7 +263,7 @@ describe('Creation of a RGB object from a CYMK object', () => {
       })
     } catch (e) {
       expect(e).to.be.deep.equal({
-        err: 'Wrong argument(s) type'
+        err: 'Unable to retrieve the type of the color'
       })
     }    
   })
