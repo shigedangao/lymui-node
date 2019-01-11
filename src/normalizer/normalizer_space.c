@@ -65,6 +65,8 @@ BridgeSpaceObj *normalizeSpace(napi_env env, napi_value obj) {
       return br;
     }
     
+    free(type);
+    
     // Get a validation character in order to check if the data is present
     if (!hasPropInJSObj(env, params[0], validator->schema, MIN_LEN_TYPE)) {
         br->error = ARG_TYPE_ERR;

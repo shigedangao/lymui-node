@@ -113,7 +113,6 @@ uint8_t hasPropInJSObj(napi_env env, napi_value v, char *schema, size_t len) {
     uint8_t res = 1;
     const char delimiter[] = ":";
 
-    printf("Value of schema %s \n", schema);
     if (schema == NULL) {
         return 0;
     }

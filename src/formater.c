@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include "format_props.h"
@@ -55,6 +56,7 @@ Validation *getValidationProps(char *str) {
 
     uint8_t idx = 0;
     size_t size = SUPPORTED_FORMAT_LEN;
+    validate->schema = NULL;
 
     while(idx < size) {
         if (!strcmp(str, supported_type[idx])) {

@@ -96,6 +96,8 @@ BridgeObj *deserialize(napi_env env, napi_value obj) {
         return br;
     }
 
+    free(type);
+
     // set the struct
     br->color  = params[0];
     br->output = validator->output;

@@ -72,6 +72,8 @@ BridgeObj *normalize(napi_env env, napi_value obj) {
         return br;
     }
 
+    free(type);
+
     br->color  = params[0];
     br->output = validator->output;
     br->error  = NULL;
