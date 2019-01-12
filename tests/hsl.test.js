@@ -97,7 +97,7 @@ describe('Creating HSL from RGB', () => {
     const rgb = {
       r: 0,
       b: 100
-    };
+    }
 
     try {
       await lib.convertRegular({
@@ -120,7 +120,7 @@ describe('Creating HSL from RGB', () => {
       })
     }
   })
-});
+})
 
 describe('Creating RGB from HSL', () => {
   it('Expect to create RGB from HSL object', async () => {

@@ -1,4 +1,4 @@
-const { expect } = require('chai')
+const { expect } = require('chai')
 const SegfaultHandler = require('segfault-handler')
 const lib = require('../index')
 
@@ -88,8 +88,8 @@ describe('Creating RGB from Ycbcr', () => {
       r: 0,
       g: 100,
       b: 201
-    });
-  });
+    })
+  })
 
   it('Expect to retrieve a black value RGB object from YCbCr', async () => {
     const rgb = await lib.toRGB({

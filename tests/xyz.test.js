@@ -157,7 +157,7 @@ describe('Creating RGB from XYZ', () => {
       g: 10,
       b: 95
     })
-  });
+  })
 
   it('Expect to create RGB from XYZ of type ARGB when no default profile is passed', async () => {
     const rgb = await lib.toRGB({

@@ -122,7 +122,7 @@ describe('Creating an RGB from an Hex', () => {
       await lib.toRGB({
         input: 232323323,
         type: 'hex'
-      });
+      })
     } catch (e) {
       expect(e).to.be.deep.equal({
         err: 'Error while creating JS Value'

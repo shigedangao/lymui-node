@@ -148,7 +148,7 @@ describe('Creating RGB from TSL', () => {
       t: 0.0,
       s: 0.0,
       l: 'lol'
-    };
+    }
 
     try {
       await lib.toRGB({

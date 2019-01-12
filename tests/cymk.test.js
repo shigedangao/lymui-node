@@ -87,7 +87,7 @@ describe('Creating Cymk from RGB', () => {
         err: 'Missing arguments'
       })
     }
-  });
+  })
 
   it('Expect to throw when no output is passed', async () => {
     const rgb = { r: 100, g: 200, b: 155 }
@@ -117,7 +117,7 @@ describe('Creating Cymk from RGB', () => {
       })
     }
   })
-});
+})
 
 describe('Creation of a RGB object from a CYMK object', () => {
   it('Expect create RGB Object from CYMK Object', async () => {
@@ -195,7 +195,7 @@ describe('Creation of a RGB object from a CYMK object', () => {
       y: 0,
       m: 0,
       k: 0
-    };
+    }
 
     try {
       await lib.toRGB({
@@ -206,7 +206,7 @@ describe('Creation of a RGB object from a CYMK object', () => {
         err: 'Missing arguments'
       })
     }
-  });
+  })
 
   it('Expect to throw when a param is of the wrong type', async () => {
     const cymk = {
@@ -267,4 +267,4 @@ describe('Creation of a RGB object from a CYMK object', () => {
       })
     }    
   })
-});
+})
