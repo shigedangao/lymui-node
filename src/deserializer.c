@@ -15,55 +15,7 @@
 #include "binding_error.h"
 #include "deserializer_opts.h"
 
-// Global varaible referencing the napi_env
-napi_env envglobal;
-
-/**
- * @brief Set Bridge Opt Field
- * @param obj napi_value
- * @param br * BridgeObj
- * @void
- */
-static void setBridgeOptField(napi_value obj, BridgeObj *br) {
-    OptField *opt = getOptField(envglobal, obj, "profile");
-    if (opt == NULL) {
-        return;
-    }
-    
-    if (opt->has) {
-        char *value = getStringValue(envglobal, opt->field, MAX_LEN_TYPE);
-        br->matrix = value;
-    }
-
-    free(opt);
-    
-    OptField *clamp = getOptField(envglobal, obj, "clamp");
-    if (clamp == NULL) {
-        return;
-    }
-    
-    if (clamp->has) {
-        double clampValue = getDoubleValue(envglobal, clamp->field);
-        br->clamp = clampValue;
-    }
-
-    free(clamp);
-
-    OptField *scale = getOptField(envglobal, obj, "scale");
-    if (scale == NULL) {
-        return;
-    }
-
-    if (scale->has) {
-        char *value = getStringValue(envglobal, opt->field, MAX_LEN_TYPE);
-        br->matrix = value;
-    }
-
-    free(scale);
-}
-
 BridgeObj *deserialize(napi_env env, napi_value obj) {
-    envglobal = env;
     BridgeObj *br = malloc(sizeof(BridgeObj));
     if (br == NULL) {
         return NULL;
@@ -106,7 +58,9 @@ BridgeObj *deserialize(napi_env env, napi_value obj) {
     br->clamp  = 0.0;
 
     free(validator);
-    setBridgeOptField(obj, br);
+    getProfileOpt(env, obj, br);
+    getClampOpt(env, obj, br);
+    getScaleOpt(env, obj, br);
     
     return br;
 }

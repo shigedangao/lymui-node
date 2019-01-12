@@ -7,28 +7,6 @@
 #include "binding_error.h"
 #include "deserializer_opts.h"
 
-// Global varaible referencing the napi_env
-napi_env envglobal;
-
-/**
- * @brief Set Bridge Opt Field
- * @param obj napi_value obj
- * @param br * BridgeObj
- */
-static void setBridgeOptField(napi_value obj, BridgeObj *br) {
-    OptField *profile = getOptField(envglobal, obj, "profile");
-    if (profile == NULL) {
-        return;
-    }
-    
-    if (profile->has) {
-        char *value = getStringValue(envglobal, profile->field, MAX_LEN_TYPE);
-        br->matrix = value;
-    }
-
-    free(profile);
-}
-
 /**
  * @brief Is Hex
  * @param type char array
@@ -47,7 +25,6 @@ static uint8_t isHex(char *type) {
 }
 
 BridgeObj *normalize(napi_env env, napi_value obj) {
-    envglobal = env;
     uint8_t hex = 0;
     BridgeObj *br = malloc(sizeof(BridgeObj));
     if (br == NULL) {
@@ -90,8 +67,8 @@ BridgeObj *normalize(napi_env env, napi_value obj) {
         return br;
     }
 
-    setBridgeOptField(obj, br);
     free(validator);
+    getProfileOpt(env, obj, br);
 
     return br;
 }

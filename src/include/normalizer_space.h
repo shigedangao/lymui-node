@@ -19,6 +19,6 @@
  * @param obj napi_value
  * @return BridgeObj pointer
  */
-BridgeSpaceObj *normalizeSpace(napi_env env, napi_value obj);
+BridgeObj *normalizeSpace(napi_env env, napi_value obj);
 
 #endif /* normalizer_space_h */

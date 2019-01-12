@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include <node_api.h>
+#include "deserializer.h"
 #include "format_props.h"
 
 extern napi_env envglobal;
@@ -18,12 +19,12 @@ extern napi_env envglobal;
 /**
  * @brief struct that will be used to calculate value
  */
-typedef struct BridgeSpaceObj {
-    napi_value color;
-    OType output;
-    char *error;
-    double clamp;
-} BridgeSpaceObj;
+// typedef struct BridgeSpaceObj {
+//     napi_value color;
+//     OType output;
+//     char *error;
+//     double clamp;
+// } BridgeSpaceObj;
 
 /**
  * @brief deserialize space color
@@ -31,6 +32,6 @@ typedef struct BridgeSpaceObj {
  * @param obj napi_value
  * @return BridgeSpaceObj pointer
  */
-BridgeSpaceObj *deserializeSpace(napi_env env, napi_value obj);
+BridgeObj *deserializeSpace(napi_env env, napi_value obj);
 
 #endif /* deserializer_space_h */

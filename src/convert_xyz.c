@@ -17,10 +17,10 @@
 /**
  * @brief generate xyz object
  * @param env napi_env
- * @param bridge BridgeSpaceObj pointer
+ * @param bridge BridgeObj pointer
  * @return napi_value
  */
-static napi_value generateXYZ(napi_env env, BridgeSpaceObj *bridge) {
+static napi_value generateXYZ(napi_env env, BridgeObj *bridge) {
     switch (bridge->output) {
         case lab:
             return normalizeLab(env, bridge->color, bridge->clamp);
@@ -77,7 +77,7 @@ napi_value toXYZ(napi_env env, napi_callback_info info) {
         return promise;
     }
     
-    BridgeSpaceObj *bridge = normalizeSpace(env, argv[0]);
+    BridgeObj *bridge = normalizeSpace(env, argv[0]);
     if (bridge == NULL) {
         napi_reject_deferred(env, def, BuildPromiseError(env, ALLOCATION_ERR));
         return promise;

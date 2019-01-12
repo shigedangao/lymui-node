@@ -14,32 +14,8 @@
 #include "binding_error.h"
 #include "deserializer_opts.h"
 
-// Global varaible referencing the napi_env
-napi_env envglobal;
-
-/**
- * @brief Set BridgeSpace Opt Field
- * @param obj napi_value
- * @param br * BridgeObj
- * @void
- */
-static void setBridgeOptField(napi_value obj, BridgeSpaceObj *br) {
-    OptField *clamp = getOptField(envglobal, obj, "clamp");
-    if (clamp == NULL) {
-        return;
-    }
-    
-    if (clamp->has) {
-        double clampValue = getDoubleValue(envglobal, clamp->field);
-        br->clamp = clampValue;
-    }
-
-    free(clamp);
-}
-
-BridgeSpaceObj *normalizeSpace(napi_env env, napi_value obj) {
-    envglobal = env;
-    BridgeSpaceObj *br = malloc(sizeof(BridgeSpaceObj));
+BridgeObj *normalizeSpace(napi_env env, napi_value obj) {
+    BridgeObj *br = malloc(sizeof(BridgeObj));
     if (br == NULL) {
         return NULL;
     }
@@ -77,9 +53,10 @@ BridgeSpaceObj *normalizeSpace(napi_env env, napi_value obj) {
     br->output = validator->output;
     br->error  = NULL;
     br->clamp  = 0.0;
+    br->matrix = NULL;
 
-    setBridgeOptField(obj, br);
     free(validator);
-    
+    getClampOpt(env, obj, br);
+
     return br;
 }
