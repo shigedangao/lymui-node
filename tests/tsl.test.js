@@ -1,6 +1,6 @@
 const { expect } = require('chai')
 const SegfaultHandler = require('segfault-handler')
-const lib = require('../build/Release/lymuilib')
+const lib = require('../index')
 
 SegfaultHandler.registerHandler('tsl_crash.log')
 
@@ -148,7 +148,7 @@ describe('Creating RGB from TSL', () => {
       t: 0.0,
       s: 0.0,
       l: 'lol'
-    };
+    }
 
     try {
       await lib.toRGB({

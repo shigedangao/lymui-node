@@ -1,6 +1,6 @@
 const { expect } = require('chai')
 const SegfaultHandler = require('segfault-handler')
-const lib = require('../build/Release/lymuilib')
+const lib = require('../index')
 
 SegfaultHandler.registerHandler('xyy_crash.log')
 
@@ -62,7 +62,7 @@ describe('Creating XYY from XYZ', () => {
 
 describe('Creating XYZ from XYY', () => {
   it('Creating white XYZ from XYY', async () => {
-    const { data } = await lib.toXYZ({
+    const { data } = await lib.toXYZ({
       input: {
         x: 0.31273,
         y: 0.329023,

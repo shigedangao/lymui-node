@@ -1,6 +1,6 @@
 const { expect } = require('chai')
 const SegfaultHandler = require('segfault-handler')
-const lib = require('../build/Release/lymuilib')
+const lib = require('../index')
 
 SegfaultHandler.registerHandler('hex_crash.log')
 
@@ -122,7 +122,7 @@ describe('Creating an RGB from an Hex', () => {
       await lib.toRGB({
         input: 232323323,
         type: 'hex'
-      });
+      })
     } catch (e) {
       expect(e).to.be.deep.equal({
         err: 'Error while creating JS Value'

@@ -107,12 +107,17 @@ char *getStringValue(napi_env env, napi_value v, size_t strLen) {
     return str;
 }
 
-uint8_t hasPropInJSObj(napi_env env, napi_value v, char *name, size_t len) {
+uint8_t hasPropInJSObj(napi_env env, napi_value v, char *schema, size_t len) {
     napi_status status;
     uint8_t idx = 0;
     uint8_t res = 1;
     const char delimiter[] = ":";
-    char * running = strdup(name);
+
+    if (schema == NULL) {
+        return 0;
+    }
+
+    char * running = strdup(schema);
     char * string;
     
     while(idx < len) {
@@ -149,6 +154,24 @@ Matrix getEnumFromStr(char *enumStr) {
     }
     
     return srgb;
+}
+
+Strategy getScaleStrategyFromStr(char *enumStr) {
+    if (enumStr == NULL) {
+        return Lightness;
+    }
+
+    if (!strcmp(enumStr, "average")) {
+        return Average;
+    } else if (!strcmp(enumStr, "luminosity")) {
+        return Luminosity;
+    } else if (!strcmp(enumStr, "bt709")) {
+        return bt709;
+    } else if (!strcmp(enumStr, "bt2100")) {
+        return bt2100;
+    }
+
+    return Lightness;
 }
 
 void getNamedPropArray(napi_env env, char * name, napi_value obj, size_t len, napi_value * res) {

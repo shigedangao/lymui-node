@@ -1,6 +1,6 @@
 const { expect } = require('chai')
 const SegfaultHandler = require('segfault-handler')
-const lib = require('../build/Release/lymuilib')
+const lib = require('../index')
 
 SegfaultHandler.registerHandler('xyz_crash.log')
 
@@ -130,11 +130,13 @@ describe('Creating Xyz from RGB', () => {
       clamp: 'foooo'
     })
 
-    expect(xyz.data).to.be.deep.equal({
-      x: 0.9504701,
-      y: 1.0000000999999998,
-      z: 1.08883
-    })
+    const x = Number.parseFloat(xyz.data.x).toFixed(4)
+    const y = Number.parseFloat(xyz.data.y).toFixed(4)
+    const z = Number.parseFloat(xyz.data.z).toFixed(4)
+
+    expect(x).to.be.equal('0.9505')
+    expect(y).to.be.equal('1.0000')
+    expect(z).to.be.equal('1.0888')
   })
 })
 
@@ -155,7 +157,7 @@ describe('Creating RGB from XYZ', () => {
       g: 10,
       b: 95
     })
-  });
+  })
 
   it('Expect to create RGB from XYZ of type ARGB when no default profile is passed', async () => {
     const rgb = await lib.toRGB({

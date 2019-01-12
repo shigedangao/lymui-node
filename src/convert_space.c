@@ -13,7 +13,7 @@
 #include "deserializer_space.h"
 #include "factory.h"
 
-static napi_value generateColorSpaceJSObj(napi_env env, BridgeSpaceObj *bridge) {
+static napi_value generateColorSpaceJSObj(napi_env env, BridgeObj *bridge) {
     Xyz *xyz = getXyzFromJSObj(env, bridge->color);
     if (xyz == NULL) {
         return NULL;
@@ -78,7 +78,7 @@ napi_value convert(napi_env env, napi_callback_info info) {
         return promise;
     }
     
-    BridgeSpaceObj *bridge = deserializeSpace(env, argv[0]);
+    BridgeObj *bridge = deserializeSpace(env, argv[0]);
     if (bridge == NULL) {
         napi_reject_deferred(env, def, BuildPromiseError(env, CREATE_VALUE_ERR));
         return promise;

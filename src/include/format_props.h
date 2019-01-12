@@ -17,6 +17,7 @@
 #define YUV_PROPS "y:u:v"
 #define HWB_PROPS "h:w:b"
 #define TSL_PROPS "t:s:l"
+#define GSCALE_PROPS "g"
 #define XYZ_PROPS "x:y:z"
 #define LAB_PROPS "l:a:b"
 #define LCH_PROPS "l:c:h"
@@ -25,5 +26,43 @@
 #define SRGB_PROPS "r:g:b"
 #define LCHLAB_PROPS "l:c:h"
 #define XYY_PROPS "x:y:Y"
+
+#define SUPPORTED_FORMAT_LEN 17
+
+extern char* validator_props[SUPPORTED_FORMAT_LEN];
+extern char* supported_type[SUPPORTED_FORMAT_LEN];
+
+typedef enum Ouput {
+  hex,
+  cymk,
+  hsl,
+  hsv,
+  ycbcr,
+  yuv,
+  hwb,
+  tsl,
+  grasycale,
+  xyz,
+  lab,
+  lch,
+  luv,
+  argb,
+  Srgb,
+  llab,
+  xyy
+} OType;
+
+typedef struct Validation {
+  OType output;
+  char *schema;
+} Validation;
+
+/**
+ * @brief Get Validation Props
+ * @param c char
+ * @return validation Validation
+ */
+Validation *getValidationProps(char *c);
+
 
 #endif /* format_props_h */

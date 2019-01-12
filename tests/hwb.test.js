@@ -1,6 +1,6 @@
 const { expect } = require('chai')
 const SegfaultHandler = require('segfault-handler')
-const lib = require('../build/Release/lymuilib')
+const lib = require('../index')
 
 SegfaultHandler.registerHandler('hwb_crash.log')
 
@@ -10,7 +10,7 @@ describe('Creating HWB from RGB', () => {
       r: 17,
       g: 12,
       b: 93
-    };
+    }
 
     const hwb = await lib.convertRegular({
       input: rgb,
@@ -30,7 +30,7 @@ describe('Creating HWB from RGB', () => {
       r: 255,
       g: 255,
       b: 255
-    };
+    }
 
     const hwb = await lib.convertRegular({
       input: rgb,
@@ -50,7 +50,7 @@ describe('Creating HWB from RGB', () => {
       r: 0,
       g: 0,
       b: 0
-    };
+    }
 
     const hwb = await lib.convertRegular({
       input: rgb,
@@ -68,7 +68,7 @@ describe('Creating HWB from RGB', () => {
     const rgb = {
       r: 17,
       g: 12,
-    };
+    }
 
     try {
       await lib.convertRegular({
@@ -88,7 +88,7 @@ describe('Creating HWB from RGB', () => {
       r: 17,
       g: 12,
       b: 'Hello'
-    };
+    }
 
     try {
       await lib.convertRegular({

@@ -1,6 +1,6 @@
 const { expect } = require('chai')
 const SegfaultHandler = require('segfault-handler')
-const lib = require('../build/Release/lymuilib')
+const lib = require('../index')
 
 SegfaultHandler.registerHandler('luv_convert.log')
 
@@ -88,7 +88,7 @@ describe('Creating LUV from RGB', () => {
 
     expect(luv.data).to.be.deep.equal({
       l: 100,
-      u: 0,
+      u: -0,
       v: 0
     })
   })

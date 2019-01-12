@@ -12,12 +12,15 @@
 #include <stdio.h>
 #include <node_api.h>
 #include "rgb.h"
+#include "hex.h"
 #include "cymk.h"
 #include "ycbcr.h"
 #include "hsl.h"
 #include "hsv.h"
 #include "yuv.h"
+#include "hwb.h"
 #include "tsl.h"
+#include "grayscale.h"
 #include "xyz.h"
 #include "lab.h"
 #include "lch.h"
@@ -114,6 +117,15 @@ napi_value HwbJSObjFactory(napi_env env, Rgb *rgb, double clamp);
  * @return napi_value
  */ 
 napi_value TslJSObjFactory(napi_env env, Rgb *rgb, double clamp);
+
+/**
+ * @brief Creating a Grayscale JS Object
+ * @param env napi_env
+ * @param rgb Rgb
+ * @param matrix char*
+ * @return napi_value
+ */
+napi_value GrayScaleJSObjFactory(napi_env env, Rgb *rgb, char *matrix);
 
 /**
  * @brief Creating Xyz JS Object

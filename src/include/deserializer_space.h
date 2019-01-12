@@ -11,31 +11,20 @@
 
 #include <stdio.h>
 #include <node_api.h>
+#include "deserializer.h"
 #include "format_props.h"
 
-/**
- * @brief list of color supported color space
- */
-typedef enum OutputSpace {
-    lab,
-    lch,
-    llab,
-    luv,
-    argb,
-    Srgb,
-    xyy
-} OSpaceType;
+extern napi_env envglobal;
 
 /**
  * @brief struct that will be used to calculate value
  */
-typedef struct BridgeSpaceObj {
-    napi_value color;
-    OSpaceType output;
-    char *error;
-    double clamp;
-} BridgeSpaceObj;
-
+// typedef struct BridgeSpaceObj {
+//     napi_value color;
+//     OType output;
+//     char *error;
+//     double clamp;
+// } BridgeSpaceObj;
 
 /**
  * @brief deserialize space color
@@ -43,15 +32,6 @@ typedef struct BridgeSpaceObj {
  * @param obj napi_value
  * @return BridgeSpaceObj pointer
  */
-BridgeSpaceObj *deserializeSpace(napi_env env, napi_value obj);
-
-
-/**
- * @brief normalize the value of regular color for being prepare into being convet into RGB (broken english am sick).
- * @param env napi_env
- * @param obj napi_value
- * @return BridgeObj pointer
- */
-BridgeSpaceObj *normalizeSpace(napi_env env, napi_value obj);
+BridgeObj *deserializeSpace(napi_env env, napi_value obj);
 
 #endif /* deserializer_space_h */

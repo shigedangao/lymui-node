@@ -43,6 +43,8 @@ static napi_value generateTypeJSObj(napi_env env, BridgeObj *bridge) {
             return HwbJSObjFactory(env, rgb, bridge->clamp);
         case tsl:
             return TslJSObjFactory(env, rgb, bridge->clamp);
+        case grasycale:
+            return GrayScaleJSObjFactory(env, rgb, bridge->matrix);
         default:
             return NULL;
     }
@@ -57,8 +59,9 @@ static napi_value generateTypeJSObj(napi_env env, BridgeObj *bridge) {
  *      b: 200
  *    },
  *    output: 'xyz',
- *    profile: 'adobeRgb', (optional) <string>
- *    clamp: 1000, optional <double>
+ *    profile: 'adobeRgb', (optional) <string> only use for xyz
+ *    clamp: 1000, (optional) <double>
+ *    scale: 'Lightness', (optional) <string> only use for grayscale
  *  })
  *
  */

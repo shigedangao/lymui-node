@@ -1,6 +1,6 @@
 const { expect } = require('chai')
 const SegfaultHandler = require('segfault-handler')
-const lib = require('../build/Release/lymuilib')
+const lib = require('../index')
 
 SegfaultHandler.registerHandler('hsl_crash.log')
 
@@ -97,7 +97,7 @@ describe('Creating HSL from RGB', () => {
     const rgb = {
       r: 0,
       b: 100
-    };
+    }
 
     try {
       await lib.convertRegular({
@@ -120,7 +120,7 @@ describe('Creating HSL from RGB', () => {
       })
     }
   })
-});
+})
 
 describe('Creating RGB from HSL', () => {
   it('Expect to create RGB from HSL object', async () => {
