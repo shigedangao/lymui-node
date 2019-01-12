@@ -122,9 +122,10 @@ napi_value TslJSObjFactory(napi_env env, Rgb *rgb, double clamp);
  * @brief Creating a Grayscale JS Object
  * @param env napi_env
  * @param rgb Rgb
+ * @param matrix char*
  * @return napi_value
  */
-napi_value GrayScaleJSObjFactory(napi_env env, Rgb *rgb);
+napi_value GrayScaleJSObjFactory(napi_env env, Rgb *rgb, char *matrix);
 
 /**
  * @brief Creating Xyz JS Object

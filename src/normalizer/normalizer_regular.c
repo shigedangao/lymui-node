@@ -62,6 +62,11 @@ BridgeObj *normalize(napi_env env, napi_value obj) {
         return br;
     }
 
+    // Unlike the deserializer. The normalizer is able
+    // to take any type of color input
+    // Therefore we pass a char 'schema' representing the type
+    // of color we want to check against
+    // e.g validator->schema = 'x:y:z'
     if (!hasPropInJSObj(env, params[0], validator->schema, MIN_LEN_TYPE)) {
         br->error = ARG_TYPE_ERR;
         return br;

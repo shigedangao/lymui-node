@@ -156,6 +156,24 @@ Matrix getEnumFromStr(char *enumStr) {
     return srgb;
 }
 
+Strategy getScaleStrategyFromStr(char *enumStr) {
+    if (enumStr == NULL) {
+        return Lightness;
+    }
+
+    if (!strcmp(enumStr, "average")) {
+        return Average;
+    } else if (!strcmp(enumStr, "luminosity")) {
+        return Luminosity;
+    } else if (!strcmp(enumStr, "bt709")) {
+        return bt709;
+    } else if (!strcmp(enumStr, "bt2100")) {
+        return bt2100;
+    }
+
+    return Lightness;
+}
+
 void getNamedPropArray(napi_env env, char * name, napi_value obj, size_t len, napi_value * res) {
     uint8_t idx = 0;
     napi_status status;

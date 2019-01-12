@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <node_api.h>
 #include "xyz.h"
+#include "grayscale.h"
 
 #define CONVERT_BASIC_LEN 2
 #define MIN_LEN_TYPE 3
@@ -101,6 +102,13 @@ uint8_t hasPropInJSObj(napi_env env, napi_value v, char * name, size_t len);
  * @return Matrix enum
  */
 Matrix getEnumFromStr(char * enumStr);
+
+/**
+ * @brief Return a strategy enum from the string
+ * @param enumStr char *
+ * @return Strategy enum
+ */
+Strategy getScaleStrategyFromStr(char *enumStr);
 
 /**
  * @brief Get the property of an object and set it on a napi_value array

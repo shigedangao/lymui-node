@@ -365,7 +365,7 @@ napi_value TslJSObjFactory(napi_env env, Rgb *rgb, double clamp) {
     return object;
 }
 
-napi_value GrayScaleJSObjFactory(napi_env env, Rgb *rgb) {
+napi_value GrayScaleJSObjFactory(napi_env env, Rgb *rgb, char *matrix) {
     napi_status status;
     napi_value object, data;
 
@@ -378,6 +378,12 @@ napi_value GrayScaleJSObjFactory(napi_env env, Rgb *rgb) {
     if (status != napi_ok) {
         return NULL;
     }
+
+    Strategy strat = getScaleStrategyFromStr(matrix);
+    Gray gray = getGrayScale(rgb, strat);
+
+    assignPropToJSObj(&data, env, numberInt, "gray", &gray);
+    assignJSObjtoJSObj(env, &object, data, "data");
 
     return object;
 }
