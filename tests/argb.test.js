@@ -62,7 +62,7 @@ describe('Creating ARGB from Xyz', () => {
       output: 'xyz'
     })
 
-    const { data } = await lib.convertSpace({
+    const { data } = await lib.convertSpace({
       input: xyz.data,
       output: 'argb',
       clamp: 100

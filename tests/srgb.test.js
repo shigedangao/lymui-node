@@ -62,7 +62,7 @@ describe('Creating SRGB from Xyz', () => {
       output: 'xyz'
     })
 
-    const { data } = await lib.convertSpace({
+    const { data } = await lib.convertSpace({
       input: xyz.data,
       output: 'Srgb',
       clamp: 100
@@ -114,7 +114,7 @@ describe('Creating XYZ from SRGB', () => {
   })
 
   it('Expect to create dark XYZ from SRGB', async () => {
-    const { data } = await lib.toXYZ({
+    const { data } = await lib.toXYZ({
       input: {
         r: 0,
         g: 0,

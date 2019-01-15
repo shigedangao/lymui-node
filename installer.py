@@ -5,7 +5,7 @@ import zipfile
 import io, shutil
 
 _platform = platform.system()
-_version = "1.2.0"
+_version = "1.2.1"
 _bin_path = "lymui/bin"
 
 def update_progress(progress):
@@ -25,8 +25,8 @@ link = "https://github.com/MarcInthaamnouay/lymui/releases/download/v" + _versio
 r = requests.get(link, stream=True)
 update_progress(0.3)
 
-zip = zipfile.ZipFile(io.BytesIO(r.content))
-zip.extractall()
+zfile = zipfile.ZipFile(io.BytesIO(r.content))
+zfile.extractall()
 update_progress(0.6)
 
 # Check if the folder bin exist

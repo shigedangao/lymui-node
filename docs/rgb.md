@@ -9,6 +9,8 @@ This api allow you to convert any type listed below to an RGB:
 - cymk
 - xyz
 - yuv
+- tsl
+- hwb
 
 # Usage
 
@@ -18,7 +20,7 @@ Usage is pretty simple. The method take 4 parameters, 2 which are optionals
 - **output**: a string representing the input color format
 - **profile**: An **optional** string that is **only used for converting Rgb to Xyz** it can either take the value 'srgb' or 'adobe'. By default it is set to 'srgb'
 
-# Eample
+# Examples
 
 Converting an **Hex to RGB**
 

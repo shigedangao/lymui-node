@@ -18,7 +18,7 @@ Usage is pretty simple. The method take 4 parameters, 2 which are optionals
 - **output**: a string representing the input color format
 - **clamp**: An **optional** integer value which allow you to limit the precision of final value
 
-# Eample
+# Example
 
 Converting an **Xyz to an Lab**
 

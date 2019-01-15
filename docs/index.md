@@ -23,6 +23,6 @@ In order to simplify the integration of the module. The module exposed 4 APIs th
 
 - [convertRegular](https://marcinthaamnouay.github.io/lymui-node/docs/regular)
 - [convertSpace](https://marcinthaamnouay.github.io/lymui-node/docs/space)
-- [toRGB](https://marcinthaamnouay.github.io/lymui-node/docs/space)
+- [toRGB](https://marcinthaamnouay.github.io/lymui-node/docs/rgb)
 - [toXYZ](https://marcinthaamnouay.github.io/lymui-node/docs/xyz)
 
