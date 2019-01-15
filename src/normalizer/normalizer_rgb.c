@@ -8,6 +8,8 @@
 
 #include "normalizer_rgb.h"
 #include <node_api.h>
+#include <string.h>
+#include <stdlib.h>
 #include "hex.h"
 #include "binding_util.h"
 #include "bridge.h"
@@ -18,9 +20,22 @@ napi_value normalizeHex(napi_env env, napi_value color) {
     if (hex == NULL) {
         return NULL;
     }
-    
-    Rgb *rgb = getRGBFromHex(hex);
-    napi_value object = RgbJSObjFactory(env, rgb);
+
+    if (hex[3]) {
+        Rgb *rgb = getRGBFromHex(hex);
+        napi_value object = RgbJSObjFactory(env, rgb);
+        return object;
+    }
+
+    char *smallHex = malloc(sizeof(char*) * 4);
+    if (smallHex == NULL) {
+        return NULL;
+    }
+
+    snprintf(smallHex, 4, "%c%c%c", hex[0], hex[1], hex[2]);
+    Rgb *tinyRgb = getRGBFromHex(smallHex);
+    napi_value object = RgbJSObjFactory(env, tinyRgb);
+
     return object;
 }
 

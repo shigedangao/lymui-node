@@ -1,4 +1,4 @@
-## Lymui-node
+## Lymui node
 
 ### Mitsuha is reviewing this PR
 
@@ -15,4 +15,3 @@
 - [ ] Unit test are fullfill
 
 🐷 Thanks for contributing ! 🐷
-

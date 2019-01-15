@@ -16,6 +16,7 @@
 void assignPropToJSObj(napi_value * jsObj, napi_env env, JSType t, char *name, void *arg) {
     napi_value value;
     napi_status status;
+    size_t MAX_STR_LEN = 64;
     
     if (t == numberInt) {
         uint8_t v = *(uint8_t *) arg;
@@ -25,7 +26,7 @@ void assignPropToJSObj(napi_value * jsObj, napi_env env, JSType t, char *name, v
         status = napi_create_double(env, v, &value);
     } else {
         char * v = (char *) arg;
-        status = napi_create_string_utf8(env, v, strlen(v), &value);
+        status = napi_create_string_utf8(env, v, strnlen(v, MAX_STR_LEN), &value);
     }
     
     if (status != napi_ok) {

@@ -87,3 +87,16 @@ napi_value normalizeSRgb(napi_env env, napi_value obj, double clamp) {
     
     return object;
 }
+
+napi_value normalizeARgb(napi_env env, napi_value obj, double clamp) {
+    Argb *argb = getArgbFromJSObj(env, obj);
+    if (argb == NULL) {
+        return NULL;
+    }
+
+    Xyz *xyz = getXyzFromARgb(argb);
+    napi_value object = XyzJSObjFactoryNoInst(env, xyz, clamp);
+
+    return object;
+}
+

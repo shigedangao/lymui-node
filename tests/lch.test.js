@@ -126,7 +126,7 @@ describe('Creating XYZ from LCH', () => {
   })
   
   it('Expect to create dark XYZ from LCH', async () => {
-    const { data } = await lib.toXYZ({
+    const { data } = await lib.toXYZ({
       input: {
         l: 0,
         c: 0,
@@ -153,7 +153,7 @@ describe('Creating XYZ from LCH', () => {
       output: 'lch'
     })
 
-    const { data } = lch
+    const { data } = lch
 
     const xyz = await lib.toXYZ({
       input: data,

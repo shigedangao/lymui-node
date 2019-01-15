@@ -3,6 +3,12 @@
 Lymui-node is a node module based on my Lymui library color converter. This node module allow you to convert asynchronously colors. The library has been tested on latest osx and ubuntu 18.04 & 16.04
 
 ![Travis logo](https://travis-ci.org/MarcInthaamnouay/lymui-node.svg?branch=master)
+![N-API bade v3](https://img.shields.io/badge/N--API-v3-green.svg)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/45d85b05a49647d68cf5ea9a53e1ced4)](https://www.codacy.com/app/mintha/lymui-node?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=MarcInthaamnouay/lymui-node&amp;utm_campaign=Badge_Grade)
+
+## Version
+
+1.1.0
 
 ## Requirements
 
@@ -55,3 +61,18 @@ Most of the binding is done in C. The entrypoint is *bootstrap.c*
 ## Support of a new color
 
 If you want me to add a new color type or if you want to add a new color type please open an issue in this repo.
+
+## Changelog
+
+* 1.1.0
+* * Add support of TSL
+* * Add support of HWB
+* * Add support of short hand hex
+* * Add support of grayscale
+* * Add support of argb -> xyz
+* * Refactor deserializer & normalizer
+* * Fix bugs
+* * Resolving wrong redirection with the doc
+* * Refactoring API exposition
+* 1.0.0
+* * Initial release
