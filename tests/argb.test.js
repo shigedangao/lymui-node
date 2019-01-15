@@ -74,4 +74,58 @@ describe('Creating ARGB from Xyz', () => {
       b: 1.0
     })
   })
+
+  it('Expect to create white XYZ from Argb', async () => {
+    const xyz = await lib.toXYZ({
+      input: {
+        r: 1.0,
+        g: 1.0,
+        b: 1.0
+      },
+      type: 'argb',
+      clamp: 10000
+    })
+
+    expect(xyz.data).to.be.deep.equal({
+      x: 0.9505,
+      y: 1.0000,
+      z: 1.0888
+    })
+  })
+
+  it('Expect to create black XYZ from Argb', async () => {
+    const xyz = await lib.toXYZ({
+      input: {
+        r: 0.0,
+        g: 0.0,
+        b: 0.0
+      },
+      type: 'argb',
+      clamp: 10000
+    })
+
+    expect(xyz.data).to.be.deep.equal({
+      x: 0.0,
+      y: 0.0,
+      z: 0.0
+    })
+  })
+
+  it('Expect to create a color XYZ from Argb', async () => {
+    const xyz = await lib.toXYZ({
+      input: {
+        r: 0.196089,
+        g: 0.039087,
+        b: 0.372496
+      },
+      type: 'argb',
+      clamp: 10000
+    })
+
+    expect(xyz.data).to.be.deep.equal({
+      x: 0.0376,
+      y: 0.0173,
+      z: 0.1138
+    })
+  })
 })
