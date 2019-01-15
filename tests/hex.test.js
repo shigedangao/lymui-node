@@ -116,7 +116,6 @@ describe('Creating an RGB from an Hex', () => {
     }
   })
 
-
   it('Expect to not throw when unknown character is pass', async () => {
     try {
       await lib.toRGB({
@@ -128,5 +127,44 @@ describe('Creating an RGB from an Hex', () => {
         err: 'Error while creating JS Value'
       })
     }
+  })
+
+  it('Expect to convert a white short hand Hex to RGB', async () => {
+    const rgb = await lib.toRGB({
+      input: 'fff',
+      type: 'hex'
+    })
+
+    expect(rgb.data).to.be.deep.equal({
+      r: 255,
+      g: 255,
+      b: 255
+    })
+  })
+
+  it('Expect to convert a black short hand Hex to RGB', async () => {
+    const rgb = await lib.toRGB({
+      input: '000',
+      type: 'hex'
+    })
+
+    expect(rgb.data).to.be.deep.equal({
+      r: 0,
+      g: 0,
+      b: 0
+    })
+  })
+
+  it('Expect to convert a short hand color Hex to RGB', async () => {
+    const rgb = await lib.toRGB({
+      input: '36F',
+      type: 'hex'
+    })
+
+    expect(rgb.data).to.be.deep.equal({
+      r: 51,
+      g: 102,
+      b: 255
+    })
   })
 })
