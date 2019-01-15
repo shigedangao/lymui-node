@@ -21,7 +21,12 @@ Usage is pretty simple. The method take 4 parameters, 2 which are optionals
 - **output**: a string representing the supported colors (list above)
 - **clamp**: An **optional** integer value which allow you to limit the precision of final value
 - **profile**: An **optional** string that is **only used for converting Rgb to Xyz** it can either take the value 'srgb' or 'adobe'. By default it is set to 'srgb'
-- **scale**: An **optional** string that is **only used for converting Rgb to Grayscale**. It can contain the following values (lightness|luminosity|average|bt709|bt2100). By default scale is set to 'lightness'
+- **scale**: An **optional** string that is **only used for converting Rgb to Grayscale**. It can contain the following values 
+  - lightness (default)
+  - luminosity
+  - average
+  - bt709
+  - bt2100
 
 # Examples
 

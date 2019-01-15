@@ -16,6 +16,9 @@ This module is a NodeJS binding to my C library Lymui. This library supported th
 - xyz
 - yccbr
 - yuv
+- grayscale
+- hwb
+- tsl
 
 ## APIs
 
