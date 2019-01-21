@@ -16,8 +16,6 @@ env:
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo easy_install pip; fi
-  - pip install requests
-  - python installer.py
   - npm install -g node-gyp
   - node-gyp configure
 
