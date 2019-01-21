@@ -8,7 +8,7 @@
     "test": "tests"
   },
   "scripts": {
-    "install": "python installer.py && node-gyp rebuild",
+    "install": "node installer.js && node-gyp rebuild",
     "test": "./node_modules/mocha/bin/mocha tests/*.test.js",
     "build:dev": "node-gyp build --debug",
     "build": "node-gyp build",
@@ -29,8 +29,11 @@
   "homepage": "https://github.com/MarcInthaamnouay/lymui-node#readme",
   "devDependencies": {
     "chai": "^4.2.0",
+    "chalk": "^2.4.2",
     "mocha": "^5.2.0",
-    "segfault-handler": "^1.0.1"
+    "request": "^2.88.0",
+    "segfault-handler": "^1.0.1",
+    "unzipper": "^0.9.9"
   },
   "keywords": [
     "color",
