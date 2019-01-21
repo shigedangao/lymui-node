@@ -1,6 +1,6 @@
 {
   "name": "lymui-node",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Lymui-node is a small color conversion library for NodeJS",
   "main": "index.js",
   "directories": {
