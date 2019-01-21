@@ -8,7 +8,7 @@ Lymui-node is a node module based on my Lymui library color converter. This node
 
 ## Version
 
-1.1.0
+1.1.1
 
 ## Requirements
 
@@ -20,7 +20,7 @@ In order to run & install the module you need to have
 - nodejs
 - node-gyp
 - python
-- build-essential (linux)
+- build-essential (linux) use by node-gyp
 
 ## Example of usage
 
@@ -63,6 +63,10 @@ Most of the binding is done in C. The entrypoint is *bootstrap.c*
 If you want me to add a new color type or if you want to add a new color type please open an issue in this repo.
 
 ## Changelog
+
+* 1.1.1
+* * Bump liblymui version to 1.2.2
+* * Change installer from python to node
 
 * 1.1.0
 * * Add support of TSL
