@@ -22,6 +22,11 @@ In order to run & install the module you need to have
 - python
 - build-essential (linux) use by node-gyp
 
+## Install
+
+The library should be automatically be build when installing the module.
+If rebuild is necessary run the following command: `npm rebuild`
+
 ## Example of usage
 
 Below is an example of how to use the library
