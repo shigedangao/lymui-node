@@ -8,7 +8,7 @@ Lymui-node is a node module based on my Lymui library color converter. This node
 
 ## Version
 
-1.1.1
+1.1.1a
 
 ## Requirements
 
@@ -68,6 +68,9 @@ Most of the binding is done in C. The entrypoint is *bootstrap.c*
 If you want me to add a new color type or if you want to add a new color type please open an issue in this repo.
 
 ## Changelog
+
+* 1.1.1a
+* * Fix incorrect dependencies resulting to an impossibility to install the package
 
 * 1.1.1
 * * Bump liblymui version to 1.2.2

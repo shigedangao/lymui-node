@@ -1,6 +1,6 @@
 {
   "name": "lymui-node",
-  "version": "1.1.1",
+  "version": "1.1.1a",
   "description": "Lymui-node is a small color conversion library for NodeJS",
   "main": "index.js",
   "directories": {
@@ -28,12 +28,8 @@
   },
   "homepage": "https://github.com/MarcInthaamnouay/lymui-node#readme",
   "devDependencies": {
-    "chai": "^4.2.0",
-    "chalk": "^2.4.2",
     "mocha": "^5.2.0",
-    "request": "^2.88.0",
-    "segfault-handler": "^1.0.1",
-    "unzipper": "^0.9.9"
+    "segfault-handler": "^1.0.1"
   },
   "keywords": [
     "color",
@@ -48,5 +44,11 @@
     "hsv",
     "color-converter",
     "color-conversion"
-  ]
+  ],
+  "dependencies": {
+    "chai": "^4.2.0",
+    "chalk": "^2.4.2",
+    "request": "^2.88.0",
+    "unzipper": "^0.9.10"
+  }
 }
