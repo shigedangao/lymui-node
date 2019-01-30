@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist_ts",
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "target": "es6",
+    "module": "commonjs",
+    "declaration": true
+  },
+  "include": [
+    "index.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
