@@ -28,8 +28,11 @@
   },
   "homepage": "https://github.com/MarcInthaamnouay/lymui-node#readme",
   "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.5",
     "mocha": "^5.2.0",
-    "segfault-handler": "^1.0.1"
+    "segfault-handler": "^1.0.1",
+    "ts-node": "^8.0.2"
   },
   "keywords": [
     "color",
@@ -46,6 +49,7 @@
     "color-conversion"
   ],
   "dependencies": {
+    "@types/node": "^10.12.20",
     "chai": "^4.2.0",
     "chalk": "^2.4.2",
     "request": "^2.88.0",

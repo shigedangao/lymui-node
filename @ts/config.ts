@@ -2,7 +2,7 @@
  * Config interface base
  */
 export interface Config<T> {
-  <T>(input: T): T;
+  input: T;
   clamp?: Number;
 }
 
