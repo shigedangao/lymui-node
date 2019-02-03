@@ -31,6 +31,6 @@ export interface Lymui {
   toXYZ<T>(config: OutputConfig<T>): Promise<T>;
 }
 
-const liblymui: Lymui = require('./build/Release/lymuilib')
+const liblymui: Lymui = require('../build/Release/lymuilib')
 
 export default liblymui

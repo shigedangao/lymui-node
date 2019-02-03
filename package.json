@@ -10,6 +10,7 @@
   "scripts": {
     "install": "node installer.js && node-gyp rebuild",
     "test": "./node_modules/mocha/bin/mocha tests/*.test.js",
+    "test-ts": "./node_modules/mocha/bin/mocha -r ts-node/register tests/ts/*.test.ts",
     "build:dev": "node-gyp build --debug",
     "build": "node-gyp build",
     "rebuild:dev": "node-gyp rebuild --debug",
@@ -32,7 +33,8 @@
     "@types/mocha": "^5.2.5",
     "mocha": "^5.2.0",
     "segfault-handler": "^1.0.1",
-    "ts-node": "^8.0.2"
+    "ts-node": "^8.0.2",
+    "typescript": "^3.3.1"
   },
   "keywords": [
     "color",

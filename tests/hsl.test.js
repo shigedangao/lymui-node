@@ -120,6 +120,26 @@ describe('Creating HSL from RGB', () => {
       })
     }
   })
+
+  it('Expect to throw an error when the output format is not supported', async () => {
+    try {
+      await lib.convertRegular({
+        input: {
+          r: 5,
+          g: 10,
+          b: 95
+        },
+        output: 'dd',
+        clamp: 10
+      })
+
+      throw new Error('should have thrown')
+    } catch(e) {
+      expect(e).to.be.deep.equal({
+        err: 'This color format is not supported by the library'
+      })
+    }
+  })
 })
 
 describe('Creating RGB from HSL', () => {

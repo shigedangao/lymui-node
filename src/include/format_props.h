@@ -49,7 +49,8 @@ typedef enum Ouput {
   argb,
   Srgb,
   llab,
-  xyy
+  xyy,
+  nil
 } OType;
 
 typedef struct Validation {

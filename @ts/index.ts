@@ -1,5 +1,5 @@
-import lib from './@ts/binding'
-import { Config, InputConfig, OutputConfig } from './@ts/config'
+import lib from './binding'
+import { Config, InputConfig, OutputConfig } from './config'
 
 // Errors enum
 enum Errors {
@@ -27,7 +27,7 @@ export default {
    * @param {InputConfig} config
    * @return {Promise}
    */
-  convertRegular<T>(config: InputConfig<T>): Promise<T> {
+  convertRegular<T, U>(config: InputConfig<T>): Promise<U> {
     checkConfigEmptyness(config)
 
     if (config.scale) {
