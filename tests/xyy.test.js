@@ -24,7 +24,7 @@ describe('Creating XYY from XYZ', () => {
   })
 
   it('Expect to create a normal XYY from an XYZ Object', async () => {
-    const { data } = await lib.convertSpace({
+    const { data } = await lib.convertSpace({
       input: {
         x: 0.023750,
         y: 0.011309,
@@ -80,7 +80,7 @@ describe('Creating XYZ from XYY', () => {
   })
 
   it('Creating normal XYZ from XYY', async () => {
-    const { data } = await lib.toXYZ({
+    const { data } = await lib.toXYZ({
       input: {
         x: 0.485566,
         y: 0.356183,

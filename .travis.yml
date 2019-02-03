@@ -12,16 +12,19 @@ sudo: true
 
 env:
   global:
-    - VERSION=1.1.1
+    - VERSION=1.1.1a
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo easy_install pip; fi
   - npm install -g node-gyp
   - node-gyp configure
+  - npm install -g typescript
 
 before_script:
   - npm install
   - npm run rebuild
+  - npm run build-ts
 
 script:
   - npm run test
+  - npm run test-ts

@@ -49,6 +49,11 @@ BridgeObj *normalize(napi_env env, napi_value obj) {
         return br;
     }
 
+    if (validator->output == nil) {
+        br->error = INVALID_TYPE;
+        return br;
+    }
+
     free(type);
 
     br->color  = params[0];

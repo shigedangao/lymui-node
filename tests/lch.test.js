@@ -108,7 +108,7 @@ describe('Creating XYZ from LCH', () => {
   })
 
   it('Expect to create bright XYZ from LCH', async () => {
-    const { data } = await lib.toXYZ({
+    const { data } = await lib.toXYZ({
       input: {
         l: 100,
         c: 0,

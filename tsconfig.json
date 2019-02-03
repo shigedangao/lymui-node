@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "outDir": "./lib_ts",
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "target": "es6",
+    "module": "commonjs",
+    "declaration": true
+  },
+  "include": [
+    "./@ts/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

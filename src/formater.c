@@ -57,6 +57,7 @@ Validation *getValidationProps(char *str) {
     uint8_t idx = 0;
     size_t size = SUPPORTED_FORMAT_LEN;
     validate->schema = NULL;
+    validate->output = nil;
 
     while(idx < size) {
         if (!strcmp(str, supported_type[idx])) {

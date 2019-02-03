@@ -25,5 +25,6 @@
 #define PROMISE_ERR "Unable to create promise"
 #define CB_INFO_ERR "Unable to retrieve data from method"
 #define OTYPE_TYPE_ERR "Unable to retrieve the type of the color"
+#define INVALID_TYPE "This color format is not supported by the library"
 
 #endif /* binding_error_h */

@@ -1,8 +1,9 @@
 {
   "name": "lymui-node",
-  "version": "1.1.1a",
+  "version": "1.1.2-beta.1",
   "description": "Lymui-node is a small color conversion library for NodeJS",
   "main": "index.js",
+  "types": "lib_ts/index.d.ts",
   "directories": {
     "lib": "lib",
     "test": "tests"
@@ -10,11 +11,14 @@
   "scripts": {
     "install": "node installer.js && node-gyp rebuild",
     "test": "./node_modules/mocha/bin/mocha tests/*.test.js",
+    "test-ts": "./node_modules/mocha/bin/mocha -r ts-node/register tests/ts/*.test.ts",
     "build:dev": "node-gyp build --debug",
     "build": "node-gyp build",
+    "build-ts": "tsc",
     "rebuild:dev": "node-gyp rebuild --debug",
     "rebuild": "node-gyp rebuild",
-    "clean": "node-gyp clean"
+    "clean": "node-gyp clean",
+    "prepublish": "npm run test && npm run test-ts"
   },
   "repository": {
     "type": "git",
@@ -28,8 +32,13 @@
   },
   "homepage": "https://github.com/MarcInthaamnouay/lymui-node#readme",
   "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^10.12.21",
     "mocha": "^5.2.0",
-    "segfault-handler": "^1.0.1"
+    "segfault-handler": "^1.0.1",
+    "ts-node": "^8.0.2",
+    "typescript": "^3.3.1"
   },
   "keywords": [
     "color",
