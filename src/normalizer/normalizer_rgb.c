@@ -27,7 +27,7 @@ napi_value normalizeHex(napi_env env, napi_value color) {
         return object;
     }
 
-    char *smallHex = malloc(sizeof(char*) * 4);
+    char *smallHex = malloc(sizeof(char) * 4);
     if (smallHex == NULL) {
         return NULL;
     }

@@ -109,7 +109,7 @@ describe('Creating LUV from RGB', () => {
     const xyz = {
       x: 0.196341,
       y: 0.101518,
-      z: 0.994060
+      z: 0.99406
     }
     
     const luv = await lib.convertSpace({

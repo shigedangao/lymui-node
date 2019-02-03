@@ -6,7 +6,7 @@ SegfaultHandler.registerHandler('xyy_crash.log')
 
 describe('Creating XYY from XYZ', () => {
   it('Expect to create a bright XYY from an XYZ Object', async () => {
-    const { data } = await lib.convertSpace({
+    const { data } = await lib.convertSpace({
       input: {
         x: 0.950470,
         y: 1.0,

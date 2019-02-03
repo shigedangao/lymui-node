@@ -90,7 +90,7 @@ describe('Creating LCH from XYZ', () => {
 
 describe('Creating XYZ from LCH', () => {
   it('Expect to create XYZ from LCH', async () => {
-    const { data } = await lib.toXYZ({
+    const { data } = await lib.toXYZ({
       input: {
         l: 13.9492,
         c: 40.0716,
