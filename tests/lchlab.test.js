@@ -6,7 +6,7 @@ SegfaultHandler.registerHandler('lch_lab_convert.log')
 
 describe('Creating LchLab from XYZ', () => {
   it('Expect to create white LchLab from XYZ', async () => {
-    const { data } = await lib.convertSpace({
+    const { data } = await lib.convertSpace({
       input: {
         x: 0.9505,
         y: 1,
@@ -80,7 +80,7 @@ describe('Creating LchLab from XYZ', () => {
 
 describe('Creating XYZ from LchLab', () => {
   it('Expect to create Xyz from LchLab', async () => {
-    const { data } = await lib.toXYZ({
+    const { data } = await lib.toXYZ({
       input: {
         l: 10.0375,
         c: 60.4716,

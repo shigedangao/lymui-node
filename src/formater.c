@@ -50,7 +50,12 @@ char *supported_type[SUPPORTED_FORMAT_LEN] = {
 
 Validation *getValidationProps(char *str) {
     Validation *validate = malloc(sizeof(Validation));
-    if (validate == NULL || str == NULL) {
+    if (validate == NULL) {
+        return NULL;
+    }
+
+    if (str == NULL) {
+        free(validate);
         return NULL;
     }
 
