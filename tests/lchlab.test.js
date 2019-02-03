@@ -24,7 +24,7 @@ describe('Creating LchLab from XYZ', () => {
   })
 
   it('Expect to create LchLab from XYZ', async () => {
-    const { data } = await lib.convertSpace({
+    const { data } = await lib.convertSpace({
       input: {
         x: 0.023750,
         y: 0.011309,
@@ -98,7 +98,7 @@ describe('Creating XYZ from LchLab', () => {
   })
 
   it('Expect to create White Xyz from LchLab', async () => {
-    const { data } = await lib.toXYZ({
+    const { data } = await lib.toXYZ({
       input: {
         l: 100,
         c: 0,
