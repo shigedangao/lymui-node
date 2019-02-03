@@ -72,7 +72,7 @@ describe('Creating LchLab from XYZ', () => {
       })
     } catch (e) {
       expect(e).to.be.deep.equal({
-        err: 'Error while creating JS Value'
+        err: 'This color format is not supported by the library'
       })
     }
   })

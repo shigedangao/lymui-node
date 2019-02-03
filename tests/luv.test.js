@@ -211,7 +211,7 @@ describe('Creating XYZ from LUV', () => {
       })
     } catch (e) {
       expect(e).to.be.deep.equal({
-        err: 'Wrong argument(s) type'
+        err: 'This color format is not supported by the library'
       })
     }
   })

@@ -89,6 +89,25 @@ describe('Creating HSV Object from RGB', () => {
       })
     }
   })
+
+  it('Expect to throw when an unsupported type is passed', async () => {
+    try {
+      await lib.convertRegular({
+        input: {
+          r: 5,
+          g: 10,
+          b: 98
+        },
+        output: 'lyl'
+      })
+
+      throw new Error('Should have throw')
+    } catch (e) {
+      expect(e).to.be.deep.equal({
+        err: 'This color format is not supported by the library'
+      })
+    }
+  })
 })
 
 describe('Creating RGB Object from HSV Object', () => {
@@ -170,6 +189,25 @@ describe('Creating RGB Object from HSV Object', () => {
     } catch (e) {
       expect(e).to.be.deep.equal({
         err: 'Missing arguments'
+      })
+    }
+  })
+
+  it('Expect to throw when an unsupported type is passed', async () => {
+    try {
+      await lib.toRGB({
+        input: {
+          h: 237,
+          s: 94.9,
+          v: 38.4
+        },
+        type: 'lyl'
+      })
+
+      throw new Error('Should have throw')
+    } catch (e) {
+      expect(e).to.be.deep.equal({
+        err: 'This color format is not supported by the library'
       })
     }
   })
