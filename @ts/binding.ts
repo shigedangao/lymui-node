@@ -10,25 +10,25 @@ export interface Lymui {
    * 
    * @param config
    */
-  convertRegular<T, U>(config: InputConfig<T>): Promise<U>;
+  convertRegular<T, O>(config: InputConfig<T>): Promise<O>;
   /**
    * Convert Space
    * 
    * @param config
    */
-  convertSpace<T>(config: InputConfig<T>): Promise<T>;
+  convertSpace<T, O>(config: InputConfig<T>): Promise<O>;
   /**
    * To RGB
    * 
    * @param config
    */
-  toRGB<T>(config: OutputConfig<T>): Promise<T>;
+  toRGB<T, O>(config: OutputConfig<T>): Promise<O>;
   /**
    * To Xyz
    * 
    * @param config 
    */
-  toXYZ<T>(config: OutputConfig<T>): Promise<T>;
+  toXYZ<T, O>(config: OutputConfig<T>): Promise<O>;
 }
 
 const liblymui: Lymui = require('../build/Release/lymuilib')

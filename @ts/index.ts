@@ -27,7 +27,7 @@ export default {
    * @param {InputConfig} config
    * @return {Promise}
    */
-  convertRegular<T, U>(config: InputConfig<T>): Promise<U> {
+  convertRegular<T, O>(config: InputConfig<T>): Promise<O> {
     checkConfigEmptyness(config)
 
     if (config.scale) {
@@ -42,7 +42,7 @@ export default {
    * @param {InputConfig} config
    * @return {Promise}
    */
-  convertSpace<T>(config: InputConfig<T>): Promise<T> {
+  convertSpace<T, O>(config: InputConfig<T>): Promise<O> {
     checkConfigEmptyness(config)
     return lib.convertSpace(config)
   },
@@ -52,7 +52,7 @@ export default {
    * @param {OutputConfig} config
    * @return {Promise}
    */
-  toRGB<T>(config: OutputConfig<T>): Promise<T> {
+  toRGB<T, O>(config: OutputConfig<T>): Promise<O> {
     checkConfigEmptyness(config)
     return lib.toRGB(config)
   },
@@ -62,7 +62,7 @@ export default {
    * @param {OutputConfig} config 
    * @return {Promise}
    */
-  toXYZ<T>(config: OutputConfig<T>): Promise<T> {
+  toXYZ<T, O>(config: OutputConfig<T>): Promise<O> {
     checkConfigEmptyness(config)
     return lib.toXYZ(config)
   }

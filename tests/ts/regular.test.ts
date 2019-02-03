@@ -1,11 +1,11 @@
 import lib from '../../@ts/index'
 import { expect } from 'chai'
 import { Output } from '../../@ts/output'
-import { Rgb } from '../../@ts/inputs'
+import { Rgb, Xyz, Cymk, Lab } from '../../@ts/inputs'
 import 'mocha'
 
-describe('Creating Regular type', () => {
-  it('Should create an hsl', async () => {
+describe('Creating Regular type (convertRegular)', () => {
+  it('Expect to create an hsl', async () => {
     const hsl = await lib.convertRegular<Rgb, Output>({
       input: {
         r: 5,
@@ -23,7 +23,7 @@ describe('Creating Regular type', () => {
     })
   })
 
-  it('Should throw an error if the input is not correct', async () => {
+  it('Expect to throw an error if the input is not correct', async () => {
     try {
       await lib.convertRegular<Rgb, Output>({
         input: {
@@ -35,6 +35,120 @@ describe('Creating Regular type', () => {
         clamp: 10
       })
     } catch(e) {
+      expect(e).to.be.deep.equal({
+        err: 'This color format is not supported by the library'
+      })
+    }
+  })
+})
+
+describe('Creating Space type (convertSpace)', () => {
+  it('Expect to create a space type', async () => {
+    const lab = await lib.convertSpace<Xyz, Output>({
+      input: {
+        x: 0.9505,
+        y: 1,
+        z: 1.0888
+      },
+      output: 'lab',
+      clamp: 1
+    })
+
+    expect(lab.data).to.be.deep.equal({
+      l: 100,
+      a: 0.0,
+      b: 0.0
+    })
+  })
+
+  it('Expect to throw an error when a type is not supported', async () => {
+    try {
+      await lib.convertSpace<Xyz, Output>({
+        input: {
+          x: 0.9505,
+          y: 1,
+          z: 1.0888
+        },
+        output: 'lol',
+        clamp: 1
+      })
+    } catch(e) {
+      expect(e).to.be.deep.equal({
+        err: 'This color format is not supported by the library'
+      })
+    }
+  })
+})
+
+describe('Creating RGB from a Cymk (toRGB)', () => {
+  it('Expect to create RGB value from Cymk', async () => {
+    const rgb = await lib.toRGB<Cymk, Output>({
+      input: {
+        c: 0.973,
+        y: 0,
+        m: 0.949,
+        k: 0.223
+      },
+      type: 'cymk'
+    })
+
+    expect(rgb.data).to.be.deep.equal({
+      r: 5,
+      g: 10,
+      b: 198
+    })
+  })
+
+  it('Expect to throw an error when the type is not supported', async () => {
+    try {
+      await lib.toRGB<Cymk, Output>({
+        input: {
+          c: 0.973,
+          y: 0,
+          m: 0.949,
+          k: 0.223
+        },
+        type: 'ly'
+      })
+    } catch(e) {
+      expect(e).to.be.deep.equal({
+        err: 'This color format is not supported by the library'
+      })
+    }
+  })
+})
+
+describe('Creating an XYZ from a Lab type (toXYZ)', () => {
+  it('Expect to create an XYZ from a Lab', async () => {
+    const { data } = await lib.toXYZ<Lab, Output>({
+      input: {
+        l: 100,
+        a: 0,
+        b: 0
+      },
+      type: 'lab',
+      clamp: 10000
+    })
+
+    expect(data).to.be.deep.equal({
+      x: 0.9505,
+      y: 1,
+      z: 1.0888
+    })
+  })
+
+  it('Expect to throw when the type is not supported', async () => {
+    try {
+      await lib.toXYZ<Lab, Output>({
+        input: {
+          l: 100,
+          a: 0,
+          b: 0
+        },
+        type: 'mn',
+        clamp: 10000
+      })
+    } catch (e) {
       expect(e).to.be.deep.equal({
         err: 'This color format is not supported by the library'
       })

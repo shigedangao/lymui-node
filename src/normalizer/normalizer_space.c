@@ -40,6 +40,11 @@ BridgeObj *normalizeSpace(napi_env env, napi_value obj) {
       br->error = OTYPE_TYPE_ERR;
       return br;
     }
+
+    if (validator->output == nil) {
+        br->error = INVALID_TYPE;
+        return br;
+    }
     
     free(type);
     
