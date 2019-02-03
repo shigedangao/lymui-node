@@ -22,8 +22,10 @@ function checkConfigEmptyness<T>(config: Config<T>) {
 
 export default {
   /**
-   * Convert Regular
+   * Convert Regular <Type, Output>
    * 
+   *   Types are available in inputs.ts
+   *   Output refer to the output.js exported interface
    * @param {InputConfig} config
    * @return {Promise}
    */

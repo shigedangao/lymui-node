@@ -133,3 +133,8 @@ export interface Srgb extends Rgb {};
  * Alias to Lch
  */
 export interface LchLab extends Lch {};
+
+/**
+ * Hex type
+ */
+export type Hex = string;

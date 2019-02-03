@@ -1,7 +1,7 @@
 import lib from '../../@ts/index'
 import { expect } from 'chai'
 import { Output } from '../../@ts/output'
-import { Rgb, Xyz, Cymk, Lab } from '../../@ts/inputs'
+import { Rgb, Xyz, Cymk, Lab, Hex } from '../../@ts/inputs'
 import 'mocha'
 
 describe('Creating Regular type (convertRegular)', () => {
@@ -153,5 +153,20 @@ describe('Creating an XYZ from a Lab type (toXYZ)', () => {
         err: 'This color format is not supported by the library'
       })
     }
+  })
+})
+
+describe('Creating RGB from Hex', () => {
+  it('Expect to create an HEX from an RGB', async () => {
+    const { data } = await lib.toRGB<Hex, Output>({
+      input: 'FFFFFF',
+      type: 'hex'
+    })
+
+    expect(data).to.be.deep.equal({
+      r: 255,
+      g: 255,
+      b: 255
+    })
   })
 })
