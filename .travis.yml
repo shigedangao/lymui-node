@@ -12,7 +12,7 @@ sudo: true
 
 env:
   global:
-    - VERSION=1.1.1a
+    - VERSION=1.1.2
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo easy_install pip; fi
