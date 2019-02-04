@@ -118,14 +118,14 @@ uint8_t hasPropInJSObj(napi_env env, napi_value v, char *schema, size_t len) {
         return 0;
     }
 
-    char * running = strdup(schema);
-    char * string;
+    char *running = strdup(schema);
+    char *s;
     
     while(idx < len) {
         bool present;
         // convert a char to a string...
-        string = strsep(&running, delimiter);
-        status = napi_has_named_property(env, v, string, &present);
+        s = strsep(&running, delimiter);
+        status = napi_has_named_property(env, v, s, &present);
         if (status != napi_ok || !present) {
             res = 0;
             idx = len + 1;
@@ -179,12 +179,12 @@ void getNamedPropArray(napi_env env, char * name, napi_value obj, size_t len, na
     uint8_t idx = 0;
     napi_status status;
     const char delimiter[] = ":";
-    char * running = strdup(name);
-    char * str;
+    char *running = strdup(name);
+    char *s;
     
     while(idx < len) {
-        str = strsep(&running, delimiter);
-        status = napi_get_named_property(env, obj, str, &res[idx]);
+        s = strsep(&running, delimiter);
+        status = napi_get_named_property(env, obj, s, &res[idx]);
         if (status != napi_ok) {
             idx = len + 1;
             napi_throw_error(env, NULL, DESERIALIZE_ERR);
