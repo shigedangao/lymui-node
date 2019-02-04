@@ -2,7 +2,7 @@
 
 ## Installation
 
-Typescript types are provided out of the box from the library. In order to use the typescript types first run this command.
+Typescript types are provided out of the box by the library. In order to use the typescript types first run this command.
 
 ```shell
 cd node_modules/lymui-node/ && npm run build-ts
@@ -52,7 +52,7 @@ import lib from 'lymui-node/lib_ts';
 import { Rgb } from 'lymui-node/lib_ts/inputs';
 import { Output } from 'lymui-node/lib_ts/output';
 
-const { data } = await lib.convertRegular<Rgb, Output>({
+const { data } = await lib.convertRegular<Rgb, Output>({
   input: {
     r: 50,
     g: 10,
@@ -67,7 +67,7 @@ const { data } = await lib.convertRegular<Rgb, Output>({
 ### convertSpace
 
 ```ts
-const { data } = await lib.convertSpace<Xyz, Output>({
+const { data } = await lib.convertSpace<Xyz, Output>({
   input: {
     x: 0.9505,
     y: 1,
@@ -81,7 +81,7 @@ const { data } = await lib.convertSpace<Xyz, Output>({
 ### toRGB
 
 ```ts
-const { data } = await lib.toRGB<Cymk, Output>({
+const { data } = await lib.toRGB<Cymk, Output>({
   input: {
     c: 0.973,
     y: 0,

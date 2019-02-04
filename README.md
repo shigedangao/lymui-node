@@ -8,7 +8,7 @@ Lymui-node is a node module based on my Lymui library color converter. This node
 
 ## Version
 
-1.1.1a
+1.1.2-beta.1
 
 ## Requirements
 
@@ -26,6 +26,10 @@ In order to run & install the module you need to have
 
 The library should be automatically be build when installing the module.
 If rebuild is necessary run the following command: `npm rebuild`
+
+### Typescript
+
+For typescript please follow the installation guide [install types](https://marcinthaamnouay.github.io/lymui-node/docs/typescript)
 
 ## Example of usage
 
@@ -68,6 +72,11 @@ Most of the binding is done in C. The entrypoint is *bootstrap.c*
 If you want me to add a new color type or if you want to add a new color type please open an issue in this repo.
 
 ## Changelog
+
+* 1.1.2-beta.1 (testing...)
+* * Fix missing validation on the type
+* * Fix non null terminating string error
+* * Add typescript types
 
 * 1.1.1a
 * * Fix incorrect dependencies resulting to an impossibility to install the package
