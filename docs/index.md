@@ -29,3 +29,7 @@ In order to simplify the integration of the module. The module exposed 4 APIs th
 - [toRGB](https://marcinthaamnouay.github.io/lymui-node/docs/rgb)
 - [toXYZ](https://marcinthaamnouay.github.io/lymui-node/docs/xyz)
 
+## Typescript
+
+- [Typescript](https://marcinthaamnouay.github.io/lymui-node/docs/typescript)
+
