@@ -35,7 +35,7 @@ Rgb *getRGBFromJSObj(napi_env env, napi_value obj) {
     return rgb;
 }
 
-char * getHEXFromJSObj(napi_env env, napi_value obj) {
+char *getHEXFromJSObj(napi_env env, napi_value obj) {
     napi_status status;
     size_t hexLen;
     char * hex = malloc(sizeof(char) * HEX_SIZE + 1);
