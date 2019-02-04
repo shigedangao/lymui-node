@@ -180,11 +180,11 @@ void getNamedPropArray(napi_env env, char * name, napi_value obj, size_t len, na
     napi_status status;
     const char delimiter[] = ":";
     char * running = strdup(name);
-    char * string;
+    char * str;
     
     while(idx < len) {
-        string = strsep(&running, delimiter);
-        status = napi_get_named_property(env, obj, string, &res[idx]);
+        str = strsep(&running, delimiter);
+        status = napi_get_named_property(env, obj, str, &res[idx]);
         if (status != napi_ok) {
             idx = len + 1;
             napi_throw_error(env, NULL, DESERIALIZE_ERR);
