@@ -8,7 +8,7 @@ Lymui-node is a node module based on my Lymui library color converter. This node
 
 ## Version
 
-1.1.2-beta.1
+1.1.2-beta.2
 
 ## Requirements
 
@@ -73,10 +73,11 @@ If you want me to add a new color type or if you want to add a new color type pl
 
 ## Changelog
 
-* 1.1.2-beta.1 (testing...)
+* 1.1.2-beta.2 (testing...)
 * * Fix missing validation on the type
 * * Fix non null terminating string error
 * * Add typescript types
+* * Add @types/node to the list of dependencies
 
 * 1.1.1a
 * * Fix incorrect dependencies resulting to an impossibility to install the package
