@@ -24,13 +24,13 @@ BridgeObj *deserializeSpace(napi_env env, napi_value obj) {
     char *inputProps = "input:output";
     napi_value params[2];
     
-    if (!hasPropInJSObj(env, obj, inputProps, CONVERT_BASIC_LEN)) {
+    if (!hasPropInJSObj(env, obj, inputProps)) {
         br->error = ARG_NB_ERR;
         return br;
     }
     
     getNamedPropArray(env, inputProps, obj, CONVERT_BASIC_LEN, params);
-    if (!hasPropInJSObj(env, params[0], XYZ_PROPS, MIN_LEN_TYPE)) {
+    if (!hasPropInJSObj(env, params[0], XYZ_PROPS)) {
         br->error = ARG_TYPE_ERR;
         return br;
     }

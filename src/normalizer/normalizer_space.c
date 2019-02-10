@@ -23,7 +23,7 @@ BridgeObj *normalizeSpace(napi_env env, napi_value obj) {
     char *inputProps = "input:type";
     napi_value params[2];
     
-    if (!hasPropInJSObj(env, obj, inputProps, CONVERT_BASIC_LEN)) {
+    if (!hasPropInJSObj(env, obj, inputProps)) {
         br->error = ARG_NB_ERR;
         return br;
     }
@@ -49,7 +49,7 @@ BridgeObj *normalizeSpace(napi_env env, napi_value obj) {
     free(type);
     
     // Get a validation character in order to check if the data is present
-    if (!hasPropInJSObj(env, params[0], validator->schema, MIN_LEN_TYPE)) {
+    if (!hasPropInJSObj(env, params[0], validator->schema)) {
         br->error = ARG_TYPE_ERR;
         return br;
     }

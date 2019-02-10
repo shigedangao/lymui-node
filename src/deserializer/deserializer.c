@@ -28,7 +28,7 @@ BridgeObj *deserialize(napi_env env, napi_value obj) {
     napi_value params[2];
     
     // We check if the JS Object has the required param
-    if (!hasPropInJSObj(env, obj, inputProps, CONVERT_BASIC_LEN)) {
+    if (!hasPropInJSObj(env, obj, inputProps)) {
         br->error = ARG_NB_ERR;
         return br;
     }
@@ -40,7 +40,7 @@ BridgeObj *deserialize(napi_env env, napi_value obj) {
     // As these deserializer is only treating 'RGB' based color input
     // We check that the first object (input a JS Object)
     // contain the rgb object like so: {input: {r: 5, g: 10, b: 98}}
-    if (!hasPropInJSObj(env, params[0], RGB_PROPS, MIN_LEN_TYPE)) {
+    if (!hasPropInJSObj(env, params[0], RGB_PROPS)) {
         br->error = ARG_TYPE_ERR;
         return br;
     }

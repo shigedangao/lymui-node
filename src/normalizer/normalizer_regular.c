@@ -34,7 +34,7 @@ BridgeObj *normalize(napi_env env, napi_value obj) {
     char *inputProps = "input:type";
     napi_value params[2];
     
-    if (!hasPropInJSObj(env, obj, inputProps, CONVERT_BASIC_LEN)) {
+    if (!hasPropInJSObj(env, obj, inputProps)) {
         br->error = ARG_NB_ERR;
         return br;
     }
@@ -72,7 +72,7 @@ BridgeObj *normalize(napi_env env, napi_value obj) {
     // Therefore we pass a char 'schema' representing the type
     // of color we want to check against
     // e.g validator->schema = 'x:y:z'
-    if (!hasPropInJSObj(env, params[0], validator->schema, MIN_LEN_TYPE)) {
+    if (!hasPropInJSObj(env, params[0], validator->schema)) {
         br->error = ARG_TYPE_ERR;
         return br;
     }

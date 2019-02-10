@@ -91,10 +91,9 @@ char *getStringValue(napi_env env, napi_value v, size_t size);
  * @param env napi_env
  * @param v napi_value
  * @param name * char
- * @param len size_t
  * @return bool
  */
-bool hasPropInJSObj(napi_env env, napi_value v, char * name, size_t len);
+bool hasPropInJSObj(napi_env env, napi_value v, char *name);
 
 /**
  * @brief Return an enum from the string

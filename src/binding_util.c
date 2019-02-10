@@ -108,7 +108,7 @@ char *getStringValue(napi_env env, napi_value v, size_t strLen) {
     return str;
 }
 
-bool hasPropInJSObj(napi_env env, napi_value v, char *schema, size_t len) {
+bool hasPropInJSObj(napi_env env, napi_value v, char *schema) {
     napi_status status;
     const char delimiter[] = ":";
     bool present;

@@ -18,7 +18,7 @@
 Rgb *getRGBFromJSObj(napi_env env, napi_value obj) {
     napi_value value[MIN_PARAM_VALUE];    
     // check if the object has the property
-    if (!hasPropInJSObj(env, obj, RGB_PROPS, MIN_PARAM_VALUE)) {
+    if (!hasPropInJSObj(env, obj, RGB_PROPS)) {
         return NULL;
     }
     
@@ -60,7 +60,7 @@ char *getHEXFromJSObj(napi_env env, napi_value obj) {
 Cymk *getCymkFromJSObj(napi_env env, napi_value obj) {
     napi_value value[MAX_PARAM_VALUE];
     
-    if (!hasPropInJSObj(env, obj, CMYK_PROPS, MAX_PARAM_VALUE)) {
+    if (!hasPropInJSObj(env, obj, CMYK_PROPS)) {
         return NULL;
     }
     
@@ -80,7 +80,7 @@ Cymk *getCymkFromJSObj(napi_env env, napi_value obj) {
 
 Ycbcr *getYcbcrFromJSObj(napi_env env, napi_value obj) {
     napi_value value[MIN_PARAM_VALUE];    
-    if (!hasPropInJSObj(env, obj, YCBCR_PROPS, MIN_PARAM_VALUE)) {
+    if (!hasPropInJSObj(env, obj, YCBCR_PROPS)) {
         return NULL;
     }
     
@@ -100,7 +100,7 @@ Ycbcr *getYcbcrFromJSObj(napi_env env, napi_value obj) {
 
 Hsl *getHslFromJSObj(napi_env env, napi_value obj) {
     napi_value value[MIN_PARAM_VALUE];    
-    if (!hasPropInJSObj(env, obj, HSL_PROPS, MIN_PARAM_VALUE)) {
+    if (!hasPropInJSObj(env, obj, HSL_PROPS)) {
         return NULL;
     }
     
@@ -119,7 +119,7 @@ Hsl *getHslFromJSObj(napi_env env, napi_value obj) {
 
 Hsv *getHsvFromJSObj(napi_env env, napi_value obj) {
     napi_value value[MIN_PARAM_VALUE];    
-    if (!hasPropInJSObj(env, obj, HSV_PROPS, MIN_PARAM_VALUE)) {
+    if (!hasPropInJSObj(env, obj, HSV_PROPS)) {
         return NULL;
     }
     
@@ -139,7 +139,7 @@ Hsv *getHsvFromJSObj(napi_env env, napi_value obj) {
 Yuv *getYuvFromJSObj(napi_env env, napi_value obj) {
     napi_value value[MIN_PARAM_VALUE];
 
-    if (!hasPropInJSObj(env, obj, YUV_PROPS, MIN_PARAM_VALUE)) {
+    if (!hasPropInJSObj(env, obj, YUV_PROPS)) {
         return NULL;
     }
     
@@ -158,7 +158,7 @@ Yuv *getYuvFromJSObj(napi_env env, napi_value obj) {
 Hwb *getHwbFromJSObj(napi_env env, napi_value obj) {
     napi_value value[MIN_PARAM_VALUE];
 
-    if (!hasPropInJSObj(env, obj, HWB_PROPS, MIN_PARAM_VALUE)) {
+    if (!hasPropInJSObj(env, obj, HWB_PROPS)) {
         return NULL;
     }
 
@@ -177,7 +177,7 @@ Hwb *getHwbFromJSObj(napi_env env, napi_value obj) {
 
 Tsl *getTslFromJSObj(napi_env env, napi_value obj) {
     napi_value value[MIN_PARAM_VALUE];
-    if (!hasPropInJSObj(env, obj, TSL_PROPS, MIN_PARAM_VALUE)) {
+    if (!hasPropInJSObj(env, obj, TSL_PROPS)) {
         return NULL;
     }
 
@@ -197,7 +197,7 @@ Tsl *getTslFromJSObj(napi_env env, napi_value obj) {
 Xyz *getXyzFromJSObj(napi_env env, napi_value args) {
     napi_value value[MIN_PARAM_VALUE];
     
-    if (!hasPropInJSObj(env, args, XYZ_PROPS, MIN_PARAM_VALUE)) {
+    if (!hasPropInJSObj(env, args, XYZ_PROPS)) {
         return NULL;
     }
     
@@ -216,7 +216,7 @@ Xyz *getXyzFromJSObj(napi_env env, napi_value args) {
 
 Lab *getLabFromJSObj(napi_env env, napi_value args) {
     napi_value value[MIN_PARAM_VALUE];    
-    if (!hasPropInJSObj(env, args, LAB_PROPS, MIN_PARAM_VALUE)) {
+    if (!hasPropInJSObj(env, args, LAB_PROPS)) {
         return NULL;
     }
     
@@ -235,7 +235,7 @@ Lab *getLabFromJSObj(napi_env env, napi_value args) {
 
 Lch *getLchFromJSObj(napi_env env, napi_value args) {
     napi_value value[MIN_PARAM_VALUE];
-    if (!hasPropInJSObj(env, args, LCH_PROPS, MIN_PARAM_VALUE)) {
+    if (!hasPropInJSObj(env, args, LCH_PROPS)) {
         return NULL;
     }
     
@@ -254,7 +254,7 @@ Lch *getLchFromJSObj(napi_env env, napi_value args) {
 
 LchLab *getLchlabFromJSObj(napi_env env, napi_value args) {
     napi_value value[MIN_PARAM_VALUE];
-    if (!hasPropInJSObj(env, args, LCHLAB_PROPS, MIN_PARAM_VALUE)) {
+    if (!hasPropInJSObj(env, args, LCHLAB_PROPS)) {
         return NULL;
     }
     
@@ -273,7 +273,7 @@ LchLab *getLchlabFromJSObj(napi_env env, napi_value args) {
 
 Luv *getLuvFromJSObj(napi_env env, napi_value args) {
     napi_value value[MIN_PARAM_VALUE];
-    if (!hasPropInJSObj(env, args, LUV_PROPS, MIN_PARAM_VALUE)) {
+    if (!hasPropInJSObj(env, args, LUV_PROPS)) {
         return NULL;
     }
     
@@ -292,7 +292,7 @@ Luv *getLuvFromJSObj(napi_env env, napi_value args) {
 
 Argb *getArgbFromJSObj(napi_env env, napi_value args) {
     napi_value value[MIN_PARAM_VALUE];
-    if (!hasPropInJSObj(env, args, ARGB_PROPS, MIN_PARAM_VALUE)) {
+    if (!hasPropInJSObj(env, args, ARGB_PROPS)) {
         return NULL;
     }
     
@@ -311,7 +311,7 @@ Argb *getArgbFromJSObj(napi_env env, napi_value args) {
 
 SRgb *getSrgbFromJSObj(napi_env env, napi_value args) {
     napi_value value[MIN_PARAM_VALUE];
-    if (!hasPropInJSObj(env, args, SRGB_PROPS, MIN_PARAM_VALUE)) {
+    if (!hasPropInJSObj(env, args, SRGB_PROPS)) {
         return NULL;
     }
     
@@ -330,7 +330,7 @@ SRgb *getSrgbFromJSObj(napi_env env, napi_value args) {
 
 Xyy *getXyyFromJSObj(napi_env env, napi_value args) {
     napi_value value[MIN_PARAM_VALUE];
-    if (!hasPropInJSObj(env, args, XYY_PROPS, MIN_PARAM_VALUE)) {
+    if (!hasPropInJSObj(env, args, XYY_PROPS)) {
         return NULL;
     }
     
