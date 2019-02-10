@@ -108,33 +108,31 @@ char *getStringValue(napi_env env, napi_value v, size_t strLen) {
     return str;
 }
 
-uint8_t hasPropInJSObj(napi_env env, napi_value v, char *schema, size_t len) {
+bool hasPropInJSObj(napi_env env, napi_value v, char *schema, size_t len) {
     napi_status status;
-    uint8_t idx = 0;
-    uint8_t res = 1;
     const char delimiter[] = ":";
+    bool present;
 
     if (schema == NULL) {
-        return 0;
+        return false;
     }
 
-    char *running = strdup(schema);
-    char *s;
-    
-    while(idx < len) {
-        bool present;
-        // convert a char to a string...
-        s = strsep(&running, delimiter);
-        status = napi_has_named_property(env, v, s, &present);
+    char *dup = strdup(schema);
+    if (dup == NULL) {
+        return false;
+    }
+
+    char *token = strtok(dup, delimiter);
+    while (token != NULL) {
+        status = napi_has_named_property(env, v, token, &present);
         if (status != napi_ok || !present) {
-            res = 0;
-            idx = len + 1;
+            token = NULL;
+        } else {
+            token = strtok(NULL, delimiter);
         }
-        
-        idx++;
     }
     
-    return res;
+    return present;
 }
 
 double clampValue(double value, double clamp) {
