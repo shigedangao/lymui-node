@@ -11,7 +11,8 @@
 #include "binding_error.h"
 #include "bridge.h"
 #include "deserializer_space.h"
-#include "factory.h"
+#include "factory_space.h"
+#include "factory_common.h"
 
 static napi_value generateColorSpaceJSObj(napi_env env, BridgeObj *bridge) {
     Xyz *xyz = getXyzFromJSObj(env, bridge->color);
