@@ -8,7 +8,6 @@ napi_value BuildPromiseError(napi_env env, char *error) {
     
     status = napi_create_object(env, &object);
     if (status != napi_ok) {
-        napi_throw_error(env, NULL, OBJ_MAKE_ERR);
         return NULL;
     }
     
