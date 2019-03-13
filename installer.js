@@ -5,7 +5,7 @@ const unzipper = require('unzipper')
 const chalk = require('chalk')
 
 // Global variable
-const LIB_VERSION = '1.2.2'
+const LIB_VERSION = '1.3.0'
 const binPath = 'lymui'
 
 /**
@@ -15,17 +15,9 @@ const binPath = 'lymui'
  * @void
  */
 const installer = () => {
-  let os
-  const platform = process.platform.toLowerCase()
-
-  if (platform === 'darwin') {
-    os = 'osx'
-  } else {
-    os = 'linux'
-  }
-
-  const libTag = `liblymui-${os}-${LIB_VERSION}.zip`
-  const link = `https://github.com/MarcInthaamnouay/lymui/releases/download/v${LIB_VERSION}-${os}/${libTag}`
+  const platform = process.platform
+  const libTag = `liblymui-${platform}-${LIB_VERSION}.zip`
+  const link = `https://github.com/MarcInthaamnouay/lymui/releases/download/v${LIB_VERSION}/${libTag}`
 
   console.warn(chalk.blueBright(`Downloading liblymui ${LIB_VERSION}.`))
 
