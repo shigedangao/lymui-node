@@ -629,13 +629,66 @@ napi_value LuvJSObjFactory(napi_env env, Xyz *xyz, double clamp) {
     return object;
 }
 
+napi_value HclJSObjFactory(napi_env env, Xyz *xyz, double clamp) {
+    napi_status status;
+    napi_value object, data;
+
+    status = napi_create_object(env, &object);
+    if (status != napi_ok) {
+        return NULL;
+    }
+
+    status = napi_create_object(env, &data);
+    if (status != napi_ok) {
+        return NULL;
+    }
+
+    Luv *luv = getLuvFromXyz(xyz);
+    if (luv == NULL) {
+        assignPropToJSObj(&object, env, string, "error", CONVERSION_ERR);
+        return object;
+    }
+
+    if (luv->error != NULL) {
+        assignPropToJSObj(&object, env, string, "error", luv->error);
+        free(luv);
+        return object;
+    }
+
+    Hcl *hcl = getHclFromLuv(luv);
+    if (hcl == NULL) {
+        assignPropToJSObj(&object, env, string, "error", OBJ_MAKE_ERR);
+        return object;
+    }
+
+    if (hcl->error != NULL) {
+        assignPropToJSObj(&object, env, string, "error", hcl->error);
+        free(hcl);
+        return object;
+    }
+
+    double h = clampValue(hcl->h, clamp);
+    double c = clampValue(hcl->c, clamp);
+    double l = clampValue(hcl->l, clamp);
+
+    assignPropToJSObj(&data, env, numberDouble, "h", &h);
+    assignPropToJSObj(&data, env, numberDouble, "c", &c);
+    assignPropToJSObj(&data, env, numberDouble, "l", &l);
+    
+    assignJSObjtoJSObj(env, &object, data, "data");  
+
+    free(xyz);
+    free(hcl);
+
+    return object;  
+}
+
 napi_value ArgbJSObjFactory(napi_env env, Xyz *xyz, double clamp) {
     napi_status status;
     napi_value object, data;
     
     status = napi_create_object(env, &object);
     if (status != napi_ok) {
-        napi_throw_error(env, NULL, OBJ_MAKE_ERR);
         return NULL;
     }
     

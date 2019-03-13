@@ -26,8 +26,9 @@
 #define SRGB_PROPS "r:g:b"
 #define LCHLAB_PROPS "l:c:h"
 #define XYY_PROPS "x:y:Y"
+#define HCL_PROPS "h:c:l"
 
-#define SUPPORTED_FORMAT_LEN 17
+#define SUPPORTED_FORMAT_LEN 18
 
 extern char* validator_props[SUPPORTED_FORMAT_LEN];
 extern char* supported_type[SUPPORTED_FORMAT_LEN];
@@ -42,6 +43,7 @@ typedef enum Ouput {
   hwb,
   tsl,
   grasycale,
+  hcl,
   xyz,
   lab,
   lch,
