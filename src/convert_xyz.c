@@ -32,6 +32,8 @@ static napi_value generateXYZ(napi_env env, BridgeObj *bridge) {
             return normalizeLchLab(env, bridge->color, bridge->clamp);
         case luv:
             return normalizeLuv(env, bridge->color, bridge->clamp);
+        case hcl:
+            return normalizeHcl(env, bridge->color, bridge->clamp);
         case xyy:
             return normalizeXyy(env, bridge->color, bridge->clamp);
         case argb:

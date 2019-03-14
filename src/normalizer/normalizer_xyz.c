@@ -9,7 +9,8 @@
 #include "normalizer_xyz.h"
 #include <node_api.h>
 #include "bridge.h"
-#include "factory.h"
+#include "factory_space.h"
+#include "factory_common.h"
 #include "lab.h"
 #include "lch.h"
 #include "luv.h"
@@ -61,6 +62,27 @@ napi_value normalizeLuv(napi_env env, napi_value obj, double clamp) {
     Xyz *xyz = getXyzFromLuv(luv);
     napi_value object = XyzJSObjFactoryNoInst(env, xyz, clamp);
     
+    return object;
+}
+
+napi_value normalizeHcl(napi_env env, napi_value obj, double clamp) {
+    Hcl *hcl = getHclFromJSObj(env, obj);
+    if (hcl == NULL) {
+        return NULL;
+    }
+
+    Luv *luv = getLuvFromHcl(hcl);
+    if (luv == NULL) {
+        return NULL;
+    }
+
+    if (luv->error != NULL) {
+        return BuildPromiseError(env, luv->error);
+    }
+
+    Xyz *xyz = getXyzFromLuv(luv);
+    napi_value object = XyzJSObjFactoryNoInst(env, xyz, clamp);
+
     return object;
 }
 

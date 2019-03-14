@@ -49,6 +49,14 @@ napi_value normalizeLchLab(napi_env env, napi_value obj, double clamp);
 napi_value normalizeLuv(napi_env env, napi_value obj, double clamp);
 
 /**
+ * @brief Normalize Hcl
+ * @param env napi_env
+ * @param obj napi_value
+ * @param clamp double
+ */
+napi_value normalizeHcl(napi_env env, napi_value obj, double clamp);
+
+/**
  * @brief normalize xyy
  * @param env napi_env
  * @param obj napi_value
