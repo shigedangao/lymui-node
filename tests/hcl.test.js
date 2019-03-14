@@ -47,21 +47,21 @@ describe('Creating HCL from Xyz', () => {
     })
   })
 
-  // it('Expect to create a dark HCL from an XYZ Object', async () => {
-  //   const { data } = await lib.convertSpace({
-  //     input: {
-  //       x: 0.0,
-  //       y: 0.0,
-  //       z: 0.0
-  //     },
-  //     output: 'hcl',
-  //     clamp: 1000
-  //   })
+  it('Expect to create a dark HCL from an XYZ Object', async () => {
+    const { data } = await lib.convertSpace({
+      input: {
+        x: 0.0,
+        y: 0.0,
+        z: 0.0
+      },
+      output: 'hcl',
+      clamp: 1000
+    })
 
-  //   expect(data).to.be.deep.equal({
-  //     h: 0,
-  //     c: 0,
-  //     l: 0
-  //   })
-  // })  
+    expect(data).to.be.deep.equal({
+      h: 0,
+      c: 0,
+      l: 0
+    })
+  })
 })
