@@ -283,6 +283,7 @@ napi_value HclJSObjFactory(napi_env env, Xyz *xyz, double clamp) {
     Hcl *hcl = getHclFromLuv(luv);
     if (hcl == NULL) {
         assignPropToJSObj(&object, env, string, "error", OBJ_MAKE_ERR);
+        free(luv);
         return object;
     }
 
