@@ -10,9 +10,9 @@
 #include <stdlib.h>
 #include "convert_rgb.h"
 #include "binding_error.h"
-#include "factory.h"
 #include "normalizer_regular.h"
 #include "normalizer_rgb.h"
+#include "factory_common.h"
 
 /**
  * @brief generate rgb object

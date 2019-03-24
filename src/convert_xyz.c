@@ -10,7 +10,9 @@
 #include <stdlib.h>
 #include "convert_xyz.h"
 #include "binding_error.h"
-#include "factory.h"
+#include "factory_regular.h"
+#include "factory_space.h"
+#include "factory_common.h"
 #include "normalizer_space.h"
 #include "normalizer_xyz.h"
 

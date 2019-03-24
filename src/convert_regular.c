@@ -9,7 +9,9 @@
 #include <node_api.h>
 #include "convert_regular.h"
 #include "binding_error.h"
-#include "factory.h"
+#include "factory_regular.h"
+#include "factory_space.h"
+#include "factory_common.h"
 #include "deserializer.h"
 #include "bridge.h"
 
