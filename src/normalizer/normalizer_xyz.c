@@ -65,27 +65,6 @@ napi_value normalizeLuv(napi_env env, napi_value obj, double clamp) {
     return object;
 }
 
-napi_value normalizeHcl(napi_env env, napi_value obj, double clamp) {
-    Hcl *hcl = getHclFromJSObj(env, obj);
-    if (hcl == NULL) {
-        return NULL;
-    }
-
-    Luv *luv = getLuvFromHcl(hcl);
-    if (luv == NULL) {
-        return NULL;
-    }
-
-    if (luv->error != NULL) {
-        return BuildPromiseError(env, luv->error);
-    }
-
-    Xyz *xyz = getXyzFromLuv(luv);
-    napi_value object = XyzJSObjFactoryNoInst(env, xyz, clamp);
-
-    return object;
-}
-
 napi_value normalizeXyy(napi_env env, napi_value obj, double clamp) {
     Xyy *xyy = getXyyFromJSObj(env, obj);
     if (xyy == NULL) {

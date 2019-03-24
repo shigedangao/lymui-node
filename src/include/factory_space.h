@@ -7,7 +7,6 @@
 #include "lab.h"
 #include "lch.h"
 #include "lchlab.h"
-#include "hcl.h"
 #include "luv.h"
 #include "argb.h"
 #include "srgb.h"
@@ -66,15 +65,6 @@ napi_value LchLabJSObjFactory(napi_env env, Xyz * xyz, double clamp);
  * @return napi_value
  */
 napi_value LuvJSObjFactory(napi_env env, Xyz * xyz, double clamp);
-
-/**
- * @brief Creating Hcl JS Object
- * @param env napi_env
- * @param xyz * Xyz
- * @param clamp double
- * @return napi_value
- */
-napi_value HclJSObjFactory(napi_env env, Xyz * xyz, double clamp);
 
 /**
  * @brief Creating ARGB JS Object

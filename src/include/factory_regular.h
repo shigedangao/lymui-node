@@ -12,7 +12,6 @@
 #include "yuv.h"
 #include "hwb.h"
 #include "tsl.h"
-#include "hcl.h"
 #include "grayscale.h"
 
 /**

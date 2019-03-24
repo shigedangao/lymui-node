@@ -24,7 +24,6 @@
 #include "lch.h"
 #include "lchlab.h"
 #include "luv.h"
-#include "hcl.h"
 #include "argb.h"
 #include "srgb.h"
 #include "xyy.h"
@@ -143,14 +142,6 @@ LchLab *getLchlabFromJSObj(napi_env env, napi_value args);
  * @return Luv
  */
 Luv *getLuvFromJSObj(napi_env env, napi_value args);
-
-/**
- * @brief Extract Hcl struct from JS Object
- * @param env napi_env
- * @param args napi_value
- * @return Hcl
- */
-Hcl *getHclFromJSObj(napi_env env, napi_value args);
 
 /**
  * @brief Extract Argb struct from JS Object

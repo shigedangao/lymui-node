@@ -290,25 +290,6 @@ Luv *getLuvFromJSObj(napi_env env, napi_value args) {
     return luv;
 }
 
-Hcl *getHclFromJSObj(napi_env env, napi_value args) {
-    napi_value value[MIN_PARAM_VALUE];
-    if (!hasPropInJSObj(env, args, HCL_PROPS)) {
-        return NULL;
-    }
-
-    getNamedPropArray(env, HCL_PROPS, args, MIN_PARAM_VALUE, value);
-    Hcl *hcl = malloc(sizeof(Hcl));
-    if (hcl == NULL) {
-        return NULL;
-    }
-
-    hcl->h = getDoubleValue(env, value[0]);
-    hcl->c = getDoubleValue(env, value[1]);
-    hcl->l = getDoubleValue(env, value[2]);
-
-    return hcl;
-}
-
 Argb *getArgbFromJSObj(napi_env env, napi_value args) {
     napi_value value[MIN_PARAM_VALUE];
     if (!hasPropInJSObj(env, args, ARGB_PROPS)) {
