@@ -64,12 +64,12 @@ Validation *getValidationProps(char *str) {
     validate->schema = NULL;
     validate->output = nil;
 
-    if (strcmp(str, "tint")) {
+    if (!strcmp(str, "tint")) {
         validate->output = tint;
         return validate;
     }
 
-    if (strcmp(str, "shade")) {
+    if (!strcmp(str, "shade")) {
         validate->output = shade;
         return validate;
     }
