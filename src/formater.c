@@ -64,6 +64,16 @@ Validation *getValidationProps(char *str) {
     validate->schema = NULL;
     validate->output = nil;
 
+    if (strcmp(str, "tint")) {
+        validate->output = tint;
+        return validate;
+    }
+
+    if (strcmp(str, "shade")) {
+        validate->output = shade;
+        return validate;
+    }
+
     while(idx < size) {
         if (!strcmp(str, supported_type[idx])) {
             OType t = idx;

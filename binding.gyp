@@ -10,6 +10,7 @@
         "src/factory/factory_common.c",
         "src/factory/factory_regular.c",
         "src/factory/factory_space.c",
+        "src/factory/factory_operation.c",
         "src/convert_xyz.c",
         "src/convert_rgb.c",
         "src/convert_regular.c",

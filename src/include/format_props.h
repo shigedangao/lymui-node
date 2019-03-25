@@ -50,6 +50,8 @@ typedef enum Ouput {
   Srgb,
   llab,
   xyy,
+  tint,
+  shade,
   nil
 } OType;
 
