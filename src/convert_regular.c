@@ -50,6 +50,8 @@ static napi_value generateTypeJSObj(napi_env env, BridgeObj *bridge) {
             return GrayScaleJSObjFactory(env, rgb, bridge->matrix);
         case tint:
             return TintFactory(env, rgb);
+        case shade:
+            return ShadeFactory(env, rgb);
         default:
             return NULL;
     }
@@ -116,4 +118,3 @@ napi_value convertRegular(napi_env env, napi_callback_info info) {
     
     return promise;
 }
-

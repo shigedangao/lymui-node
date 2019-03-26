@@ -4,7 +4,7 @@ const lib = require('../index')
 
 SegfaultHandler.registerHandler('tint_crash')
 
-describe('Creating a tint from RGB', () => {
+describe('Creating tint from RGB', () => {
   it('Expect to create a tint from an RGB', async () => {
     const rgb = {
       r: 50,
@@ -53,12 +53,6 @@ describe('Creating a tint from RGB', () => {
   })
 
   it('Expect to throw when no value is passed', async () => {
-    const rgb = {
-      r: 0,
-      g: 0,
-      b: 0
-    }
-
     try {
       await lib.convertRegular({
         output: 'tint'
