@@ -15,8 +15,10 @@ const checkConfigEmptyness = config => {
     typeof config === 'undefined' ||
     config === null
   ) {
-    throw { err: ERRORS.MISSING_ARGS }
+    return Promise.reject({ err: ERRORS.MISSING_ARGS })
   }
+
+  return Promise.resolve()
 }
 
 module.exports = {
@@ -28,41 +30,49 @@ module.exports = {
    * @return {Promise}
    */
   convertRegular: config => {
-    checkConfigEmptyness(config)
-    if (config.hasOwnProperty('scale')) {
-      config.scale = config.scale.toLowerCase()
-    }
-
-    return lib.convertRegular(config)
+    return checkConfigEmptyness(config)
+      .catch(err => Promise.reject(err))
+      .then(() => {
+        if (config.hasOwnProperty('scale')) {
+          config.scale = config.scale.toLowerCase()
+        }
+      })
+      .then(() => lib.convertRegular(config))
   },
   /**
    * Convert Space
    *    Smart reference to the lib.convertSpace method
    * 
+   * @param {Object} config
    * @return {Promise}
    */
   convertSpace: config => {
-    checkConfigEmptyness(config)
-    return lib.convertSpace(config)
+    return checkConfigEmptyness(config)
+      .catch(err => Promise.reject(err))
+      .then(() => lib.convertSpace(config))
   },
   /**
    * To RGB
    *    Smart reference to the lib.toRGB method
    * 
+   * @param {Object} config
    * @return {Promise}
    */
   toRGB: config => {
-    checkConfigEmptyness(config)
-    return lib.toRGB(config)
+    return checkConfigEmptyness(config)
+      .catch(err => Promise.reject(err))
+      .then(() => lib.toRGB(config))
   },
   /**
    * To XYZ
    *    Smart Reference to the lib.toXYZ method
    * 
+   * @param {Object} config
    * @return {Promise}
    */
   toXYZ: config => {
-    checkConfigEmptyness(config)
-    return lib.toXYZ(config)
+    return checkConfigEmptyness(config)
+      .catch(err => Promise.reject(err))
+      .then(() => lib.toXYZ(config))
   }
 }
