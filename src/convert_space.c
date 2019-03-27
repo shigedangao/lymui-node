@@ -6,6 +6,7 @@
 //  Copyright © 2018 Marc. All rights reserved.
 //
 
+#include <stdlib.h>
 #include "convert_space.h"
 #include <node_api.h>
 #include "binding_error.h"
@@ -87,17 +88,19 @@ napi_value convert(napi_env env, napi_callback_info info) {
     
     if (bridge->error != NULL) {
         napi_reject_deferred(env, def, BuildPromiseError(env, bridge->error));
+        free(bridge);
         return promise;
     }
     
     JSObject = generateColorSpaceJSObj(env, bridge);
     if (JSObject == NULL) {
         napi_reject_deferred(env, def, BuildPromiseError(env, CREATE_VALUE_ERR));
+        free(bridge);
         return promise;
     }
-    
+
+    free(bridge);
     napi_resolve_deferred(env, def, JSObject);
-    
     
     return promise;
 }

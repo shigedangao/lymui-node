@@ -3,16 +3,16 @@
 
 #include <stdio.h>
 #include <node_api.h>
-#include "rgb.h"
-#include "hex.h"
-#include "cymk.h"
-#include "ycbcr.h"
-#include "hsl.h"
-#include "hsv.h"
-#include "yuv.h"
-#include "hwb.h"
-#include "tsl.h"
-#include "grayscale.h"
+#include <rgb.h>
+#include <hex.h>
+#include <cymk.h>
+#include <ycbcr.h>
+#include <hsl.h>
+#include <hsv.h>
+#include <yuv.h>
+#include <hwb.h>
+#include <tsl.h>
+#include <grayscale.h>
 
 /**
  * @brief Factory creating Rgb Object on the fly

@@ -72,7 +72,6 @@ napi_value HexJSObjFactory(napi_env env, Rgb *rgb) {
     }
     
     assignPropToJSObj(&data, env, string, "hex", hex);
-    
     assignJSObjtoJSObj(env, &object, data, "data");
     
     free(hex);

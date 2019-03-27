@@ -92,11 +92,13 @@ napi_value toRGB(napi_env env, napi_callback_info info) {
     
     if (bridge->error != NULL) {
         napi_reject_deferred(env, def, BuildPromiseError(env, bridge->error));
+        free(bridge);
         return promise;
     }
     
     JSObject = generateRGB(env, bridge);
     if (JSObject == NULL) {
+        free(bridge);
         napi_reject_deferred(env, def, BuildPromiseError(env, CREATE_VALUE_ERR));
         return promise;
     }

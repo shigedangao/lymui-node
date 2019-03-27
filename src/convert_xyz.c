@@ -89,17 +89,19 @@ napi_value toXYZ(napi_env env, napi_callback_info info) {
     
     if (bridge->error != NULL) {
         napi_reject_deferred(env, def, BuildPromiseError(env, bridge->error));
+        free(bridge);
         return promise;
     }
     
     JSObject = generateXYZ(env, bridge);
     if (JSObject == NULL) {
         napi_reject_deferred(env, def, BuildPromiseError(env, CREATE_VALUE_ERR));
+        free(bridge);
         return promise;
     }
     
-    napi_resolve_deferred(env, def, JSObject);
     free(bridge);
+    napi_resolve_deferred(env, def, JSObject);
     
     return promise;
 }

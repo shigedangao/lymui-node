@@ -13,7 +13,7 @@
 #include "binding_util.h"
 #include "bridge.h"
 #include "format_props.h"
-#include "hex.h"
+#include <hex.h>
 
 Rgb *getRGBFromJSObj(napi_env env, napi_value obj) {
     napi_value value[MIN_PARAM_VALUE];    
@@ -23,14 +23,14 @@ Rgb *getRGBFromJSObj(napi_env env, napi_value obj) {
     }
     
     getNamedPropArray(env, RGB_PROPS, obj, MIN_PARAM_VALUE, value);
-    
-    // convert the data to the wanted type
-    uint8_t red = getUintValue(env, value[0]);
-    uint8_t green = getUintValue(env, value[1]);
-    uint8_t blue = getUintValue(env, value[2]);
-    uint8_t arr[] = {red, green, blue};
-    
-    Rgb *rgb = makeRGB(arr, sizeof(arr));
+    Rgb *rgb = malloc(sizeof(Rgb));
+    if (rgb == NULL) {
+        return NULL;
+    }
+
+    rgb->r = getUintValue(env, value[0]);
+    rgb->g = getUintValue(env, value[1]);
+    rgb->b = getUintValue(env, value[2]);
     
     return rgb;
 }

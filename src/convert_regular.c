@@ -6,6 +6,7 @@
 //  Copyright © 2018 Marc. All rights reserved.
 //
 
+#include <stdlib.h>
 #include <node_api.h>
 #include "convert_regular.h"
 #include "binding_error.h"
@@ -105,15 +106,18 @@ napi_value convertRegular(napi_env env, napi_callback_info info) {
     
     if (bridge->error != NULL) {
         napi_reject_deferred(env, def, BuildPromiseError(env, bridge->error));
+        free(bridge);
         return promise;
     }
     
     JSObject = generateTypeJSObj(env, bridge);
     if (JSObject == NULL) {
         napi_reject_deferred(env, def, BuildPromiseError(env, CREATE_VALUE_ERR));
+        free(bridge);
         return promise;
     }
     
+    free(bridge);
     napi_resolve_deferred(env, def, JSObject);
     
     return promise;
