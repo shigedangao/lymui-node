@@ -9,7 +9,10 @@
 #include <node_api.h>
 #include "convert_regular.h"
 #include "binding_error.h"
-#include "factory.h"
+#include "factory_regular.h"
+#include "factory_space.h"
+#include "factory_common.h"
+#include "factory_operation.h"
 #include "deserializer.h"
 #include "bridge.h"
 
@@ -45,6 +48,10 @@ static napi_value generateTypeJSObj(napi_env env, BridgeObj *bridge) {
             return TslJSObjFactory(env, rgb, bridge->clamp);
         case grasycale:
             return GrayScaleJSObjFactory(env, rgb, bridge->matrix);
+        case tint:
+            return TintFactory(env, rgb);
+        case shade:
+            return ShadeFactory(env, rgb);
         default:
             return NULL;
     }
@@ -111,4 +118,3 @@ napi_value convertRegular(napi_env env, napi_callback_info info) {
     
     return promise;
 }
-

@@ -9,7 +9,8 @@
 #include "normalizer_xyz.h"
 #include <node_api.h>
 #include "bridge.h"
-#include "factory.h"
+#include "factory_space.h"
+#include "factory_common.h"
 #include "lab.h"
 #include "lch.h"
 #include "luv.h"

@@ -13,7 +13,7 @@
 #include "hex.h"
 #include "binding_util.h"
 #include "bridge.h"
-#include "factory.h"
+#include "factory_regular.h"
 
 napi_value normalizeHex(napi_env env, napi_value color) {
     char *hex = getHEXFromJSObj(env, color);
