@@ -6,6 +6,7 @@
 //  Copyright © 2019 Marc. All rights reserved.
 //
 
+#include <stdlib.h>
 #include "factory_operation.h"
 #include "factory_common.h"
 #include "binding_error.h"
@@ -43,6 +44,9 @@ napi_value TintFactory(napi_env env, Rgb *rgb) {
         return object; 
     }
 
+    free(rgb);
+    releaseTint(tint);
+
     return object;
 }
 
@@ -77,6 +81,9 @@ napi_value ShadeFactory(napi_env env, Rgb *rgb) {
         assignPropToJSObj(&object, env, string, "error", ASSIGN_ERR);
         return object; 
     }
+
+    free(rgb);
+    releaseShade(shade);
 
     return object;
 }
