@@ -11,22 +11,22 @@
 
 #include <stdio.h>
 #include <node_api.h>
-#include "rgb.h"
-#include "cymk.h"
-#include "ycbcr.h"
-#include "hsl.h"
-#include "hsv.h"
-#include "yuv.h"
-#include "hwb.h"
-#include "tsl.h"
-#include "xyz.h"
-#include "lab.h"
-#include "lch.h"
-#include "lchlab.h"
-#include "luv.h"
-#include "argb.h"
-#include "srgb.h"
-#include "xyy.h"
+#include <rgb.h>
+#include <cymk.h>
+#include <ycbcr.h>
+#include <hsl.h>
+#include <hsv.h>
+#include <yuv.h>
+#include <hwb.h>
+#include <tsl.h>
+#include <xyz.h>
+#include <lab.h>
+#include <lch.h>
+#include <lchlab.h>
+#include <luv.h>
+#include <argb.h>
+#include <srgb.h>
+#include <xyy.h>
 
 #define MIN_PARAM_VALUE 3
 #define MAX_PARAM_VALUE 4
