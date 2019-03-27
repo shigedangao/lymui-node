@@ -1,7 +1,9 @@
+import { Color } from "./inputs"
+
 /**
  * Output interface
  */
 export interface Output {
-  data: any,
+  data: Color,
   error?: String  
 }

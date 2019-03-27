@@ -1,7 +1,9 @@
+export interface Color {}
+
 /**
  * Rgb interface use by the input Object
  */
-export interface Rgb {
+export interface Rgb extends Color {
   r: number;
   g: number;
   b: number;
@@ -10,7 +12,7 @@ export interface Rgb {
 /**
  * Cymk interface use by the input Object (toRGB)
  */
-export interface Cymk {
+export interface Cymk extends Color {
   c: number;
   y: number;
   m: number;
@@ -20,7 +22,7 @@ export interface Cymk {
 /**
  * Hsl interface use by the input Object (toRGB)
  */
-export interface Hsl {
+export interface Hsl extends Color {
   h: number;
   s: number;
   l: number;
@@ -29,7 +31,7 @@ export interface Hsl {
 /**
  * Hsv interface use by the input Object (toRGB)
  */
-export interface Hsv {
+export interface Hsv extends Color {
   h: number;
   s: number;
   v: number;
@@ -38,7 +40,7 @@ export interface Hsv {
 /**
  * Ycbcr interface use by the input Object (toRGB)
  */
-export interface Ycbcr {
+export interface Ycbcr extends Color {
   y: number;
   cb: number;
   cr: number;
@@ -47,7 +49,7 @@ export interface Ycbcr {
 /**
  * Yuv interface use by the input Object (toRGB)
  */
-export interface Yuv {
+export interface Yuv extends Color {
   y: number;
   u: number;
   v: number;
@@ -56,7 +58,7 @@ export interface Yuv {
 /**
  * Hwb interface use by the input Object (toRGB)
  */
-export interface Hwb {
+export interface Hwb extends Color {
   h: number;
   w: number;
   b: number;
@@ -65,7 +67,7 @@ export interface Hwb {
 /**
  * Tsl interface use by the input Object (toRGB)
  */
-export interface Tsl {
+export interface Tsl extends Color {
   t: number;
   s: number;
   l: number;
@@ -74,7 +76,7 @@ export interface Tsl {
 /**
  * Xyz interface use by the input Object
  */
-export interface Xyz {
+export interface Xyz extends Color {
   x: number;
   y: number;
   z: number;
@@ -83,7 +85,7 @@ export interface Xyz {
 /**
  * Lab interface use by the input Object (toXYZ)
  */
-export interface Lab {
+export interface Lab extends Color {
   l: number;
   a: number;
   b: number;
@@ -92,7 +94,7 @@ export interface Lab {
 /**
  * Lch interface use by the input Object (toXYZ)
  */
-export interface Lch {
+export interface Lch extends Color {
   l: number;
   c: number;
   h: number;
@@ -101,7 +103,7 @@ export interface Lch {
 /**
  * Luv interface use by the input Object (toXYZ)
  */
-export interface Luv {
+export interface Luv extends Color {
   l: number;
   u: number;
   v: number;
@@ -110,7 +112,7 @@ export interface Luv {
 /**
  * Xyy interface use by the input Object (toXYZ)
  */
-export interface Xyy {
+export interface Xyy extends Color {
   x: number;
   y: number;
   Y: number;
