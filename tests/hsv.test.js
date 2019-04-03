@@ -6,7 +6,7 @@ SegfaultHandler.registerHandler('hsv_crash.log')
 
 describe('Creating HSV Object from RGB', () => {
   it('Expect to create HSV from RGB Object', async () => {
-    const hsv = await lib.convertRegular({
+    const hsv = await lib.fromRGB({
       input: {
         r: 5,
         g: 10,
@@ -24,7 +24,7 @@ describe('Creating HSV Object from RGB', () => {
   })
 
   it('Expect to create black HSV from RGB Object', async () => {
-    const hsv = await lib.convertRegular({
+    const hsv = await lib.fromRGB({
       input: {
         r: 0,
         g: 0,
@@ -41,7 +41,7 @@ describe('Creating HSV Object from RGB', () => {
   })
 
   it('Expect to create white HSV from RGB Object', async () => {
-    const hsv = await lib.convertRegular({
+    const hsv = await lib.fromRGB({
       input: { 
         r: 255,
         g: 255,
@@ -58,7 +58,7 @@ describe('Creating HSV Object from RGB', () => {
   })
 
   it('Expect to create a HSV object from RGB', async () => {
-    const hsv = await lib.convertRegular({
+    const hsv = await lib.fromRGB({
       input: {
         r: 100,
         g: 200,
@@ -77,7 +77,7 @@ describe('Creating HSV Object from RGB', () => {
 
   it('Expect to throw when missing props in rgb object', async () => {
     try {
-      await lib.convertRegular({
+      await lib.fromRGB({
         input: {
           r: 0,
           b: 100
@@ -92,7 +92,7 @@ describe('Creating HSV Object from RGB', () => {
 
   it('Expect to throw when an unsupported type is passed', async () => {
     try {
-      await lib.convertRegular({
+      await lib.fromRGB({
         input: {
           r: 5,
           g: 10,

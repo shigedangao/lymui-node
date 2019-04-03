@@ -6,7 +6,7 @@ SegfaultHandler.registerHandler('luv_convert.log')
 
 describe('Creating LUV from RGB', () => {
   it('Expect to create LUV from RGB with type SRGB', async () => {
-    const { data } = await lib.convertSpace({
+    const { data } = await lib.fromXYZ({
       input: {
         x: 0.034889,
         y: 0.017213,
@@ -30,13 +30,13 @@ describe('Creating LUV from RGB', () => {
       b: 98
     }
 
-    const { data } = await lib.convertRegular({
+    const { data } = await lib.fromRGB({
       input: rgb,
       output: 'xyz',
       profile: 'srgb'
     })
 
-    const luv = await lib.convertSpace({
+    const luv = await lib.fromXYZ({
       input: data,
       output: 'luv',
       clamp: 1000
@@ -50,7 +50,7 @@ describe('Creating LUV from RGB', () => {
   })
 
   it('Expect to create a valid LUV from a white SRGB', async () => {
-    const luv = await lib.convertSpace({
+    const luv = await lib.fromXYZ({
       input: {
         x: 0.9505,
         y: 1,
@@ -74,13 +74,13 @@ describe('Creating LUV from RGB', () => {
       b: 255
     }
 
-    const { data } = await lib.convertRegular({
+    const { data } = await lib.fromRGB({
       input: rgb,
       output: 'xyz',
       profile: 'adobeRgb'
     })
 
-    const luv = await lib.convertSpace({
+    const luv = await lib.fromXYZ({
       input: data,
       output: 'luv',
       clamp: 1000
@@ -95,7 +95,7 @@ describe('Creating LUV from RGB', () => {
 
   it('Expect to throw when a params is missing on the Rgb object', async () => {
     try {
-      await lib.convertSpace({
+      await lib.fromXYZ({
         output: 'luv',
       })
     } catch (e) {
@@ -112,7 +112,7 @@ describe('Creating LUV from RGB', () => {
       z: 0.99406
     }
     
-    const luv = await lib.convertSpace({
+    const luv = await lib.fromXYZ({
       output: 'luv',
       input: xyz,
       clamp: 1000

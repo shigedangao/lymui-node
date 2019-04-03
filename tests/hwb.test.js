@@ -12,7 +12,7 @@ describe('Creating HWB from RGB', () => {
       b: 93
     }
 
-    const hwb = await lib.convertRegular({
+    const hwb = await lib.fromRGB({
       input: rgb,
       output: 'hwb',
       clamp: 10
@@ -32,7 +32,7 @@ describe('Creating HWB from RGB', () => {
       b: 255
     }
 
-    const hwb = await lib.convertRegular({
+    const hwb = await lib.fromRGB({
       input: rgb,
       output: 'hwb',
       clamp: 10
@@ -52,7 +52,7 @@ describe('Creating HWB from RGB', () => {
       b: 0
     }
 
-    const hwb = await lib.convertRegular({
+    const hwb = await lib.fromRGB({
       input: rgb,
       output: 'hwb',
     })
@@ -71,7 +71,7 @@ describe('Creating HWB from RGB', () => {
     }
 
     try {
-      await lib.convertRegular({
+      await lib.fromRGB({
         input: rgb,
         output: 'hwb',
         clamp: 10
@@ -91,7 +91,7 @@ describe('Creating HWB from RGB', () => {
     }
 
     try {
-      await lib.convertRegular({
+      await lib.fromRGB({
         input: rgb,
         output: 'hwb',
         clamp: 10

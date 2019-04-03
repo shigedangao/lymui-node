@@ -29,7 +29,7 @@ module.exports = {
    * @param {Object} config
    * @return {Promise}
    */
-  convertRegular: config => {
+  fromRGB: config => {
     return checkConfigEmptyness(config)
       .catch(err => Promise.reject(err))
       .then(() => {
@@ -37,7 +37,7 @@ module.exports = {
           config.scale = config.scale.toLowerCase()
         }
       })
-      .then(() => lib.convertRegular(config))
+      .then(() => lib.fromRGB(config))
   },
   /**
    * Convert Space
@@ -46,10 +46,10 @@ module.exports = {
    * @param {Object} config
    * @return {Promise}
    */
-  convertSpace: config => {
+  fromXYZ: config => {
     return checkConfigEmptyness(config)
       .catch(err => Promise.reject(err))
-      .then(() => lib.convertSpace(config))
+      .then(() => lib.fromXYZ(config))
   },
   /**
    * To RGB

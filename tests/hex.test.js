@@ -6,7 +6,7 @@ SegfaultHandler.registerHandler('hex_crash.log')
 
 describe('Creating HEX from RGB', () => {
   it('Expect to create an HEX from an RGB object', async () => {
-    const hex = await lib.convertRegular({
+    const hex = await lib.fromRGB({
       input: {
         r: 5,
         g: 10,
@@ -21,7 +21,7 @@ describe('Creating HEX from RGB', () => {
   })
 
   it('Expect to create an HEX with upper value', async () => {
-    const hex = await lib.convertRegular({
+    const hex = await lib.fromRGB({
       input: {
         r: 255,
         g: 255,
@@ -37,7 +37,7 @@ describe('Creating HEX from RGB', () => {
 
   it('Expect to not throw when R, G, B value > uint8_t', async () => {
     try {
-      await lib.convertRegular({
+      await lib.fromRGB({
         input: {
           r: 300,
           g: 400,

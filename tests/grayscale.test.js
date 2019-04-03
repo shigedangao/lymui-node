@@ -12,7 +12,7 @@ describe('Creating a Grayscale from RGB', () => {
       b: 0
     }
 
-    const gray = await lib.convertRegular({
+    const gray = await lib.fromRGB({
       input: rgb,
       output: 'grayscale'
     })
@@ -29,7 +29,7 @@ describe('Creating a Grayscale from RGB', () => {
       b: 0
     }
 
-    const gray = await lib.convertRegular({
+    const gray = await lib.fromRGB({
       input: rgb,
       output: 'grayscale',
       scale: 'luminosity'
@@ -47,7 +47,7 @@ describe('Creating a Grayscale from RGB', () => {
       b: 0
     }
 
-    const gray = await lib.convertRegular({
+    const gray = await lib.fromRGB({
       input: rgb,
       output: 'grayscale',
       scale: 'average'
@@ -65,7 +65,7 @@ describe('Creating a Grayscale from RGB', () => {
       b: 0
     }
 
-    const gray = await lib.convertRegular({
+    const gray = await lib.fromRGB({
       input: rgb,
       output: 'grayscale',
       scale: 'bt709'
@@ -83,7 +83,7 @@ describe('Creating a Grayscale from RGB', () => {
       b: 0
     }
 
-    const gray = await lib.convertRegular({
+    const gray = await lib.fromRGB({
       input: rgb,
       output: 'grayscale',
       scale: 'bt2100'
@@ -101,7 +101,7 @@ describe('Creating a Grayscale from RGB', () => {
       b: 0
     }
 
-    const gray = await lib.convertRegular({
+    const gray = await lib.fromRGB({
       input: rgb,
       output: 'grayscale',
       scale: 'BT2100'

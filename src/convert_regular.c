@@ -60,7 +60,7 @@ static napi_value generateTypeJSObj(napi_env env, BridgeObj *bridge) {
 
 /**
  *  JS API
- *  const xyz = async convertBasic({
+ *  const xyz = async fromRGB({
  *    input: {
  *      r: 100,
  *      g: 10,
@@ -73,7 +73,7 @@ static napi_value generateTypeJSObj(napi_env env, BridgeObj *bridge) {
  *  })
  *
  */
-napi_value convertRegular(napi_env env, napi_callback_info info) {
+napi_value fromRGB(napi_env env, napi_callback_info info) {
     napi_status status;
     size_t argc = 1;
     napi_value argv[1];

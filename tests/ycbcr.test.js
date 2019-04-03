@@ -6,7 +6,7 @@ SegfaultHandler.registerHandler('ycbcr_crash.log')
 
 describe('Creating Ycbcr from RGB Object', () => {
   it('Expect to create Ycbcr object from RGB Object', async () => {
-    const ycbcr = await lib.convertRegular({
+    const ycbcr = await lib.fromRGB({
       input: {
         r: 0,
         g: 100,
@@ -23,7 +23,7 @@ describe('Creating Ycbcr from RGB Object', () => {
   })
 
   it('Expect to create Ycbcr object from RGB black value object', async () => {
-    const ycbcr = await lib.convertRegular({
+    const ycbcr = await lib.fromRGB({
       input: {
         r: 0,
         g: 0,
@@ -40,7 +40,7 @@ describe('Creating Ycbcr from RGB Object', () => {
   })
 
   it('Expect to create Ycbcr object from RGB white value object', async () => {
-    const ycbcr = await lib.convertRegular({
+    const ycbcr = await lib.fromRGB({
       input: {
         r: 255,
         g: 255,
@@ -58,7 +58,7 @@ describe('Creating Ycbcr from RGB Object', () => {
 
   it('Expect to throw when a missing prop is founded', async () => {
     try {
-      await lib.convertRegular({
+      await lib.fromRGB({
         input: {
           r: 1,
           b: 20
