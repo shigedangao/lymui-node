@@ -12,7 +12,7 @@ describe('Creating shades from RGB', () => {
       b: 100
     }
 
-    const shade = await lib.convertRegular({
+    const shade = await lib.fromRGB({
       input: rgb,
       output: 'shade'
     })
@@ -27,7 +27,7 @@ describe('Creating shades from RGB', () => {
       b: 255
     }
 
-    const shade = await lib.convertRegular({
+    const shade = await lib.fromRGB({
       input: rgb,
       output: 'shade'
     })
@@ -43,7 +43,7 @@ describe('Creating shades from RGB', () => {
       b: 0
     }
 
-    const shade = await lib.convertRegular({
+    const shade = await lib.fromRGB({
       input: rgb,
       output: 'shade'
     })
@@ -54,7 +54,7 @@ describe('Creating shades from RGB', () => {
 
   it('Expect to throw when no value is passed', async () => {
     try {
-      await lib.convertRegular({
+      await lib.fromRGB({
         output: 'shade'
       })
     } catch (e) {

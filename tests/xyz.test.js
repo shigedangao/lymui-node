@@ -6,7 +6,7 @@ SegfaultHandler.registerHandler('xyz_crash.log')
 
 describe('Creating Xyz from RGB', () => {
   it('Expect to create XYZ from RGB Object', async () => {
-    const xyz = await lib.convertRegular({
+    const xyz = await lib.fromRGB({
       input: {
         r: 50,
         g: 10,
@@ -24,7 +24,7 @@ describe('Creating Xyz from RGB', () => {
   })
 
   it('Expect to create XYZ from RGB Object with a clamp value of type ARGB', async () => {
-    const xyz = await lib.convertRegular({
+    const xyz = await lib.fromRGB({
       input: {
         r: 50,
         g: 10,
@@ -43,7 +43,7 @@ describe('Creating Xyz from RGB', () => {
   })
 
   it('Expect to create dark XYZ from RGB Object of type SRGB', async () => {
-    const xyz = await lib.convertRegular({
+    const xyz = await lib.fromRGB({
       input: {
         r: 0,
         g: 0,
@@ -62,7 +62,7 @@ describe('Creating Xyz from RGB', () => {
   })
 
   it('Expect to create dark XYZ from RGB Object of type adobe RGB', async () => {
-    const xyz = await lib.convertRegular({
+    const xyz = await lib.fromRGB({
       input: {
         r: 0,
         g: 0,
@@ -81,7 +81,7 @@ describe('Creating Xyz from RGB', () => {
   })
 
   it('Expect to create bright XYZ from RGB Object of type SRGB', async () => {
-    const xyz = await lib.convertRegular({
+    const xyz = await lib.fromRGB({
       input: {
         r: 255,
         g: 255,
@@ -100,7 +100,7 @@ describe('Creating Xyz from RGB', () => {
   })
 
   it('Expect to create bright XYZ from RGB Object of type adobe RGB', async () => {
-    const xyz = await lib.convertRegular({
+    const xyz = await lib.fromRGB({
       input: {
         r: 255,
         g: 255,
@@ -119,7 +119,7 @@ describe('Creating Xyz from RGB', () => {
   })
 
   it('Expect to not clamp when clamp value is not a number', async () => {
-    const xyz = await lib.convertRegular({
+    const xyz = await lib.fromRGB({
       input: {
         r: 255,
         g: 255,

@@ -44,7 +44,7 @@ static napi_value generateColorSpaceJSObj(napi_env env, BridgeObj *bridge) {
 
 /**
  * JS API
- * const luv = async convertSpace({
+ * const luv = async fromXYZ({
  *   input: {
  *     x: 0.50,
  *     y: 1.0,
@@ -55,7 +55,7 @@ static napi_value generateColorSpaceJSObj(napi_env env, BridgeObj *bridge) {
  * })
  *
  */
-napi_value convert(napi_env env, napi_callback_info info) {
+napi_value fromXYZ(napi_env env, napi_callback_info info) {
     napi_status status;
     size_t argc = 1;
     napi_value argv[1];

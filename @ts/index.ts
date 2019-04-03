@@ -22,31 +22,31 @@ function checkConfigEmptyness<T>(config: Config<T>) {
 
 export default {
   /**
-   * Convert Regular <Type, Output>
+   * From RGB <Type, Output>
    * 
    *   Types are available in inputs.ts
    *   Output refer to the output.js exported interface
    * @param {InputConfig} config
    * @return {Promise}
    */
-  convertRegular<T, O>(config: InputConfig<T>): Promise<O> {
+  fromRGB<T, O>(config: InputConfig<T>): Promise<O> {
     checkConfigEmptyness(config)
 
     if (config.scale) {
       config.scale = config.scale.toLowerCase()
     }
 
-    return lib.convertRegular(config)
+    return lib.fromRGB(config)
   },
   /**
-   * Convert Space
+   * From XYZ
    * 
    * @param {InputConfig} config
    * @return {Promise}
    */
-  convertSpace<T, O>(config: InputConfig<T>): Promise<O> {
+  fromXYZ<T, O>(config: InputConfig<T>): Promise<O> {
     checkConfigEmptyness(config)
-    return lib.convertSpace(config)
+    return lib.fromXYZ(config)
   },
   /**
    * To RGB

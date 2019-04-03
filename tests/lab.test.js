@@ -6,7 +6,7 @@ SegfaultHandler.registerHandler('lab_convert.log')
 
 describe('Creating LAB from XYZ', () => {
   it('Expect to create LAB object from XYZ with type SRGB', async () => {
-    const lab = await lib.convertSpace({
+    const lab = await lib.fromXYZ({
       input: {
         x: 0.9505,
         y: 1,
@@ -24,7 +24,7 @@ describe('Creating LAB from XYZ', () => {
   })
 
   it('Expect to create LAB object from XYZ with type SRGB (unprecise)', async () => {
-    const lab = await lib.convertSpace({
+    const lab = await lib.fromXYZ({
       input: {
         x: 0.0348,
         y: 0.0172,
@@ -43,7 +43,7 @@ describe('Creating LAB from XYZ', () => {
 
   it('Expect to throw when nothing is passed', async () => {
     try {
-      await lib.convertSpace()
+      await lib.fromXYZ()
     } catch(e) {
       expect(e).to.be.deep.equal({
         err: 'Missing arguments'
@@ -53,7 +53,7 @@ describe('Creating LAB from XYZ', () => {
 
   it('Expect to throw when param data is missing', async () => {
     try {
-      await lib.convertSpace({
+      await lib.fromXYZ({
         input: {},
         output: 'lab'
       })
@@ -71,13 +71,13 @@ describe('Creating LAB from XYZ', () => {
       b: 95
     }
 
-    const { data } = await lib.convertRegular({
+    const { data } = await lib.fromRGB({
       input: rgb,
       output: 'xyz',
       profile: 'srgb'
     })
 
-    const lab = await lib.convertSpace({
+    const lab = await lib.fromXYZ({
       input: data,
       output: 'lab',
       clamp: 1000

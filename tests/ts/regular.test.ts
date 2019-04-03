@@ -4,9 +4,9 @@ import { Output } from '../../@ts/output'
 import { Rgb, Xyz, Cymk, Lab, Hex } from '../../@ts/inputs'
 import 'mocha'
 
-describe('Creating Regular type (convertRegular)', () => {
+describe('Creating Regular type (fromRGB)', () => {
   it('Expect to create an hsl', async () => {
-    const hsl = await lib.convertRegular<Rgb, Output>({
+    const hsl = await lib.fromRGB<Rgb, Output>({
       input: {
         r: 5,
         g: 10,
@@ -25,7 +25,7 @@ describe('Creating Regular type (convertRegular)', () => {
 
   it('Expect to throw an error if the input is not correct', async () => {
     try {
-      await lib.convertRegular<Rgb, Output>({
+      await lib.fromRGB<Rgb, Output>({
         input: {
           r: 5,
           g: 10,
@@ -42,9 +42,9 @@ describe('Creating Regular type (convertRegular)', () => {
   })
 })
 
-describe('Creating Space type (convertSpace)', () => {
+describe('Creating Space type (fromXYZ)', () => {
   it('Expect to create a space type', async () => {
-    const lab = await lib.convertSpace<Xyz, Output>({
+    const lab = await lib.fromXYZ<Xyz, Output>({
       input: {
         x: 0.9505,
         y: 1,
@@ -63,7 +63,7 @@ describe('Creating Space type (convertSpace)', () => {
 
   it('Expect to throw an error when a type is not supported', async () => {
     try {
-      await lib.convertSpace<Xyz, Output>({
+      await lib.fromXYZ<Xyz, Output>({
         input: {
           x: 0.9505,
           y: 1,

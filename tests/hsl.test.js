@@ -12,7 +12,7 @@ describe('Creating HSL from RGB', () => {
       b: 95
     }
     
-    const hsl = await lib.convertRegular({
+    const hsl = await lib.fromRGB({
       input: rgb,
       output: 'hsl',
       clamp: 10
@@ -32,7 +32,7 @@ describe('Creating HSL from RGB', () => {
       b: 0
     }
 
-    const hsl = await lib.convertRegular({
+    const hsl = await lib.fromRGB({
       input: rgb,
       output: 'hsl'
     })
@@ -51,7 +51,7 @@ describe('Creating HSL from RGB', () => {
       b: 255
     }
 
-    const hsl = await lib.convertRegular({
+    const hsl = await lib.fromRGB({
       input: rgb,
       output: 'hsl'
     })
@@ -70,7 +70,7 @@ describe('Creating HSL from RGB', () => {
       b: 255
     }
 
-    const hsl = await lib.convertRegular({
+    const hsl = await lib.fromRGB({
       input: rgb,
       clamp: 10,
       output: 'hsl'
@@ -85,7 +85,7 @@ describe('Creating HSL from RGB', () => {
 
   it('Expect to throw when no param is passed', async () => {
     try {
-      await lib.convertRegular()
+      await lib.fromRGB()
     } catch (e) {
       expect(e).to.be.deep.equal({
         err: 'Missing arguments'
@@ -100,7 +100,7 @@ describe('Creating HSL from RGB', () => {
     }
 
     try {
-      await lib.convertRegular({
+      await lib.fromRGB({
         input: rgb,
         output: 'hsl'
       })
@@ -113,7 +113,7 @@ describe('Creating HSL from RGB', () => {
 
   it('Expect to throw when wrong kind of argument is passed', async () => {
     try {
-      await lib.convertRegular('lol')
+      await lib.fromRGB('lol')
     } catch (e) {
       expect(e).to.be.deep.equal({
         err: 'Missing arguments'
@@ -123,7 +123,7 @@ describe('Creating HSL from RGB', () => {
 
   it('Expect to throw an error when the output format is not supported', async () => {
     try {
-      await lib.convertRegular({
+      await lib.fromRGB({
         input: {
           r: 5,
           g: 10,

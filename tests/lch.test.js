@@ -6,7 +6,7 @@ SegfaultHandler.registerHandler('lch_convert.log')
 
 describe('Creating LCH from XYZ', () => {
   it('Expect to create LCH from XYZ', async () => {
-    const { data } = await lib.convertSpace({
+    const { data } = await lib.fromXYZ({
       input: {
         x: 0.03488,
         y: 0.01721,
@@ -30,13 +30,13 @@ describe('Creating LCH from XYZ', () => {
       b: 98
     }
 
-    const xyz = await lib.convertRegular({
+    const xyz = await lib.fromRGB({
       input: rgb,
       output: 'xyz',
       profile: 'srgb'
     })
 
-    const { data } = await lib.convertSpace({
+    const { data } = await lib.fromXYZ({
       input: xyz.data,
       output: 'lch',
       clamp: 1000
@@ -50,7 +50,7 @@ describe('Creating LCH from XYZ', () => {
   })
 
   it('Expect to create LCH from a bright XYZ', async () => {
-    const { data } = await lib.convertSpace({
+    const { data } = await lib.fromXYZ({
       input: {
         x: 0.950470,
         y: 1.0,
@@ -70,7 +70,7 @@ describe('Creating LCH from XYZ', () => {
   })
 
   it('Expect to create LCH from a dark XYZ', async () => {
-    const { data } = await lib.convertSpace({
+    const { data } = await lib.fromXYZ({
       input: {
         x: 0,
         y: 0,
@@ -144,7 +144,7 @@ describe('Creating XYZ from LCH', () => {
   })
 
   it('Expect to create very dark XYZ from LCH', async () => {
-    const lch = await lib.convertSpace({
+    const lch = await lib.fromXYZ({
       input: {
         x: 0.005,
         y: 0.002,

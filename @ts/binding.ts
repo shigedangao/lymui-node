@@ -6,17 +6,17 @@ import { InputConfig, OutputConfig } from './config'
  */
 export interface Lymui {
   /**
-   * Convert Regular
+   * From RGB
    * 
    * @param config
    */
-  convertRegular<T, O>(config: InputConfig<T>): Promise<O>;
+  fromRGB<T, O>(config: InputConfig<T>): Promise<O>;
   /**
-   * Convert Space
+   * From XYZ
    * 
    * @param config
    */
-  convertSpace<T, O>(config: InputConfig<T>): Promise<O>;
+  fromXYZ<T, O>(config: InputConfig<T>): Promise<O>;
   /**
    * To RGB
    * 

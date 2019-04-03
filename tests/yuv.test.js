@@ -6,7 +6,7 @@ SegfaultHandler.registerHandler('yuv_crash.log')
 
 describe('Creating YUV from RGB', () => {
   it('Expect to create YUV from RGB', async () => {
-    const yuv = await lib.convertRegular({
+    const yuv = await lib.fromRGB({
       input: {
         r: 50,
         g: 10,
@@ -24,7 +24,7 @@ describe('Creating YUV from RGB', () => {
   })
 
   it('Expect to create an other YUV from RGB', async () => {
-    const yuv = await lib.convertRegular({
+    const yuv = await lib.fromRGB({
       input: {
         r: 50,
         g: 10,
@@ -42,7 +42,7 @@ describe('Creating YUV from RGB', () => {
   })
 
   it('Expect to create dark YUV from black RGB', async () => {
-    const yuv = await lib.convertRegular({
+    const yuv = await lib.fromRGB({
       input: {
         r: 0,
         g: 0,
@@ -59,7 +59,7 @@ describe('Creating YUV from RGB', () => {
   })
 
   it('Expect to create white YUV from white RGB', async () => {
-    const yuv = await lib.convertRegular({
+    const yuv = await lib.fromRGB({
       input: {
         r: 255,
         g: 255,
@@ -78,7 +78,7 @@ describe('Creating YUV from RGB', () => {
 
   it('Expect to throw when wrong kind of RGB is pass', async () => {
     try {
-      await lib.convertRegular({
+      await lib.fromRGB({
         input: {
           r: 10,
           g: 10
