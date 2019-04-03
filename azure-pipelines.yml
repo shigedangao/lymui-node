@@ -1,0 +1,21 @@
+# Azure pipelines for building NodeJS & C lib
+strategy:
+  matrix:
+    linux:
+      imageName: 'ubuntu-16.04'
+    mac:
+      imageName: 'macos-10.13'
+    windows:
+      imageName: 'vs2017-win2016'
+
+pool:
+  vmImage: $(imageName)
+
+steps:
+  - script: |
+    npm install
+    npm run build
+    npm run test
+  - script: |
+    npm run build-ts
+    npm run test-ts
