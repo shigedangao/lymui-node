@@ -27,10 +27,10 @@ napi_value Init(napi_env env, napi_value exports) {
     // define the methods here
     napi_property_descriptor desc[] = {
         // Normal color
-        DECLARE_NAPI_METHOD("convertRegular", convertRegular),
+        DECLARE_NAPI_METHOD("fromRGB", fromRGB),
         DECLARE_NAPI_METHOD("toRGB", toRGB),
         // Color Space
-        DECLARE_NAPI_METHOD("convertSpace", convert),
+        DECLARE_NAPI_METHOD("fromXYZ", fromXYZ),
         DECLARE_NAPI_METHOD("toXYZ", toXYZ)
     };
     

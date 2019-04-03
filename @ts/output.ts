@@ -1,4 +1,4 @@
-import { Color } from "./inputs"
+import { Color, Hsl } from "./inputs"
 
 /**
  * Output interface
@@ -6,4 +6,12 @@ import { Color } from "./inputs"
 export interface Output {
   data: Color,
   error?: String  
+}
+
+/**
+ * Output Operation Interface
+ */
+export interface OutputOperation {
+  data: Hsl[],
+  error?: String
 }

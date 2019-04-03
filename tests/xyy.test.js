@@ -6,7 +6,7 @@ SegfaultHandler.registerHandler('xyy_crash.log')
 
 describe('Creating XYY from XYZ', () => {
   it('Expect to create a bright XYY from an XYZ Object', async () => {
-    const { data } = await lib.convertSpace({
+    const { data } = await lib.fromXYZ({
       input: {
         x: 0.950470,
         y: 1.0,
@@ -24,7 +24,7 @@ describe('Creating XYY from XYZ', () => {
   })
 
   it('Expect to create a normal XYY from an XYZ Object', async () => {
-    const { data } = await lib.convertSpace({
+    const { data } = await lib.fromXYZ({
       input: {
         x: 0.023750,
         y: 0.011309,
@@ -42,7 +42,7 @@ describe('Creating XYY from XYZ', () => {
   })
 
   it('Expect to create a dark XYY from an XYZ Object', async () => {
-    const { data } = await lib.convertSpace({
+    const { data } = await lib.fromXYZ({
       input: {
         x: 0,
         y: 0,

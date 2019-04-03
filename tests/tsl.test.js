@@ -12,7 +12,7 @@ describe('Creating TSL from RGB', () => {
       b: 128
     }
 
-    const tsl = await lib.convertRegular({
+    const tsl = await lib.fromRGB({
       input: rgb,
       output: 'tsl',
       clamp: 1000
@@ -32,7 +32,7 @@ describe('Creating TSL from RGB', () => {
       b: 255
     }
 
-    const tsl = await lib.convertRegular({
+    const tsl = await lib.fromRGB({
       input: rgb,
       output: 'tsl',
       clamp: 1000
@@ -52,7 +52,7 @@ describe('Creating TSL from RGB', () => {
       b: 0
     }
 
-    const tsl = await lib.convertRegular({
+    const tsl = await lib.fromRGB({
       input: rgb,
       output: 'tsl',
       clamp: 1000
@@ -72,7 +72,7 @@ describe('Creating TSL from RGB', () => {
     }
 
     try {
-      await lib.convertRegular({
+      await lib.fromRGB({
         input: rgb,
         output: 'tsl',
         clamp: 1000

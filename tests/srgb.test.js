@@ -6,7 +6,7 @@ SegfaultHandler.registerHandler('srgb_crash.log')
 
 describe('Creating SRGB from Xyz', () => {
   it('Expect to create SRGB from XYZ Object', async () => {
-    const xyz = await lib.convertRegular({
+    const xyz = await lib.fromRGB({
       input: {
         r: 50,
         g: 10,
@@ -16,7 +16,7 @@ describe('Creating SRGB from Xyz', () => {
       profile: 'srgb'
     })
 
-    const { data } = await lib.convertSpace({
+    const { data } = await lib.fromXYZ({
       input: xyz.data,
       output: 'Srgb',
       clamp: 100
@@ -30,7 +30,7 @@ describe('Creating SRGB from Xyz', () => {
   })
 
   it('Expect to create dark SRGB from XYZ Object', async () => {
-    const xyz = await lib.convertRegular({
+    const xyz = await lib.fromRGB({
       input: {
         r: 0,
         g: 0,
@@ -39,7 +39,7 @@ describe('Creating SRGB from Xyz', () => {
       output: 'xyz'
     })
 
-    const { data } = await lib.convertSpace({
+    const { data } = await lib.fromXYZ({
       input: xyz.data,
       output: 'Srgb',
       clamp: 100
@@ -53,7 +53,7 @@ describe('Creating SRGB from Xyz', () => {
   })
 
   it('Expect to create white SRGB from XYZ Object', async () => {
-    const xyz = await lib.convertRegular({
+    const xyz = await lib.fromRGB({
       input: {
         r: 255,
         g: 255,
@@ -62,7 +62,7 @@ describe('Creating SRGB from Xyz', () => {
       output: 'xyz'
     })
 
-    const { data } = await lib.convertSpace({
+    const { data } = await lib.fromXYZ({
       input: xyz.data,
       output: 'Srgb',
       clamp: 100

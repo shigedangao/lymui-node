@@ -12,7 +12,7 @@ describe('Creating Cymk from RGB', () => {
       b: 198
     }
 
-    const cymk = await lib.convertRegular({
+    const cymk = await lib.fromRGB({
       input: rgb,
       output: 'cymk',
       clamp: 10000
@@ -33,7 +33,7 @@ describe('Creating Cymk from RGB', () => {
       b: 0
     }
 
-    const cymk = await lib.convertRegular({
+    const cymk = await lib.fromRGB({
       input: rgb,
       output: 'cymk'
     })
@@ -53,7 +53,7 @@ describe('Creating Cymk from RGB', () => {
       b: 255
     }
 
-    const cymk = await lib.convertRegular({
+    const cymk = await lib.fromRGB({
       input: rgb,
       output: 'cymk'
     })
@@ -73,7 +73,7 @@ describe('Creating Cymk from RGB', () => {
       b: 500
     }
 
-    expect(async () => await lib.convertRegular({
+    expect(async () => await lib.fromRGB({
       input: rgb,
       output: 'cymk'
     })).to.not.throw()
@@ -81,7 +81,7 @@ describe('Creating Cymk from RGB', () => {
 
   it('Expect to throw when no param is pass', async () => {
     try {
-      await lib.convertRegular()
+      await lib.fromRGB()
     } catch (e) {
       expect(e).to.be.deep.equal({
         err: 'Missing arguments'
@@ -93,7 +93,7 @@ describe('Creating Cymk from RGB', () => {
     const rgb = { r: 100, g: 200, b: 155 }
     
     try {
-      await lib.convertRegular({
+      await lib.fromRGB({
         input: rgb
       })
     } catch (e) {
@@ -107,7 +107,7 @@ describe('Creating Cymk from RGB', () => {
     const rgb = { r: 20, b: 30 }
 
     try {
-      await lib.convertRegular({
+      await lib.fromRGB({
         input: rgb,
         output: 'cymk'
       })

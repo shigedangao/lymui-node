@@ -13,11 +13,11 @@
 #include <node_api.h>
 
 /**
- * @brief convert API for all the color space
+ * @brief fromXYZ API for all the color space
  * @param env napi_env
  * @param info napi_callback_info
  * @return napi_value
  */
-napi_value convert(napi_env env, napi_callback_info info);
+napi_value fromXYZ(napi_env env, napi_callback_info info);
 
 #endif /* convert_space_h */
