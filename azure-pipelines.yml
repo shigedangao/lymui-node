@@ -12,6 +12,9 @@ pool:
   vmImage: $(imageName)
 
 steps:
+  - task: NodeTool@
+    inputs:
+      versionSpec: '10.x'
   - script: npm install && npm run build && npm run build-ts
     displayName: 'Build the library'
   - script: npm run test && npm run test-ts
