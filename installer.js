@@ -16,6 +16,7 @@ const binPath = 'lymui'
  */
 const installer = () => {
   const platform = process.platform
+  console.log(platform)
   const libTag = `liblymui-${platform}-${LIB_VERSION}.zip`
   const link = `https://github.com/MarcInthaamnouay/lymui/releases/download/v${LIB_VERSION}/${libTag}`
 
