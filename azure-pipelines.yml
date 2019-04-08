@@ -13,10 +13,6 @@ pool:
 
 steps:
   - script: |
-    apt-get install -y software-common-properties
-    condition: eq( variables['Agent.OS'], 'Linux' )
-    displayName: 'Install additional components'
-  - script: |
     npm install
     npm run build
     npm run test
