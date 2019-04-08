@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 #include <node_api.h>
-#include "xyz.h"
+#include <xyz.h>
 #include "grayscale.h"
 
 #define CONVERT_BASIC_LEN 2
