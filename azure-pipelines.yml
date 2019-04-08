@@ -13,9 +13,15 @@ pool:
 
 steps:
   - script: |
+    apt-get install -y software-common-properties
+    condition: eq( variables['Agent.OS'], 'Linux' )
+    displayName: 'Install additional components'
+  - script: |
     npm install
     npm run build
     npm run test
+    displayName: 'Build & test the library'
   - script: |
     npm run build-ts
     npm run test-ts
+    displayName: 'Build & test ts bindings'

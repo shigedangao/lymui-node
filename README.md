@@ -8,7 +8,7 @@ Lymui-node is a node module based on my Lymui library color converter. This node
 
 ## Version
 
-1.1.2-beta.2
+1.2.0-beta
 
 ## Requirements
 
