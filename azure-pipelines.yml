@@ -12,12 +12,7 @@ pool:
   vmImage: $(imageName)
 
 steps:
-  - script: |
-    npm install
-    npm run build
-    npm run test
-    displayName: 'Build & test the library'
-  - script: |
-    npm run build-ts
-    npm run test-ts
-    displayName: 'Build & test ts bindings'
+  - script: npm install && npm run build && npm run build-ts
+    displayName: 'Build the library'
+  - script: npm run test && npm run test-ts
+    displayName: 'Test the library'
