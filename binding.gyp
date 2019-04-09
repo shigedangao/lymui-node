@@ -30,6 +30,13 @@
       ],
       "libraries": [
         "<(module_root_dir)/lymui/bin/liblymui.a"
+      ],
+      "conditions": [
+        ['OS=="win"', {
+          'libraries': [
+            '-llegacy_stdio_definitions.lib'
+          ]
+        }]
       ]
     }
   ]
