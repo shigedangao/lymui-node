@@ -32,16 +32,5 @@
         "<(module_root_dir)/lymui/bin/liblymui.a"
       ]
     }
-  ],
-  "conditions": [
-    ['OS=="win"', {
-      "targets": [
-        {
-          "libraries": [
-            "C:/Program Files (x86)/Microsoft Visual Studio/2017/Enterprise/MSBuild/15.0/VC/lib/legacy_stdio_definitions.lib"
-          ]
-        }
-      ]
-    }]
   ]
 }
