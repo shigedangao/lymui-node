@@ -35,7 +35,11 @@ BridgeObj *deserialize(napi_env env, napi_value obj) {
     
     // Base on the declared napi_value params[2]
     // We retrieve these required parameters
-    getNamedPropArray(env, inputProps, obj, CONVERT_BASIC_LEN, params);
+    char *err = getNamedPropArray(env, inputProps, obj, CONVERT_BASIC_LEN, params);
+    if (err != NULL) {
+        br->error = err;
+        return br;
+    }
     
     // As these deserializer is only treating 'RGB' based color input
     // We check that the first object (input a JS Object)
