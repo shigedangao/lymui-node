@@ -22,6 +22,7 @@
 #define CREATE_VALUE_ERR "Error while creating JS Value"
 #define CONVERSION_ERR "Error while converting from Type T to an other type"
 #define ALLOCATION_ERR "Error while creating new type T of color"
+#define READ_ERR "Error while reading the type of color"
 #define PROMISE_ERR "Unable to create promise"
 #define CB_INFO_ERR "Unable to retrieve data from method"
 #define OTYPE_TYPE_ERR "Unable to retrieve the type of the color"

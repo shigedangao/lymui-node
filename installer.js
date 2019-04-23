@@ -15,7 +15,11 @@ const binPath = 'lymui'
  * @void
  */
 const installer = () => {
-  const platform = process.platform
+  let platform = process.platform
+  if (platform === 'win32' || platform === 'win64') {
+    platform = 'Windows_NT'
+  }
+
   const libTag = `liblymui-${platform}-${LIB_VERSION}.zip`
   const link = `https://github.com/MarcInthaamnouay/lymui/releases/download/v${LIB_VERSION}/${libTag}`
 

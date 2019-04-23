@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 #include <node_api.h>
-#include "xyz.h"
+#include <xyz.h>
 #include "grayscale.h"
 
 #define CONVERT_BASIC_LEN 2
@@ -116,7 +116,8 @@ Strategy getScaleStrategyFromStr(char *enumStr);
  * @param obj napi_value
  * @param len size_t
  * @param res napi_value
+ * @return char ptr
  */
-void getNamedPropArray(napi_env env, char *name, napi_value obj, size_t len, napi_value *res);
+char *getNamedPropArray(napi_env env, char *name, napi_value obj, size_t len, napi_value *res);
 
 #endif /* binding_util_h */

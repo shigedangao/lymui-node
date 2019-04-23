@@ -10,8 +10,8 @@
   },
   "scripts": {
     "install": "node installer.js && node-gyp rebuild",
-    "test": "./node_modules/mocha/bin/mocha tests/*.test.js",
-    "test-ts": "./node_modules/mocha/bin/mocha -r ts-node/register tests/ts/*.test.ts",
+    "test": "node ./node_modules/mocha/bin/mocha tests/*.test.js",
+    "test-ts": "node ./node_modules/mocha/bin/mocha -r ts-node/register tests/ts/*.test.ts",
     "build:dev": "node-gyp build --debug",
     "build": "node-gyp build",
     "build-ts": "tsc",
