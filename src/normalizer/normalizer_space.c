@@ -28,7 +28,12 @@ BridgeObj *normalizeSpace(napi_env env, napi_value obj) {
         return br;
     }
     
-    getNamedPropArray(env, inputProps, obj, CONVERT_BASIC_LEN, params);
+    char *err = getNamedPropArray(env, inputProps, obj, CONVERT_BASIC_LEN, params);
+    if (err != NULL) {
+        br->error = err;
+        return br;
+    }
+
     char *type = getStringValue(env, params[1], MAX_LEN_TYPE);
     if (type == NULL) {
         br->error = CONVERT_ERR;

@@ -173,21 +173,27 @@ Strategy getScaleStrategyFromStr(char *enumStr) {
     return Lightness;
 }
 
-void getNamedPropArray(napi_env env, char * name, napi_value obj, size_t len, napi_value * res) {
+char* getNamedPropArray(napi_env env, char * name, napi_value obj, size_t len, napi_value * res) {
     uint8_t idx = 0;
     napi_status status;
     const char delimiter[] = ":";
     char *running = strdup(name);
-    char *s;
-    
-    while(idx < len) {
-        s = strsep(&running, delimiter);
-        status = napi_get_named_property(env, obj, s, &res[idx]);
+    if (running == NULL) {
+        return DESERIALIZE_ERR;
+    }
+
+    char *token = strtok(running, delimiter);
+    while(token != NULL) {
+        status = napi_get_named_property(env, obj, token, &res[idx]);
         if (status != napi_ok) {
             idx = len + 1;
-            napi_throw_error(env, NULL, DESERIALIZE_ERR);
+            token = NULL;
+            return READ_ERR;
         }
         
+        token = strtok(NULL, delimiter);
         idx++;
     }
+
+    return NULL;
 }
