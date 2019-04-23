@@ -5,7 +5,7 @@ const unzipper = require('unzipper')
 const chalk = require('chalk')
 
 // Global variable
-const LIB_VERSION = '1.3.0c'
+const LIB_VERSION = '1.3.0e'
 const binPath = 'lymui'
 
 /**
