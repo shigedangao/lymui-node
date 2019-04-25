@@ -70,3 +70,5 @@ The bindings to the lymui library is located on the ```src``` folder.
 Feel free to contribute :) Fork it and do whatever you want
 
 ## Changelog
+
+The changelog is available over [here](docs/changelog.md)
