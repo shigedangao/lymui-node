@@ -1,8 +1,5 @@
 const { expect } = require('chai')
-const SegfaultHandler = require('segfault-handler')
 const lib = require('../index')
-
-SegfaultHandler.registerHandler('grayscale_crash')
 
 describe('Creating a Grayscale from RGB', () => {
   it('Expect to create a Grayscale of type Lightness from RGB object', async () => {

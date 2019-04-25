@@ -1,8 +1,5 @@
 const { expect } = require('chai')
-const SegfaultHandler = require('segfault-handler')
 const lib = require('../index')
-
-SegfaultHandler.registerHandler('lch_convert.log')
 
 describe('Creating LCH from XYZ', () => {
   it('Expect to create LCH from XYZ', async () => {

@@ -1,8 +1,5 @@
 const { expect } = require('chai')
-const SegfaultHandler = require('segfault-handler')
 const lib = require('../index')
-
-SegfaultHandler.registerHandler('lab_convert.log')
 
 describe('Creating LAB from XYZ', () => {
   it('Expect to create LAB object from XYZ with type SRGB', async () => {

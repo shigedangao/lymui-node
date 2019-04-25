@@ -1,8 +1,5 @@
 const { expect } = require('chai')
-const SegfaultHandler = require('segfault-handler')
 const lib = require('../index')
-
-SegfaultHandler.registerHandler('hwb_crash.log')
 
 describe('Creating HWB from RGB', () => {
   it('Expect to create HWB object from RGB object', async () => {

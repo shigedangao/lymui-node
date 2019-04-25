@@ -1,8 +1,5 @@
 const { expect } = require('chai')
-const SegfaultHandler = require('segfault-handler')
 const lib = require('../index')
-
-SegfaultHandler.registerHandler('shade_crash')
 
 describe('Creating shades from RGB', () => {
   it('Expect to create a shade from an RGB', async () => {
