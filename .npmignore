@@ -12,3 +12,4 @@ bin
 .vscode
 PULL_REQUEST_TEMPLATE.md
 lib_ts
+docs
