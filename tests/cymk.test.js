@@ -1,8 +1,5 @@
 const { expect } = require('chai')
-const SegfaultHandler = require('segfault-handler')
 const lib = require('../index')
-
-SegfaultHandler.registerHandler('cymk_crash.log')
 
 describe('Creating Cymk from RGB', () => {
   it('Expect to create a Cymk object from a RGB object', async () => {

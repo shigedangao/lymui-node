@@ -1,8 +1,5 @@
 const { expect } = require('chai')
-const SegfaultHandler = require('segfault-handler')
 const lib = require('../index')
-
-SegfaultHandler.registerHandler('tsl_crash.log')
 
 describe('Creating TSL from RGB', () => {
   it('Expect to create TSL object from RGB object', async () => {

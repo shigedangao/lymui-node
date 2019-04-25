@@ -1,35 +1,69 @@
-## Lymui - node
+# Lymui-node
 
-This module is a NodeJS binding to my C library Lymui. This library supported the following colors formats
+This library is a NodeJS library which allow you to convert color to a panel of other formats. This library is based on my personal color conversion library Lymui. Below you can find a table which show you the current format supported.
 
-- argb
-- cymk
-- hex
-- hsl
-- hsv
-- lab
-- lch
-- lchlab
-- luv
-- srgb
-- xyy
-- xyz
-- yccbr
-- yuv
-- grayscale
-- hwb
-- tsl
+| Base Color                  | Format                                                                  |
+|-----------------------------|-------------------------------------------------------------------------|
+| RGB                         | - Hex - Hsl - Hsv - Hwb - Tsl - Cymk - YCbCr - Yuv                      |
+| Xyz                         | - Lab - Luv  - Lch(uv) - Lch(Lab) - Xyy - Lab(Hunter lab) - Argb - Srgb |
+| Rgb operations (output Hsl) | - Tint - Shade                                                          |
 
-## APIs
+# Getting started
 
-In order to simplify the integration of the module. The module exposed 4 APIs that allow you to convert back and forth the colors. Below are the exposed APIs
+The library is a native addons which is using ```N-API``` bindings to NodeJS. The library has been tested on NodeJS 10.x.x and above. It currently support the following OS
 
-- [convertRegular](https://marcinthaamnouay.github.io/lymui-node/docs/regular)
-- [convertSpace](https://marcinthaamnouay.github.io/lymui-node/docs/space)
-- [toRGB](https://marcinthaamnouay.github.io/lymui-node/docs/rgb)
-- [toXYZ](https://marcinthaamnouay.github.io/lymui-node/docs/xyz)
+- Linux
+- OSX
+- Windows
+
+## Installation
+
+In order to install the library you'll need to install ```node-gyp```. Install it by running the command
+
+```shell
+npm install -g node-gyp
+```
+
+Secondly you can then install the library with this command
+
+```shell
+npm install lymui-node
+```
+
+## Example of usage
+
+The library is simple to use as an example we're going to convert an RGB to an Hexadecimal
+
+```js
+const lib = require('lymui-node')
+
+const hex = await lib.fromRGB({
+  input: {
+    r: 100,
+    g: 200,
+    b: 200
+  },
+  output: 'hex'
+})
+
+// Hex is equal to
+{ data: { hex: '64c8c8' } }
+```
+
+## Going further
+
+You can consult the example of usage of the API here
+
+- [Converting from & to RGB](apis/rgb.md)
+- [Converting from & to XYZ](apis/xyz.md)
 
 ## Typescript
 
-- [Typescript](https://marcinthaamnouay.github.io/lymui-node/docs/typescript)
+The library support TypeScript. Please check the following 2 links below.
 
+- [Using typesript](ts/intro.md)
+- [Available typings](ts/typing.md)
+
+## Contributions
+
+Contributions are always welcome. Feel free to fork and do whatever you want with it :D

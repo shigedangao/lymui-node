@@ -18,6 +18,10 @@
 
 #define DECLARE_NAPI_METHOD(name, func) { name, 0, func, 0, 0, 0, napi_default, 0 }
 
+#if _WIN32
+#define snprintf _snprintf
+#endif
+
 /**
  *  Initialization of our NodeJS module
  */

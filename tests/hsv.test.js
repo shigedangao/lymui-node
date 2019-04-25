@@ -1,8 +1,5 @@
 const { expect } = require('chai')
-const SegfaultHandler = require('segfault-handler')
 const lib = require('../index')
-
-SegfaultHandler.registerHandler('hsv_crash.log')
 
 describe('Creating HSV Object from RGB', () => {
   it('Expect to create HSV from RGB Object', async () => {

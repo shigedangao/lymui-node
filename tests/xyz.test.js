@@ -1,8 +1,5 @@
 const { expect } = require('chai')
-const SegfaultHandler = require('segfault-handler')
 const lib = require('../index')
-
-SegfaultHandler.registerHandler('xyz_crash.log')
 
 describe('Creating Xyz from RGB', () => {
   it('Expect to create XYZ from RGB Object', async () => {
@@ -137,6 +134,24 @@ describe('Creating Xyz from RGB', () => {
     expect(x).to.be.equal('0.9505')
     expect(y).to.be.equal('1.0000')
     expect(z).to.be.equal('1.0888')
+  })
+
+  it('Expect to use the srgb as a default profile', async () => {
+    const xyz = await lib.fromRGB({
+      input: {
+        r: 50,
+        g: 10,
+        b: 95
+      },
+      output: 'xyz',
+      clamp: 100000
+    })
+
+    expect(xyz.data).to.be.deep.equal({
+      x: 0.03489,
+      y: 0.01721,
+      z: 0.10973
+    })
   })
 })
 

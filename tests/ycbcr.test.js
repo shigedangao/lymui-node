@@ -1,8 +1,5 @@
 const { expect } = require('chai')
-const SegfaultHandler = require('segfault-handler')
 const lib = require('../index')
-
-SegfaultHandler.registerHandler('ycbcr_crash.log')
 
 describe('Creating Ycbcr from RGB Object', () => {
   it('Expect to create Ycbcr object from RGB Object', async () => {
