@@ -1,8 +1,5 @@
 const { expect } = require('chai')
-const SegfaultHandler = require('segfault-handler')
 const lib = require('../index')
-
-SegfaultHandler.registerHandler('yuv_crash.log')
 
 describe('Creating YUV from RGB', () => {
   it('Expect to create YUV from RGB', async () => {

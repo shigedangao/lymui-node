@@ -1,51 +1,50 @@
 ## Lymui-node
 
-Lymui-node is a node module based on my Lymui library color converter. This node module allow you to convert asynchronously colors. The library has been tested on latest osx and ubuntu 18.04 & 16.04
+Lymui-node is a small size color converter based on my Lymui C library. The library allow you to convert asynchronously colors.
 
-![Travis logo](https://travis-ci.org/MarcInthaamnouay/lymui-node.svg?branch=master)
+The library support the following platforms:
+
+- Linux
+- OSX
+- Windows (through mingw)
+
+[![Build Status](https://dev.azure.com/androidgs2/lymui/_apis/build/status/MarcInthaamnouay.lymui-node?branchName=master)](https://dev.azure.com/androidgs2/lymui/_build/latest?definitionId=2&branchName=master)
 ![N-API bade v3](https://img.shields.io/badge/N--API-v3-green.svg)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/45d85b05a49647d68cf5ea9a53e1ced4)](https://www.codacy.com/app/mintha/lymui-node?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=MarcInthaamnouay/lymui-node&amp;utm_campaign=Badge_Grade)
 
 ## Version
 
-1.2.0-beta
+1.2.0
 
-## Requirements
+## Getting start
 
-This node module is only available on linux & osx platform.
-Window is currently not supported by the main library.
+### Install
 
-In order to run & install the module you need to have
+The library is a native addons. Firstable let's install node-gyp
 
-- nodejs
-- node-gyp
-- python
-- build-essential (linux) use by node-gyp
+```shell
+npm install node-gyp
+```
 
-## Install
+When you have install the node-gyp you can then install the library
 
-The library should be automatically be build when installing the module.
-If rebuild is necessary run the following command: `npm rebuild`
+```shell
+npm install lymui-node
+```
 
-### Typescript
+### Example of usage
 
-For typescript please follow the installation guide [install types](https://marcinthaamnouay.github.io/lymui-node/docs/typescript)
-
-## Example of usage
-
-Below is an example of how to use the library
+The API is pretty simple below is an example
 
 ```js
 const lib = require('lymui-node');
 
-const rgb = {
-  r: 100,
-  g: 200,
-  b: 200
-};
-
-const hsl = lib.convertRegular({
-  input: rgb,
+const hsl = lib.fromRGB({
+  input: {
+    r: 100,
+    g: 200,
+    b: 200
+  },
   output: 'hsl',
   clamp: 100
 })
@@ -64,37 +63,12 @@ Test it locally should be easy. Please follow the steps below:
 
 ## Bindings
 
-If you want to debug the bindings files are located on the **src** folder.
-Most of the binding is done in C. The entrypoint is *bootstrap.c*
+The bindings to the lymui library is located on the ```src``` folder.
 
-## Support of a new color
+## Contribute
 
-If you want me to add a new color type or if you want to add a new color type please open an issue in this repo.
+Feel free to contribute :) Fork it and do whatever you want
 
 ## Changelog
 
-* 1.1.2-beta.2 (testing...)
-* * Fix missing validation on the type
-* * Fix non null terminating string error
-* * Add typescript types
-* * Add @types/node to the list of dependencies
-
-* 1.1.1a
-* * Fix incorrect dependencies resulting to an impossibility to install the package
-
-* 1.1.1
-* * Bump liblymui version to 1.2.2
-* * Change installer from python to node
-
-* 1.1.0
-* * Add support of TSL
-* * Add support of HWB
-* * Add support of short hand hex
-* * Add support of grayscale
-* * Add support of argb -> xyz
-* * Refactor deserializer & normalizer
-* * Fix bugs
-* * Resolving wrong redirection with the doc
-* * Refactoring API exposition
-* 1.0.0
-* * Initial release
+The changelog is available over [here](docs/changelog.md)

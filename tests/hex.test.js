@@ -1,8 +1,5 @@
 const { expect } = require('chai')
-const SegfaultHandler = require('segfault-handler')
 const lib = require('../index')
-
-SegfaultHandler.registerHandler('hex_crash.log')
 
 describe('Creating HEX from RGB', () => {
   it('Expect to create an HEX from an RGB object', async () => {

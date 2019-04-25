@@ -1,8 +1,5 @@
 const { expect } = require('chai')
-const SegfaultHandler = require('segfault-handler')
 const lib = require('../index')
-
-SegfaultHandler.registerHandler('tint_crash')
 
 describe('Creating tint from RGB', () => {
   it('Expect to create a tint from an RGB', async () => {

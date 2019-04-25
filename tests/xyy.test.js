@@ -1,8 +1,5 @@
 const { expect } = require('chai')
-const SegfaultHandler = require('segfault-handler')
 const lib = require('../index')
-
-SegfaultHandler.registerHandler('xyy_crash.log')
 
 describe('Creating XYY from XYZ', () => {
   it('Expect to create a bright XYY from an XYZ Object', async () => {

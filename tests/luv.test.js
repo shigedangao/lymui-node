@@ -1,8 +1,5 @@
 const { expect } = require('chai')
-const SegfaultHandler = require('segfault-handler')
 const lib = require('../index')
-
-SegfaultHandler.registerHandler('luv_convert.log')
 
 describe('Creating LUV from RGB', () => {
   it('Expect to create LUV from RGB with type SRGB', async () => {

@@ -1,8 +1,5 @@
 const { expect } = require('chai')
-const SegfaultHandler = require('segfault-handler')
 const lib = require('../index')
-
-SegfaultHandler.registerHandler('argb_crash.log')
 
 describe('Creating ARGB from Xyz', () => {
   it('Expect to create ARGB from Adobe profile XYZ Object', async () => {
