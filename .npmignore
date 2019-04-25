@@ -13,3 +13,4 @@ bin
 PULL_REQUEST_TEMPLATE.md
 lib_ts
 docs
+azure_pipelines.yml
