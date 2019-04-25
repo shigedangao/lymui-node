@@ -8,6 +8,8 @@
 * * Fix non null terminating string error
 * * Add typescript support
 * * Add windows support
+* * Fix memory leak
+* * Rename convertRegular and convertSpace for semantic purposes
 
 * 1.1.1a
 * * Fix incorrect dependencies resulting to an impossibility to install the package
