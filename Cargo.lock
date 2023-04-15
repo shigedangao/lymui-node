@@ -3,13 +3,27 @@
 version = 3
 
 [[package]]
+name = "anyhow"
+version = "1.0.70"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7de8ce5e0f9f8d88245311066a578d72b7af3e7088f32783804676302df237e4"
+
+[[package]]
+name = "libc"
+version = "0.2.141"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3304a64d199bb964be99741b7a14d26972741915b3649639149b2479bb46f4b5"
+
+[[package]]
 name = "lymui"
 version = "0.1.0"
-source = "git+https://github.com/shigedangao/lymui#52ad0918323066ecd3fc3972444fe5954a5b3f5d"
+source = "git+https://github.com/shigedangao/lymui#4dfd71584f515d7b932526807197c800625856f4"
 
 [[package]]
 name = "lymui-c"
 version = "0.1.0"
 dependencies = [
+ "anyhow",
+ "libc",
  "lymui",
 ]

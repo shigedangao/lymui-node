@@ -3,3 +3,4 @@ build
 lib_ts
 .vscode
 /target
+/lymui-c/examples/test
