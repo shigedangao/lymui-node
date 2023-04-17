@@ -1,0 +1,14 @@
+[package]
+name = "lymui-c"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "lymui_c"
+crate-type = ["cdylib"]
+
+[dependencies]
+anyhow = "1.0.70"
+libc = "0.2.141"
+lymui = { git = "https://github.com/shigedangao/lymui" }
