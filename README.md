@@ -1,4 +1,4 @@
-## Lymui-node 🍭
+## Lymui-node 🍭 (WIP)
 
 A small wrapper over the [lymui](https://github.com/shigedangao/lymui) library. The wrapper provide binding for the specified language below
 
