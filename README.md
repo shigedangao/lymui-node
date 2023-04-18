@@ -24,7 +24,7 @@ cargo build
 3. Compile the example with GCC
 
 ```sh
-gcc test.c -o test -llymui_c -L../../target/debug
+gcc rgb.c -o test -llymui_c -L../../target/debug
 ```
 
 4. Run the example

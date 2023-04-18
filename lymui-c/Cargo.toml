@@ -10,5 +10,7 @@ crate-type = ["cdylib"]
 
 [dependencies]
 anyhow = "1.0.70"
-libc = "0.2.141"
 lymui = { git = "https://github.com/shigedangao/lymui" }
+
+[build-dependencies]
+cbindgen = "0.24.3"
