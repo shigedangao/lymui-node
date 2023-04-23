@@ -1,13 +1,23 @@
 use super::kind::{rgb::RgbKind, xyz::XyzKind};
 use anyhow::Result;
-use libc::size_t;
-use lymui::xyz::{
-    hlab::Hlab, lab::Lab, lchlab::Lchlab, lchuv::Lchuv, luv::Luv, oklab::OkLab, oklch::OkLch,
-    rec2020::Rec2020, rec2100::Rec2100, rec709::Rec709, srgb::Srgb, xyy::Xyy, argb::Argb, hcl::Hcl, Kind as LightKind, Xyz
-};
 use lymui::{
-    cymk::Cymk, hex::Hex, hsl::Hsl, hsv::Hsv, hwb::Hwb, rgb::Rgb, util::AsVec, ycbcr::Ycbcr,
+    ansi::{Ansi, AnsiKind},
+    cymk::Cymk,
+    hex::Hex,
+    hsl::Hsl,
+    hsv::Hsv,
+    hue::Hue,
+    hwb::Hwb,
+    rgb::FromRgb,
+    rgb::Rgb,
+    util::AsVec,
+    ycbcr::Ycbcr,
     yuv::Yuv,
+};
+use lymui::xyz::{
+    argb::Argb, hcl::Hcl, hlab::Hlab, lab::Lab, lchlab::Lchlab, lchuv::Lchuv, luv::Luv,
+    oklab::OkLab, oklch::OkLch, rec2020::Rec2020, rec2100::Rec2100, rec709::Rec709, srgb::Srgb,
+    xyy::Xyy, Kind as LightKind, Xyz,
 };
 use std::ffi::CString;
 use std::os::raw::c_char;
@@ -16,13 +26,13 @@ use std::os::raw::c_char;
 #[repr(C)]
 pub struct AnyColor {
     pub hex: *const c_char,
-    pub slice: *mut ColorSlice,
+    pub slice: *mut ColorSlice
 }
 
 #[derive(Debug)]
 #[repr(C)]
 pub struct ColorSlice {
-    pub len: size_t,
+    pub len: usize,
     pub ptr: *const f64,
 }
 
@@ -54,12 +64,15 @@ impl AnyColor {
 
         let vec = match tgt {
             RgbKind::Cymk => Cymk::from(rgb).as_vec(),
+            RgbKind::Hue => vec![Hue::from(rgb)],
             RgbKind::Hsl => Hsl::from(rgb).as_vec(),
             RgbKind::Hsv => Hsv::from(rgb).as_vec(),
             RgbKind::Hwb => Hwb::from(rgb).as_vec(),
             RgbKind::Rgb => rgb.as_vec(),
             RgbKind::YCbCr => Ycbcr::from(rgb).as_vec(),
             RgbKind::Yuv => Yuv::from(rgb).as_vec(),
+            RgbKind::Ansi16 => vec![Ansi::from_rgb(rgb, AnsiKind::C16) as f64],
+            RgbKind::Ansi256 => vec![Ansi::from_rgb(rgb, AnsiKind::C256) as f64],
             _ => Vec::new(),
         };
 
@@ -147,10 +160,7 @@ impl AnyColor {
         // Vec is still present but not a Rust's object responsabi lity
         std::mem::forget(vec);
 
-        let slice = ColorSlice {
-            len: len as size_t,
-            ptr,
-        };
+        let slice = ColorSlice { len, ptr };
 
         self.slice = Box::into_raw(Box::new(slice));
     }

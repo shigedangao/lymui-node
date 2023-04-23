@@ -1,20 +1,13 @@
 use anyhow::Result;
+use lymui::util::FromVec;
 use core::ffi::c_void;
 use lymui::create_color_from_vec;
 use lymui::rgb::{FromRgb, Rgb};
-use lymui::xyz::hlab::Hlab;
-use lymui::xyz::lab::Lab;
-use lymui::xyz::lchlab::Lchlab;
-use lymui::xyz::lchuv::Lchuv;
-use lymui::xyz::luv::Luv;
-use lymui::xyz::oklab::OkLab;
-use lymui::xyz::oklch::OkLch;
-use lymui::xyz::rec2020::Rec2020;
-use lymui::xyz::rec2100::Rec2100;
-use lymui::xyz::rec709::Rec709;
-use lymui::xyz::srgb::Srgb;
-use lymui::xyz::xyy::Xyy;
-use lymui::xyz::{argb::Argb, hcl::Hcl, Kind as LightKind, Xyz};
+use lymui::xyz::{
+    argb::Argb, hcl::Hcl, hlab::Hlab, lab::Lab, lchlab::Lchlab, lchuv::Lchuv, luv::Luv,
+    oklab::OkLab, oklch::OkLch, rec2020::Rec2020, rec2100::Rec2100, rec709::Rec709, srgb::Srgb,
+    xyy::Xyy, Kind as LightKind, Xyz,
+};
 
 #[derive(Debug)]
 #[repr(C)]
@@ -63,12 +56,13 @@ impl XyzKind {
 
         let xyz = match self {
             Self::RgbCompat => {
-                let slice = unsafe { std::slice::from_raw_parts(ptr as *mut f64, 3) }.to_vec();
-                let rgb = Rgb {
-                    r: slice.first().copied().unwrap_or_default() as u8,
-                    g: slice.get(1).copied().unwrap_or_default() as u8,
-                    b: slice.get(2).copied().unwrap_or_default() as u8,
-                };
+                let slice = unsafe { std::slice::from_raw_parts(ptr as *mut f64, 3) }
+                    .to_vec()
+                    .into_iter()
+                    .map(|v| v as u8)
+                    .collect::<Vec<_>>();
+                
+                let rgb = Rgb::from_vec(slice.to_vec());
 
                 Xyz::from_rgb(rgb, light)
             }
