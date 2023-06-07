@@ -3,11 +3,8 @@ use lymui::util::FromVec;
 use core::ffi::c_void;
 use lymui::create_color_from_vec;
 use lymui::rgb::{FromRgb, Rgb};
-use lymui::xyz::{
-    argb::Argb, hcl::Hcl, hlab::Hlab, lab::Lab, lchlab::Lchlab, lchuv::Lchuv, luv::Luv,
-    oklab::OkLab, oklch::OkLch, rec2020::Rec2020, rec2100::Rec2100, rec709::Rec709, srgb::Srgb,
-    xyy::Xyy, Kind as LightKind, Xyz,
-};
+use lymui::prelude::*;
+use crate::LightKind;
 
 #[derive(Debug)]
 #[repr(C)]

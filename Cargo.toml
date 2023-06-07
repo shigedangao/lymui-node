@@ -2,4 +2,5 @@
 
 members = [
     "lymui-c",
+    "node-binding"
 ]
