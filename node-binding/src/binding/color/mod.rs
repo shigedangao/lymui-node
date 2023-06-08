@@ -10,6 +10,10 @@ pub mod hsv;
 pub mod hue;
 pub mod hwb;
 pub mod ycbcr;
+pub mod xyz;
+pub mod argb;
+pub mod hcl;
+pub mod hlab;
 
 pub(crate) trait FromObject {
     fn from_js_object(object: Object) -> Result<Self> where Self: Sized;
