@@ -89,7 +89,7 @@ pub extern "C" fn get_grayscale(
         Err(_) => return 0,
     };
 
-    grayscale::get_grayscale_from_rgb(rgb, grayscale_light_kind)
+    grayscale::get_grayscale_from_rgb(rgb, grayscale_light_kind).0
 }
 
 /// Generate shade or tint

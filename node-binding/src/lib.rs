@@ -1,16 +1,29 @@
-use binding::mapping::Mapping;
+use mapping::{
+    rgb::RgbMapping,
+    xyz::XyzMapping
+};
 use napi::bindgen_prelude::*;
 use napi_derive::napi;
 
-mod binding;
+mod mapping;
 
 #[napi]
-pub fn get_any_color(obj: Object, input: Mapping, out: Mapping, env: Env) -> Result<Object> {
+pub fn get_any_rgb_compatible_color(obj: Object, input: RgbMapping, out: RgbMapping, env: Env) -> Result<Object> {
     let rgb = input.get_rgb_from_mapping(obj)
         .map_err(|err| Error::new(Status::InvalidArg, err.to_string()))?;
 
     let generated = out.create_color_from_rgb_input(rgb, env)
         .map_err(|err| Error::new(Status::GenericFailure, err.to_string()))?;
+
+    Ok(generated)
+}
+
+#[napi]
+pub fn get_any_xyz_compatible_color(obj: Object, input: XyzMapping, out: XyzMapping, env: Env) -> Result<Object> {
+    let xyz = input.get_xyz_from_mapping(obj)
+        .map_err(|err| Error::new(Status::InvalidArg, err.to_string()))?;
+
+    let generated = out.create_color_from_xyz_input(xyz, env)?;
 
     Ok(generated)
 }

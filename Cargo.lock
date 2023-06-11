@@ -214,6 +214,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "453ad9f582a441959e5f0d088b02ce04cfe8d51a8eaf077f12ac6d3e94164ca6"
 
 [[package]]
+name = "js-macro"
+version = "0.1.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.15",
+]
+
+[[package]]
 name = "libc"
 version = "0.2.142"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -247,11 +256,11 @@ dependencies = [
 [[package]]
 name = "lymui"
 version = "0.1.0"
-
-[[package]]
-name = "lymui"
-version = "0.1.0"
-source = "git+https://github.com/shigedangao/lymui#98aff0479a029a0399a12d17c2913535070224ea"
+dependencies = [
+ "js-macro",
+ "napi",
+ "napi-derive",
+]
 
 [[package]]
 name = "lymui-c"
@@ -259,7 +268,7 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "cbindgen",
- "lymui 0.1.0 (git+https://github.com/shigedangao/lymui)",
+ "lymui",
 ]
 
 [[package]]
@@ -331,7 +340,7 @@ name = "node-binding"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "lymui 0.1.0",
+ "lymui",
  "napi",
  "napi-build",
  "napi-derive",

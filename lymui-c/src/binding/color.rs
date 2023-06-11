@@ -41,7 +41,7 @@ impl AnyColor {
         let mut color = AnyColor::default();
 
         if tgt == RgbKind::Hex {
-            let hex_c_str = CString::new(Hex::from(rgb))?;
+            let hex_c_str = CString::new(Hex::from(rgb).0)?;
             color.hex = hex_c_str.into_raw();
 
             return Ok(color);
@@ -56,8 +56,8 @@ impl AnyColor {
             RgbKind::Rgb => rgb.as_vec(),
             RgbKind::YCbCr => Ycbcr::from(rgb).as_vec(),
             RgbKind::Yuv => Yuv::from(rgb).as_vec(),
-            RgbKind::Ansi16 => vec![Ansi::from_rgb(rgb, AnsiKind::C16) as f64],
-            RgbKind::Ansi256 => vec![Ansi::from_rgb(rgb, AnsiKind::C256) as f64],
+            RgbKind::Ansi16 => vec![Ansi::from_rgb(rgb, AnsiKind::C16).0 as f64],
+            RgbKind::Ansi256 => vec![Ansi::from_rgb(rgb, AnsiKind::C256).0 as f64],
             _ => Vec::new(),
         };
 

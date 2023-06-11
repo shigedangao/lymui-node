@@ -40,7 +40,7 @@ impl RgbKind {
                     .to_string_lossy()
                     .into_owned();
 
-                Ok(Rgb::try_from(hex)?)
+                Ok(Rgb::try_from(Hex(hex))?)
             }
             Self::Hsl | Self::Hsv | Self::Hwb | Self::YCbCr | Self::Yuv | Self::Rgb | Self::Cymk => {                
                 Ok(self.create_rgb_from_slice(ptr))

@@ -6,5 +6,5 @@ const rgb = {
     b: 95
 };
 
-let res = lymui.getAnyColor(rgb, lymui.Mapping.Rgb, lymui.Mapping.Hex);
-console.log(res);
+let res = lymui.getAnyRgbCompatibleColor(rgb, lymui.RgbMapping.Rgb, lymui.RgbMapping.Hex);
+console.log(res)
