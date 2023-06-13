@@ -1,6 +1,7 @@
 use mapping::{
     rgb::RgbMapping,
-    xyz::XyzMapping
+    xyz::XyzMapping,
+    grayscale::GrayscaleMapping
 };
 use napi::bindgen_prelude::*;
 use napi_derive::napi;
@@ -26,4 +27,11 @@ pub fn get_any_xyz_compatible_color(obj: Object, input: XyzMapping, out: XyzMapp
     let generated = out.create_color_from_xyz_input(xyz, env)?;
 
     Ok(generated)
+}
+
+#[napi]
+pub fn get_grayscale_from_rgb(obj: Object, kind: GrayscaleMapping, env: Env) -> Result<Object> {
+    let gscale = kind.into_grayscale(obj, env)?;
+
+    Ok(gscale)
 }

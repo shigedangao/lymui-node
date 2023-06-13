@@ -8,3 +8,7 @@ const rgb = {
 
 let res = lymui.getAnyRgbCompatibleColor(rgb, lymui.RgbMapping.Rgb, lymui.RgbMapping.Hex);
 console.log(res)
+
+
+let gscale = lymui.getGrayscaleFromRgb(rgb, lymui.GrayscaleMapping.BT709)
+console.log(gscale)
