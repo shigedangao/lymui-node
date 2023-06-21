@@ -1,6 +1,9 @@
-use napi_derive::napi;
+use lymui::{
+    js::{FromJsObject, IntoJsObject},
+    prelude::*,
+};
 use napi::bindgen_prelude::*;
-use lymui::{prelude::*, js::{FromJsObject, IntoJsObject}};
+use napi_derive::napi;
 
 #[napi]
 pub enum XyzMapping {
@@ -16,14 +19,14 @@ pub enum XyzMapping {
     REC2020,
     REC2100,
     SRgb,
-    Xyy
+    Xyy,
 }
 
 impl XyzMapping {
     /// Create an xyz from the color mapping
-    /// 
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `self` - Self
     /// * `object` - Object
     pub(crate) fn get_xyz_from_mapping(&self, object: Object) -> Result<Xyz> {
@@ -40,16 +43,16 @@ impl XyzMapping {
             Self::REC2020 => Xyz::from(Rec2020::from_js_object(object)?),
             Self::REC2100 => Xyz::from(Rec2100::from_js_object(object)?),
             Self::SRgb => Xyz::from(Srgb::from_js_object(object)?),
-            Self::Xyy => Xyz::from(Xyy::from_js_object(object)?)
+            Self::Xyy => Xyz::from(Xyy::from_js_object(object)?),
         };
 
         Ok(xyz)
     }
 
     /// Create a color from an xyz input
-    /// 
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `self` - &Self
     /// * `xyz` - Xyz
     /// * `env` - Env
@@ -67,9 +70,9 @@ impl XyzMapping {
             Self::REC2020 => Rec2020::from(xyz).into_js_object(env),
             Self::REC2100 => Rec2100::from(xyz).into_js_object(env),
             Self::SRgb => Srgb::from(xyz).into_js_object(env),
-            Self::Xyy => Xyy::from(xyz).into_js_object(env)
+            Self::Xyy => Xyy::from(xyz).into_js_object(env),
         }?;
 
         Ok(res)
-    } 
+    }
 }

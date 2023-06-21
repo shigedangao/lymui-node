@@ -1,9 +1,9 @@
 use super::kind::{rgb::RgbKind, xyz::XyzKind};
+use crate::LightKind;
 use anyhow::Result;
 use lymui::prelude::*;
 use lymui::rgb::FromRgb;
 use lymui::util::AsVec;
-use crate::LightKind;
 use std::ffi::CString;
 use std::os::raw::c_char;
 
@@ -11,7 +11,7 @@ use std::os::raw::c_char;
 #[repr(C)]
 pub struct AnyColor {
     pub hex: *const c_char,
-    pub slice: *mut ColorSlice
+    pub slice: *mut ColorSlice,
 }
 
 #[derive(Debug)]

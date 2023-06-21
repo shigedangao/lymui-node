@@ -1,3 +1,3 @@
 pub mod color;
-pub mod kind;
 pub mod generator;
+pub mod kind;

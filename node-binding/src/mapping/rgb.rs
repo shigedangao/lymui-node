@@ -1,9 +1,9 @@
+use anyhow::{anyhow, Result};
+use lymui::js::prelude::*;
+use lymui::prelude::*;
 use lymui::rgb::FromRgb;
 use napi::bindgen_prelude::*;
 use napi_derive::napi;
-use anyhow::{Result, anyhow};
-use lymui::prelude::*;
-use lymui::js::prelude::*;
 
 #[napi]
 pub enum RgbMapping {
@@ -17,16 +17,18 @@ pub enum RgbMapping {
     Ycbcr,
     XyzD65,
     XyzD50,
-    XyzAdobe
+    XyzAdobe,
+    Ansi16,
+    Ansi256,
 }
 
 impl RgbMapping {
     /// Convert a JS object into an RGB. This will allows us to convert it to an other type T
-    /// 
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `object` - Object
-    pub(crate) fn get_rgb_from_mapping(&self, object: Object) -> Result<Rgb> {                
+    pub(crate) fn get_rgb_from_mapping(&self, object: Object) -> Result<Rgb> {
         let rgb = match self {
             Self::Cymk => Rgb::from(Cymk::from_js_object(object)?),
             Self::Hex => {
@@ -42,15 +44,16 @@ impl RgbMapping {
             Self::XyzD65 => Xyz::from_js_object(object)?.as_rgb(lymui::xyz::Kind::D65),
             Self::XyzD50 => Xyz::from_js_object(object)?.as_rgb(lymui::xyz::Kind::D50),
             Self::XyzAdobe => Xyz::from_js_object(object)?.as_rgb(lymui::xyz::Kind::Adobe),
+            Self::Ansi16 | Self::Ansi256 => Rgb::try_from(Ansi::from_js_object(object)?)?,
         };
 
         Ok(rgb)
     }
 
     /// Create a color from an RGB input
-    /// 
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `rgb` - Rgb
     /// * `env` - Env
     pub(crate) fn create_color_from_rgb_input(&self, rgb: Rgb, env: Env) -> Result<Object> {
@@ -66,6 +69,8 @@ impl RgbMapping {
             Self::XyzD65 => Xyz::from_rgb(rgb, lymui::xyz::Kind::D65).into_js_object(env),
             Self::XyzD50 => Xyz::from_rgb(rgb, lymui::xyz::Kind::D50).into_js_object(env),
             Self::XyzAdobe => Xyz::from_rgb(rgb, lymui::xyz::Kind::Adobe).into_js_object(env),
+            Self::Ansi16 => Ansi::from_rgb(rgb, AnsiKind::C16).into_js_object(env),
+            Self::Ansi256 => Ansi::from_rgb(rgb, AnsiKind::C256).into_js_object(env),
         }?;
 
         Ok(res)

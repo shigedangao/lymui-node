@@ -6,8 +6,8 @@ use crate::binding::{
     kind::xyz::XyzKind,
     kind::xyz::XyzLight,
 };
-use std::ffi::c_void;
 use lymui::xyz::Kind as LightKind;
+use std::ffi::c_void;
 
 pub mod binding;
 
@@ -93,9 +93,9 @@ pub extern "C" fn get_grayscale(
 }
 
 /// Generate shade or tint
-/// 
+///
 /// # Arguments
-/// 
+///
 /// * `rgb_compat_color` - *mut c_void
 /// * `from ` - RgbKind
 /// * `factor` - f64
@@ -114,7 +114,7 @@ pub extern "C" fn generate_shade_tint(
 
     match ColorMixture::new(rgb, factor, is_shade) {
         Ok(res) => Box::into_raw(Box::new(res)),
-        Err(_) => std::ptr::null_mut()
+        Err(_) => std::ptr::null_mut(),
     }
 }
 
@@ -143,13 +143,13 @@ pub unsafe extern "C" fn drop_any_color(ptr: *mut AnyColor) {
 }
 
 /// Drop a color mixture (shade or tint)
-/// 
+///
 /// # Arguments
-/// 
+///
 /// * `ptr` - *mut ColorMixture
-/// 
-/// # Safety 
-/// 
+///
+/// # Safety
+///
 /// This method should be called with a valid object that has been allocated with Rust
 /// /!\ Never use the free method from C as the pointer is allocated by Rust
 #[no_mangle]

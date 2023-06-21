@@ -1,10 +1,10 @@
+use crate::LightKind;
 use anyhow::Result;
-use lymui::util::FromVec;
 use core::ffi::c_void;
 use lymui::create_color_from_vec;
-use lymui::rgb::{FromRgb, Rgb};
 use lymui::prelude::*;
-use crate::LightKind;
+use lymui::rgb::{FromRgb, Rgb};
+use lymui::util::FromVec;
 
 #[derive(Debug)]
 #[repr(C)]
@@ -54,11 +54,11 @@ impl XyzKind {
         let xyz = match self {
             Self::RgbCompat => {
                 let slice = unsafe { std::slice::from_raw_parts(ptr as *mut f64, 3) }
-                    .to_vec()
-                    .into_iter()
+                    .iter()
+                    .copied()
                     .map(|v| v as u8)
                     .collect::<Vec<_>>();
-                
+
                 let rgb = Rgb::from_vec(slice.to_vec());
 
                 Xyz::from_rgb(rgb, light)

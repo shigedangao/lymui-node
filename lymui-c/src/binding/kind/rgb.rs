@@ -1,7 +1,7 @@
 use anyhow::Result;
-use std::ffi::c_void;
 use lymui::create_color_from_vec;
 use lymui::prelude::*;
+use std::ffi::c_void;
 use std::ffi::CStr;
 
 #[derive(Debug, PartialEq, Eq)]
@@ -17,7 +17,7 @@ pub enum RgbKind {
     YCbCr,
     Yuv,
     Ansi16,
-    Ansi256
+    Ansi256,
 }
 
 impl RgbKind {
@@ -42,12 +42,16 @@ impl RgbKind {
 
                 Ok(Rgb::try_from(Hex(hex))?)
             }
-            Self::Hsl | Self::Hsv | Self::Hwb | Self::YCbCr | Self::Yuv | Self::Rgb | Self::Cymk => {                
-                Ok(self.create_rgb_from_slice(ptr))
-            }
+            Self::Hsl
+            | Self::Hsv
+            | Self::Hwb
+            | Self::YCbCr
+            | Self::Yuv
+            | Self::Rgb
+            | Self::Cymk => Ok(self.create_rgb_from_slice(ptr)),
             _ => Err(anyhow::format_err!(
                 "Targeted color could not be convert into Rgb"
-            ))
+            )),
         }
     }
 
@@ -59,8 +63,8 @@ impl RgbKind {
     /// * `ptr` - *mut c_void
     fn create_rgb_from_slice(&self, ptr: *mut c_void) -> Rgb {
         let vec = match self {
-            Self::Cymk =>  unsafe { std::slice::from_raw_parts(ptr as *mut f64, 4) }.to_vec(),
-            _ => unsafe { std::slice::from_raw_parts(ptr as *mut f64, 3) }.to_vec()
+            Self::Cymk => unsafe { std::slice::from_raw_parts(ptr as *mut f64, 4) }.to_vec(),
+            _ => unsafe { std::slice::from_raw_parts(ptr as *mut f64, 3) }.to_vec(),
         };
 
         match self {

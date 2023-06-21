@@ -1,11 +1,11 @@
-use napi_derive::napi;
-use napi::bindgen_prelude::*;
 use lymui::{
-    prelude::*,
+    grayscale::Kind,
     js::{FromJsObject, IntoJsObject},
+    prelude::*,
     rgb::FromRgb,
-    grayscale::Kind
 };
+use napi::bindgen_prelude::*;
+use napi_derive::napi;
 
 #[napi]
 pub enum GrayscaleMapping {
@@ -13,18 +13,18 @@ pub enum GrayscaleMapping {
     Average,
     Luminosity,
     BT709,
-    BT2100
+    BT2100,
 }
 
 impl GrayscaleMapping {
     /// Convert a js rgb object into a grayscale
-    /// 
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `self` - Self
     /// * `obj - Object
     /// * `env` - Env`
-    pub(crate) fn into_grayscale(&self, obj: Object, env: Env) -> Result<Object> {
+    pub(crate) fn into_grayscale(self, obj: Object, env: Env) -> Result<Object> {
         let rgb = Rgb::from_js_object(obj)?;
 
         let grayscale = match self {
