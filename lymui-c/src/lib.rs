@@ -58,7 +58,7 @@ pub extern "C" fn convert_color_from_xyz_compatible_color(
         _ => LightKind::Adobe,
     };
 
-    let xyz = match from.as_xyz(color, xyz_light_kind) {
+    let xyz = match from.as_xyz(color, Some(xyz_light_kind)) {
         Ok(res) => res,
         Err(_) => return std::ptr::null_mut(),
     };

@@ -11,7 +11,7 @@ crate-type = ["cdylib"]
 [dependencies]
 napi = { version = "2", features = ["serde"] }
 napi-derive = "2"
-lymui = { path = "../../lymui/lymui", features = ["js"]}
+lymui = { git = "https://github.com/shigedangao/lymui" , features = ["js"]}
 anyhow = "1.0.71"
 
 [build-dependencies]

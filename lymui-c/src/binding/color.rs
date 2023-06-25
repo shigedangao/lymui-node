@@ -49,7 +49,6 @@ impl AnyColor {
 
         let vec = match tgt {
             RgbKind::Cymk => Cymk::from(rgb).as_vec(),
-            RgbKind::Hue => vec![Hue::from(rgb)],
             RgbKind::Hsl => Hsl::from(rgb).as_vec(),
             RgbKind::Hsv => Hsv::from(rgb).as_vec(),
             RgbKind::Hwb => Hwb::from(rgb).as_vec(),
@@ -92,7 +91,7 @@ impl AnyColor {
             XyzKind::REC2100 => Rec2100::from(xyz).as_vec(),
             XyzKind::SRGB => Srgb::from(xyz).as_vec(),
             XyzKind::Xyy => Xyy::from(xyz).as_vec(),
-            XyzKind::RgbCompat => xyz.as_rgb(light).as_vec(),
+            XyzKind::Rgb => xyz.as_rgb(light).as_vec(),
         };
 
         color.get_color_slice(vec);

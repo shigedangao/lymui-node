@@ -21,4 +21,9 @@ int main(void) {
 
     AnyColor *h = convert_color_from_rgb_compatible_color(rgb, Rgb, Hex);
     printf("hex: %s \n", h->hex);
+
+    // an other rgb
+    double toconvert[3] = {0.0, 10.0, 200.0};
+    AnyColor *a = convert_color_from_rgb_compatible_color(toconvert, Rgb, Ansi256);
+    printf("ansi 256 %f \n", a->slice->ptr[0]);
 }

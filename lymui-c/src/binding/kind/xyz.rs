@@ -3,8 +3,8 @@ use anyhow::Result;
 use core::ffi::c_void;
 use lymui::create_color_from_vec;
 use lymui::prelude::*;
-use lymui::rgb::{FromRgb, Rgb};
-use lymui::util::FromVec;
+use lymui::rgb::FromRgb;
+use super::rgb::RgbKind;
 
 #[derive(Debug)]
 #[repr(C)]
@@ -33,7 +33,7 @@ pub enum XyzKind {
     SRGB,
     Xyy,
     // Special case when a user ask for a Xyz from an RGB
-    RgbCompat,
+    Rgb,
 }
 
 impl XyzKind {
@@ -44,7 +44,7 @@ impl XyzKind {
     /// * `&self` - Self
     /// * `ptr` - *mut c_void
     /// * `light` - XyzLight
-    pub fn as_xyz(&self, ptr: *mut c_void, light: LightKind) -> Result<Xyz> {
+    pub fn as_xyz(&self, ptr: *mut c_void, light: Option<LightKind>) -> Result<Xyz> {
         if ptr.is_null() {
             return Err(anyhow::format_err!(
                 "Pointer is null. Unable to convert reflect the color as an Xyz"
@@ -52,18 +52,16 @@ impl XyzKind {
         }
 
         let xyz = match self {
-            Self::RgbCompat => {
-                let slice = unsafe { std::slice::from_raw_parts(ptr as *mut f64, 3) }
-                    .iter()
-                    .copied()
-                    .map(|v| v as u8)
-                    .collect::<Vec<_>>();
+            Self::Rgb => {
+                let Some(xyz_light) = light else {
+                    return Err(anyhow::format_err!("Lightkind is not present in the parameter"))
+                };
 
-                let rgb = Rgb::from_vec(slice.to_vec());
+                let rgb_kind = RgbKind::Rgb;
+                let rgb = rgb_kind.as_rgb(ptr)?;
 
-                Xyz::from_rgb(rgb, light)
+                Xyz::from_rgb(rgb, xyz_light)
             }
-            Self::Xyz => unsafe { *(ptr as *mut Xyz) },
             _ => {
                 let slice = unsafe { std::slice::from_raw_parts(ptr as *mut f64, 3) };
                 self.create_xyz_from_vec(slice.to_vec())
@@ -98,7 +96,47 @@ impl XyzKind {
             Self::REC2100 => Xyz::from(create_color_from_vec::<f64, Rec2100>(vec)),
             Self::SRGB => Xyz::from(create_color_from_vec::<f64, Srgb>(vec)),
             Self::Xyy => Xyz::from(create_color_from_vec::<f64, Xyy>(vec)),
+            Self::Xyz => create_color_from_vec::<f64, Xyz>(vec),
             _ => Xyz::default(),
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn expect_to_convert_rgb_to_xyz() {
+        let tgt = XyzKind::Rgb;
+        let mut rgb = vec![17.0, 18.0, 92.0];
+        let rgb_ptr = rgb.as_mut_ptr() as *mut c_void;
+
+        let res = tgt.as_xyz(rgb_ptr, Some(LightKind::D65));
+        assert!(res.is_ok());
+
+        let xyz = res.unwrap();
+        assert_eq!(xyz.x, 0.023785878915414407);
+        assert_eq!(xyz.y, 0.013242343593540241);
+        assert_eq!(xyz.z, 0.10253384014175347);
+    }
+
+    #[test]
+    fn expect_to_convert_slice_to_xyz() {
+        let tgt = XyzKind::Oklab;
+        let mut lab: Vec<f64> = vec![
+            0.26368,
+            0.06116,
+            -0.1258
+        ];
+        let lab_ptr = lab.as_mut_ptr() as *mut c_void;
+        
+        let res = tgt.as_xyz(lab_ptr, None);
+        assert!(res.is_ok());
+        
+        let xyz = res.unwrap();
+        assert!(xyz.x.is_sign_positive());
+        assert!(xyz.y.is_sign_positive());
+        assert!(xyz.z.is_sign_positive());
     }
 }

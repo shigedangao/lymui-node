@@ -14,7 +14,6 @@ typedef enum GrayscaleKind {
 typedef enum RgbKind {
   Cymk,
   Hex,
-  Hue,
   Hsl,
   Hsv,
   Hwb,
@@ -41,7 +40,7 @@ typedef enum XyzKind {
   REC2100,
   SRGB,
   Xyy,
-  RgbCompat,
+  Rgb,
 } XyzKind;
 
 typedef enum XyzLight {

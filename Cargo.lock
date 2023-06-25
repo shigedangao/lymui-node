@@ -216,6 +216,7 @@ checksum = "453ad9f582a441959e5f0d088b02ce04cfe8d51a8eaf077f12ac6d3e94164ca6"
 [[package]]
 name = "js-macro"
 version = "0.1.0"
+source = "git+https://github.com/shigedangao/lymui#b0bda5952e5939b56ba948807c9939938ade766f"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -256,6 +257,7 @@ dependencies = [
 [[package]]
 name = "lymui"
 version = "0.1.0"
+source = "git+https://github.com/shigedangao/lymui#b0bda5952e5939b56ba948807c9939938ade766f"
 dependencies = [
  "js-macro",
  "napi",
