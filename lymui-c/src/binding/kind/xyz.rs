@@ -1,10 +1,10 @@
+use super::rgb::RgbKind;
 use crate::LightKind;
 use anyhow::Result;
 use core::ffi::c_void;
 use lymui::create_color_from_vec;
 use lymui::prelude::*;
 use lymui::rgb::FromRgb;
-use super::rgb::RgbKind;
 
 #[derive(Debug)]
 #[repr(C)]
@@ -124,16 +124,12 @@ mod tests {
     #[test]
     fn expect_to_convert_slice_to_xyz() {
         let tgt = XyzKind::Oklab;
-        let mut lab: Vec<f64> = vec![
-            0.26368,
-            0.06116,
-            -0.1258
-        ];
+        let mut lab: Vec<f64> = vec![0.26368, 0.06116, -0.1258];
         let lab_ptr = lab.as_mut_ptr() as *mut c_void;
-        
+
         let res = tgt.as_xyz(lab_ptr, None);
         assert!(res.is_ok());
-        
+
         let xyz = res.unwrap();
         assert!(xyz.x.is_sign_positive());
         assert!(xyz.y.is_sign_positive());

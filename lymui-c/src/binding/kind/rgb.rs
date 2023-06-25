@@ -50,8 +50,7 @@ impl RgbKind {
             | Self::Cymk => Ok(self.create_rgb_from_slice(ptr)),
             Self::Ansi16 | Self::Ansi256 => {
                 let u = ptr as u8;
-                Rgb::try_from(Ansi(u))
-                    .map_err(|err| anyhow::format_err!(err.to_string()))
+                Rgb::try_from(Ansi(u)).map_err(|err| anyhow::format_err!(err.to_string()))
             }
         }
     }
@@ -99,7 +98,7 @@ mod tests {
 
         let res = tgt.as_rgb(hex_ptr);
         assert!(res.is_ok());
-        
+
         let rgb = res.unwrap();
         assert_eq!(rgb.r, 255);
         assert_eq!(rgb.g, 255);

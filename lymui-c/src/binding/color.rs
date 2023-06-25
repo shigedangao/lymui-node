@@ -149,3 +149,22 @@ impl AnyColor {
         self.slice = Box::into_raw(Box::new(slice));
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn expect_to_convert_rgb_to_color() {
+        let color = AnyColor::from_rgb(
+            Rgb {
+                r: 17,
+                g: 112,
+                b: 190,
+            },
+            RgbKind::Hex,
+        );
+
+        assert!(color.is_ok());
+    }
+}
