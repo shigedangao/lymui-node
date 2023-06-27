@@ -57,3 +57,38 @@ impl ColorMixture {
         Ok(ColorMixture { len, ptr })
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn expect_to_generate_shade() {
+        let shade = ColorMixture::new(
+            Rgb {
+                r: 10,
+                g: 10,
+                b: 255,
+            },
+            0.1,
+            true,
+        );
+
+        assert!(shade.is_ok());
+    }
+
+    #[test]
+    fn expect_to_generate_tint() {
+        let tint = ColorMixture::new(
+            Rgb {
+                r: 10,
+                g: 10,
+                b: 255,
+            },
+            0.1,
+            false,
+        );
+
+        assert!(tint.is_ok());
+    }
+}

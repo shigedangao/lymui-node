@@ -153,6 +153,7 @@ impl AnyColor {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::ffi::CStr;
 
     #[test]
     fn expect_to_convert_rgb_to_color() {
@@ -164,7 +165,64 @@ mod tests {
             },
             RgbKind::Hex,
         );
-
         assert!(color.is_ok());
+
+        let hex = color.unwrap().hex;
+        let cstr = unsafe { CStr::from_ptr(hex) }.to_str().unwrap();
+
+        assert_eq!(cstr, "#1170be");
+    }
+
+    #[test]
+    fn expect_to_convert_rgb_to_slice() {
+        let color = AnyColor::from_rgb(
+            Rgb {
+                r: 50,
+                g: 10,
+                b: 29,
+            },
+            RgbKind::YCbCr,
+        );
+        assert!(color.is_ok());
+
+        let slice = color.unwrap().slice;
+
+        // Retrieve the vector
+        unsafe {
+            let slice = Box::from_raw(slice);
+            let vec = Vec::from_raw_parts(slice.ptr as *mut f64, slice.len, slice.len);
+
+            assert!(vec.len() == 3);
+            assert!(vec[0].is_normal());
+            assert!(vec[1].is_normal());
+            assert!(vec[2].is_normal());
+        };
+    }
+
+    #[test]
+    fn expect_to_convert_xyz_to_slice() {
+        let lab = AnyColor::from_xyz(
+            Xyz {
+                x: 0.037632178651154785,
+                y: 0.01735228547582024,
+                z: 0.11380345919261227,
+            },
+            XyzKind::Lab,
+            LightKind::D65,
+        );
+        assert!(lab.is_ok());
+
+        let slice = lab.unwrap().slice;
+
+        // Retrieve the vector
+        unsafe {
+            let slice = Box::from_raw(slice);
+            let vec = Vec::from_raw_parts(slice.ptr as *mut f64, slice.len, slice.len);
+
+            assert!(vec.len() == 3);
+            assert!(vec[0].is_normal());
+            assert!(vec[1].is_normal());
+            assert!(vec[2].is_normal());
+        };
     }
 }

@@ -36,3 +36,22 @@ pub(crate) fn get_grayscale_from_rgb(rgb: Rgb, kind: GrayscaleKind) -> GrayScale
 
     GrayScale::from_rgb(rgb, g_kind)
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn expect_to_convert_rgb_to_grayscale() {
+        let gscale = get_grayscale_from_rgb(
+            Rgb {
+                r: 10,
+                g: 10,
+                b: 10,
+            },
+            GrayscaleKind::BT709,
+        );
+
+        assert!(gscale.0 > 0);
+    }
+}
