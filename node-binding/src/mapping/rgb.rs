@@ -1,4 +1,3 @@
-use anyhow::{anyhow, Result};
 use lymui::js::prelude::*;
 use lymui::prelude::*;
 use lymui::rgb::FromRgb;
@@ -33,7 +32,7 @@ impl RgbMapping {
             Self::Cymk => Rgb::from(Cymk::from_js_object(object)?),
             Self::Hex => {
                 let hex = Hex::from_js_object(object)?;
-                Rgb::try_from(hex).map_err(|err| anyhow!(err.to_string()))?
+                Rgb::try_from(hex).map_err(|err| Error::from_reason(err.to_string()))?
             }
             Self::Hsl => Rgb::from(Hsl::from_js_object(object)?),
             Self::Hsv => Rgb::from(Hsv::from_js_object(object)?),
@@ -44,7 +43,8 @@ impl RgbMapping {
             Self::XyzD65 => Xyz::from_js_object(object)?.as_rgb(lymui::xyz::Kind::D65),
             Self::XyzD50 => Xyz::from_js_object(object)?.as_rgb(lymui::xyz::Kind::D50),
             Self::XyzAdobe => Xyz::from_js_object(object)?.as_rgb(lymui::xyz::Kind::Adobe),
-            Self::Ansi16 | Self::Ansi256 => Rgb::try_from(Ansi::from_js_object(object)?)?,
+            Self::Ansi16 | Self::Ansi256 => Rgb::try_from(Ansi::from_js_object(object)?)
+                .map_err(|err| Error::from_reason(err.to_string()))?,
         };
 
         Ok(rgb)

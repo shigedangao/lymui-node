@@ -3,10 +3,10 @@ name: tests
 on: [push]
 
 jobs:
-  tests:
+  rust:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: install clippy
         run: rustup component add clippy
       - name: clippy
@@ -15,3 +15,16 @@ jobs:
         run: cargo fmt --check
       - name: run tests
         run: cargo test
+  js:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [18.x]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm build
+      - run: npm test

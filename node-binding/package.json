@@ -1,13 +1,15 @@
 {
     "package": "lymui-node",
     "devDependencies": {
-      "@napi-rs/cli": "^1.0.0"
+        "@napi-rs/cli": "^1.0.0",
+        "jest": "^29.5.0"
     },
     "napi": {
-      "name": "node-binding"
+        "name": "node-binding"
     },
     "scripts": {
-      "build": "napi build --release",
-      "build:debug": "napi build"
+        "build": "napi build --release",
+        "build:debug": "napi build",
+        "test": "jest"
     }
-  }
+}

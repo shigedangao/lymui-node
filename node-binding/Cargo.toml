@@ -12,7 +12,6 @@ crate-type = ["cdylib"]
 napi = { version = "2", features = ["serde"] }
 napi-derive = "2"
 lymui = { git = "https://github.com/shigedangao/lymui" , features = ["js"]}
-anyhow = "1.0.71"
 
 [build-dependencies]
 napi-build = "1"
