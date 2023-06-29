@@ -27,4 +27,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm build
+        working-directory: node-binding
       - run: npm test
+        working-directory: node-binding
