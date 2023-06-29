@@ -26,6 +26,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+      - run: npm install
+        working-directory: node-binding
       - run: npm run build
         working-directory: node-binding
       - run: npm run test
