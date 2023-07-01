@@ -20,6 +20,7 @@ pub enum XyzMapping {
     REC2100,
     SRgb,
     Xyy,
+    Xyz
 }
 
 impl XyzMapping {
@@ -44,6 +45,7 @@ impl XyzMapping {
             Self::REC2100 => Xyz::from(Rec2100::from_js_object(object)?),
             Self::SRgb => Xyz::from(Srgb::from_js_object(object)?),
             Self::Xyy => Xyz::from(Xyy::from_js_object(object)?),
+            Self::Xyz => Xyz::from_js_object(object)?
         };
 
         Ok(xyz)
@@ -71,6 +73,7 @@ impl XyzMapping {
             Self::REC2100 => Rec2100::from(xyz).into_js_object(env),
             Self::SRgb => Srgb::from(xyz).into_js_object(env),
             Self::Xyy => Xyy::from(xyz).into_js_object(env),
+            Self::Xyz => xyz.into_js_object(env)
         }?;
 
         Ok(res)
