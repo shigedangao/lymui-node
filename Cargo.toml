@@ -1,6 +1,17 @@
-[workspace]
+[package]
+name = "lymui-c"
+version = "0.2.0"
+edition = "2024"
 
-members = [
-    "lymui-c",
-    "node-binding"
-]
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "lymui_c"
+crate-type = ["cdylib"]
+
+[dependencies]
+anyhow = "1.0.102"
+lymui = { path = "../lymui" }
+
+
+[build-dependencies]
+cbindgen = "^0.29.2"

@@ -15,20 +15,3 @@ jobs:
         run: cargo fmt --check
       - name: run tests
         run: cargo test
-  js:
-    runs-on: ubuntu-22.04
-    strategy:
-      matrix:
-        node-version: [18.x]
-    steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm install
-        working-directory: node-binding
-      - run: npm run build
-        working-directory: node-binding
-      - run: npm run test
-        working-directory: node-binding
