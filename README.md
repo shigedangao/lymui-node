@@ -1,52 +1,93 @@
-## Lymui-node 🍭 (WIP)
+## Lymui-c 🍭
 
-A small wrapper over the [lymui](https://github.com/shigedangao/lymui) library. The wrapper provide binding for the specified language below
+A thin C ABI wrapper over the [lymui](https://github.com/shigedangao/lymui) color conversion library. It compiles to a C-compatible shared library (`cdylib`) so you can consume the library from C (and any language with C FFI).
 
-- C
-- NodeJS
+## Features
 
-## C Binding
+- Convert between a wide range of color spaces (RGB, CYMK, HSL, HSV, HWB, YCbCr, YUV, ANSI16/256, XYZ, ARGB, HCL, HLAB, LAB, LCH-LAB, LCHUV, LUV, Oklab, Oklch, REC709, REC2020, REC2100, sRGB, xyY, Hex).
+- Compute grayscale values using several strategies (Lightness, Average, Luminosity, BT709, BT2100).
+- Generate shades and tints from a given color.
+- Optional reference white selection (`D50`, `D65`, `Adobe`) for XYZ-based conversions.
 
-Uses these commands
+## Build
 
-1. Compile the header for the C library
-
-```sh
-cbindgen --config cbindgen.toml --crate lymui-c --output my_header.h --lang c
-```
-
-2. Compile lymui-node
+Build the shared library and let `build.rs` regenerate the `bindings.h` header through `cbindgen`.
 
 ```sh
-cargo build 
+cargo build --release
 ```
 
-3. Compile the example with GCC
+This produces:
+
+- `target/release/liblymui_c.{so,dylib,dll}` — the shared library.
+- `bindings.h` — the C header (regenerated on every build).
+
+If you want to regenerate the header manually:
 
 ```sh
-gcc rgb.c -o test -llymui_c -L../../target/debug
+cbindgen --config cbindgen.toml --crate lymui-c --output bindings.h --lang c
 ```
 
-4. Run the example
+## Using it from C
+
+A complete example lives in [`examples/rgb.c`](examples/rgb.c). Compile and run it against the debug build:
 
 ```sh
-LD_LIBRARY_PATH=../../target/debug ./test
+cd examples
+gcc rgb.c -o test -llymui_c -L../target/debug
+LD_LIBRARY_PATH=../target/debug ./test
 ```
 
-## NodeJS
+On macOS replace `LD_LIBRARY_PATH` with `DYLD_LIBRARY_PATH`.
 
-You'll need to have NodeJS installed on your machine.
+### Minimal example
 
-1. Go to the `node-binding` folder and run the following command `npm run build`. This is going to output a `.node` file which you can use in your npm project
+```c
+#include "../bindings.h"
+#include <stdint.h>
+#include <stdio.h>
 
-2. In a JS file file you can copy paste the following example.
+int main(void) {
+    uint8_t rgb[3] = {100, 0, 194};
 
-```js
-const binding = require('../node-binding.node')
+    // RGB -> CYMK
+    Color *cymk = get_color(rgb, Rgb, Cymk, None);
+    printf("c: %f, y: %f, m: %f, k: %f\n",
+        cymk->data->ptr[0], cymk->data->ptr[1],
+        cymk->data->ptr[2], cymk->data->ptr[3]);
 
-const res = binding.getAnyRgbCompatibleColor(
-    { r: 5, g: 10, b: 100 },
-    binding.RgbMapping.Rgb,
-    binding.RgbMapping.Hex
-)
+    // RGB -> Hex
+    Color *hex = get_color(rgb, Rgb, Hex, None);
+    printf("hex: %s\n", hex->hex);
+
+    // Grayscale
+    uint8_t *gray = get_grayscale(rgb, Rgb, Lightness);
+    printf("grayscale: %u\n", *gray);
+
+    // Shade generator with a 0.1 factor
+    Generator *shade = get_generator(rgb, Rgb, 0.1, Shade);
+    printf("shade[1] = (%d, %d, %d)\n",
+        shade->generated[1].r, shade->generated[1].g, shade->generated[1].b);
+
+    // Always release colors allocated by Rust
+    drop_color(*hex);
+    return 0;
+}
 ```
+
+## API overview
+
+| Function | Description |
+| --- | --- |
+| `get_color(data, from, target, lumens)` | Convert `data` from the `from` color space to `target`. Returns a `Color*` whose `data->ptr` holds the component vector, or `hex` for hex output. |
+| `get_grayscale(data, from, kind)` | Returns a `uint8_t*` grayscale value computed with the chosen strategy. |
+| `get_generator(data, from, factor, kind)` | Returns a `Generator*` of `RgbGenerator` values (Shade or Tint). |
+| `drop_color(color)` | Frees memory allocated by `get_color`. Must be called to avoid leaks. |
+
+### Memory ownership
+
+Any pointer returned by the library is owned by Rust. `drop_color` is provided to release `Color` results; do not `free()` these pointers directly.
+
+## License
+
+See [LICENSE](LICENSE).
