@@ -92,6 +92,7 @@ typedef struct RgbGenerator {
 typedef struct Generator {
   struct RgbGenerator *generated;
   uintptr_t len;
+  uintptr_t cap;
 } Generator;
 
 /**
@@ -157,3 +158,19 @@ struct Generator *get_generator(void *data,
  * * `color` - The color to free.
  */
 void drop_color(struct Color color);
+
+/**
+ * Frees the memory allocated for the given generator.
+ *
+ * # Safety
+ *
+ * * `generator` - Must be a valid pointer to a `Generator`.
+ *
+ * This function must be called when the generator is no longer needed. As rust owns
+ * the memory for the generator, this function should be called to avoid memory leaks.
+ *
+ * # Arguments
+ *
+ * * `generator` - The generator to free.
+ */
+void drop_generator(struct Generator *generator);

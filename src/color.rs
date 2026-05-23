@@ -67,6 +67,11 @@ pub fn get_color(
     }
 }
 
+/// Frees memory allocated by `get_color` when `target` is `Hex`.
+///
+/// # Arguments
+///
+/// * `color` - A pointer to the `ColorResult` to be freed.
 pub unsafe fn drop_color_result(color: *mut ColorResult) {
     if !color.is_null() {
         let boxed_color = unsafe { Box::from_raw(color) };

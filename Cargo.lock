@@ -247,7 +247,9 @@ dependencies = [
 
 [[package]]
 name = "lymui"
-version = "0.2.0"
+version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e980178484f283a9ef8569ae855d9a264bbbc2baa567e6d7c24b01ecacf3eea2"
 
 [[package]]
 name = "lymui-c"

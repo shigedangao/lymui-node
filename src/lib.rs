@@ -30,6 +30,7 @@ pub struct RgbGenerator {
 pub struct Generator {
     pub generated: *mut RgbGenerator,
     pub len: usize,
+    cap: usize,
 }
 
 /// Represents the lumens type for color calculations.
@@ -179,6 +180,7 @@ pub unsafe extern "C" fn get_generator(
     let generated_boxed = Box::new(Generator {
         generated: generated_kind.as_mut_ptr(),
         len: generated_kind.len(),
+        cap: generated_kind.capacity(),
     });
 
     // Prevent rust deallocating the vector
@@ -208,4 +210,36 @@ pub unsafe extern "C" fn drop_color(color: Color) {
             drop(hex);
         }
     }
+}
+
+/// Frees the memory allocated for the given generator.
+///
+/// # Safety
+///
+/// * `generator` - Must be a valid pointer to a `Generator`.
+///
+/// This function must be called when the generator is no longer needed. As rust owns
+/// the memory for the generator, this function should be called to avoid memory leaks.
+///
+/// # Arguments
+///
+/// * `generator` - The generator to free.
+#[unsafe(no_mangle)]
+pub unsafe extern "C" fn drop_generator(generator: *mut Generator) {
+    if generator.is_null() {
+        return;
+    }
+
+    let owned_generator = unsafe { Box::from_raw(generator) };
+    // Reconstruct the vector from the boxed generator
+    let v = unsafe {
+        Vec::from_raw_parts(
+            owned_generator.generated,
+            owned_generator.len,
+            owned_generator.cap,
+        )
+    };
+
+    // Drop the vector to free the memory
+    drop(v);
 }

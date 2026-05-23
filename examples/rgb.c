@@ -44,4 +44,5 @@ int main(void) {
 
     // drop the color when you're done with it -> free the memory
     drop_color(*hex);
+    drop_generator(shade);
 }
