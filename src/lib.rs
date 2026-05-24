@@ -296,6 +296,23 @@ mod tests {
     }
 
     #[test]
+    fn expect_to_get_hex() {
+        let color_slice: [u8; 3] = [0, 100, 200];
+        let color = get_color(
+            color_slice.as_ptr() as *mut c_void,
+            ColorMapping::Rgb,
+            ColorMapping::Hex,
+            Lumens::None,
+        );
+
+        assert!(!color.is_null());
+
+        let boxed_color = unsafe { Box::from_raw(color) };
+        let hex = unsafe { CString::from_raw(boxed_color.hex) };
+        assert_eq!(hex.to_string_lossy(), "#0064c8");
+    }
+
+    #[test]
     fn expect_to_get_grayscale() {
         let color_vec: [u8; 3] = [255, 0, 0];
         let g_scale = get_grayscale(
