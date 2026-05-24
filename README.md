@@ -69,8 +69,10 @@ int main(void) {
     printf("shade[1] = (%d, %d, %d)\n",
         shade->generated[1].r, shade->generated[1].g, shade->generated[1].b);
 
-    // Always release colors allocated by Rust
+    // Always release memory allocated by Rust
+    drop_color(*cymk);
     drop_color(*hex);
+    drop_generator(shade);
     return 0;
 }
 ```
@@ -83,10 +85,11 @@ int main(void) {
 | `get_grayscale(data, from, kind)` | Returns a `uint8_t*` grayscale value computed with the chosen strategy. |
 | `get_generator(data, from, factor, kind)` | Returns a `Generator*` of `RgbGenerator` values (Shade or Tint). |
 | `drop_color(color)` | Frees memory allocated by `get_color`. Must be called to avoid leaks. |
+| `drop_generator(generator)` | Frees the `Generator*` allocated by `get_generator`. Must be called to avoid leaks. |
 
 ### Memory ownership
 
-Any pointer returned by the library is owned by Rust. `drop_color` is provided to release `Color` results; do not `free()` these pointers directly.
+Any pointer returned by the library is owned by Rust. Use `drop_color` to release `Color` results and `drop_generator` to release `Generator` results; do not `free()` these pointers directly.
 
 ## License
 
