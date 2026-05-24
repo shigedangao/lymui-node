@@ -28,7 +28,7 @@ pub struct RgbGenerator {
 #[derive(Debug)]
 #[repr(C)]
 pub struct Generator {
-    pub generated: *mut RgbGenerator,
+    pub generated: *const RgbGenerator,
     pub len: usize,
     cap: usize,
 }
@@ -153,7 +153,7 @@ pub extern "C" fn get_grayscale(data: *mut c_void, from: ColorMapping, kind: Gra
 ///
 /// A raw pointer to the generator, or `null` if the generator could not be created.
 #[unsafe(no_mangle)]
-pub unsafe extern "C" fn get_generator(
+pub extern "C" fn get_generator(
     data: *mut c_void,
     from: ColorMapping,
     factor: c_double,
@@ -182,7 +182,7 @@ pub unsafe extern "C" fn get_generator(
     }
 
     let generated_boxed = Box::new(Generator {
-        generated: generated_kind.as_mut_ptr(),
+        generated: generated_kind.as_ptr(),
         len: generated_kind.len(),
         cap: generated_kind.capacity(),
     });
@@ -206,7 +206,7 @@ pub unsafe extern "C" fn get_generator(
 /// The `data` pointer must be valid and not null.
 /// The `hex` pointer must be valid and not null.
 #[unsafe(no_mangle)]
-pub unsafe extern "C" fn drop_color(color: Color) {
+pub extern "C" fn drop_color(color: Color) {
     if !color.data.is_null() {
         unsafe {
             color::drop_color_result(color.data);
@@ -243,7 +243,7 @@ pub unsafe extern "C" fn drop_generator(generator: *mut Generator) {
     // Reconstruct the vector from the boxed generator
     let v = unsafe {
         Vec::from_raw_parts(
-            owned_generator.generated,
+            owned_generator.generated as *mut RgbGenerator,
             owned_generator.len,
             owned_generator.cap,
         )
@@ -334,23 +334,18 @@ mod tests {
         assert_eq!(unsafe { *g_scale }, 127);
 
         assert!(!g_scale.is_null());
-        unsafe {
-            drop_grayscale(g_scale);
-        }
+        unsafe { drop_grayscale(g_scale) };
     }
 
     #[test]
     fn expect_to_get_shade() {
         let color_slice: [u8; 3] = [200, 100, 50];
-        let generator = unsafe {
-            get_generator(
-                color_slice.as_ptr() as *mut c_void,
-                ColorMapping::Rgb,
-                0.5,
-                GeneratorKind::Shade,
-            )
-        };
-
+        let generator = get_generator(
+            color_slice.as_ptr() as *mut c_void,
+            ColorMapping::Rgb,
+            0.5,
+            GeneratorKind::Shade,
+        );
         assert!(!generator.is_null());
 
         unsafe {

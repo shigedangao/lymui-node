@@ -91,7 +91,7 @@ typedef struct RgbGenerator {
  * The generated colors are send as *mut RgbGenerator which represents a pointer to a vector of RgbGenerator results.
  */
 typedef struct Generator {
-  struct RgbGenerator *generated;
+  const struct RgbGenerator *generated;
   uintptr_t len;
   uintptr_t cap;
 } Generator;

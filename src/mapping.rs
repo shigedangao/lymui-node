@@ -234,7 +234,7 @@ impl ColorMapping {
         let color_vec = match self {
             Self::Cymk => convert_rgb_subcolor::<Rgb, Cymk>(rgb).to_vec(),
             Self::Hsl => convert_rgb_subcolor::<Rgb, Hsl>(rgb).to_vec(),
-            Self::Hsv => convert_rgb_subcolor::<Rgb, Hsl>(rgb).to_vec(),
+            Self::Hsv => convert_rgb_subcolor::<Rgb, Hsv>(rgb).to_vec(),
             Self::Hwb => convert_rgb_subcolor::<Rgb, Hwb>(rgb).to_vec(),
             Self::Yuv => convert_rgb_subcolor::<Rgb, Yuv>(rgb).to_vec(),
             Self::Xyz => from_rgb_space_to_xyz_space::<Rgb, Xyz>(rgb, lumens).to_vec(),
