@@ -64,6 +64,7 @@ typedef enum GeneratorKind {
 } GeneratorKind;
 
 typedef struct ColorResult {
+  uintptr_t cap;
   uintptr_t len;
   const double *ptr;
 } ColorResult;
@@ -174,3 +175,19 @@ void drop_color(struct Color color);
  * * `generator` - The generator to free.
  */
 void drop_generator(struct Generator *generator);
+
+/**
+ * Frees the memory allocated for the given grayscale scale.
+ *
+ * # Safety
+ *
+ * * `g_scale` - Must be a valid pointer to a `u8` slice.
+ *
+ * This function must be called when the grayscale scale is no longer needed. As rust owns
+ * the memory for the grayscale scale, this function should be called to avoid memory leaks.
+ *
+ * # Arguments
+ *
+ * * `g_scale` - The grayscale scale to free.
+ */
+void drop_grayscale(uint8_t *g_scale);

@@ -243,3 +243,73 @@ pub unsafe extern "C" fn drop_generator(generator: *mut Generator) {
     // Drop the vector to free the memory
     drop(v);
 }
+
+/// Frees the memory allocated for the given grayscale scale.
+///
+/// # Safety
+///
+/// * `g_scale` - Must be a valid pointer to a `u8` slice.
+///
+/// This function must be called when the grayscale scale is no longer needed. As rust owns
+/// the memory for the grayscale scale, this function should be called to avoid memory leaks.
+///
+/// # Arguments
+///
+/// * `g_scale` - The grayscale scale to free.
+#[unsafe(no_mangle)]
+pub unsafe extern "C" fn drop_grayscale(g_scale: *mut u8) {
+    if g_scale.is_null() {
+        return;
+    }
+
+    unsafe {
+        drop(Box::from_raw(g_scale));
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn expect_to_get_color() {
+        let color_slice: [u8; 3] = [0, 100, 200];
+        let color = get_color(
+            color_slice.as_ptr() as *mut c_void,
+            ColorMapping::Rgb,
+            ColorMapping::YCbCr,
+            Lumens::None,
+        );
+
+        assert!(!color.is_null());
+
+        // Reconstruct the vec which should contains the color data as a vector of f64
+        let boxed_color = unsafe { Box::from_raw(color) };
+        let data = unsafe { Box::from_raw(boxed_color.data) };
+        let vv = unsafe { Vec::from_raw_parts(data.ptr as *mut f64, data.len, data.cap) };
+
+        // Verify the vec contains the expected color data
+        assert_eq!(vv.len(), 3);
+        assert_eq!(vv[0], 86.);
+        assert_eq!(vv[1], 186.);
+        assert_eq!(vv[2], 77.);
+    }
+
+    #[test]
+    fn expect_to_get_grayscale() {
+        let color_vec: [u8; 3] = [255, 0, 0];
+        let g_scale = get_grayscale(
+            color_vec.as_ptr() as *mut c_void,
+            ColorMapping::Rgb,
+            Grayscale::Lightness,
+        );
+
+        // Leaking in order to access the result.
+        assert_eq!(unsafe { *g_scale }, 127);
+
+        assert!(!g_scale.is_null());
+        unsafe {
+            drop_grayscale(g_scale);
+        }
+    }
+}
