@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 int main(void) {
-    uint8_t rgb[3] = {100, 0, 194};
+    uint8_t rgb[3] = {255, 0, 0};
     Lumens lumen = None;
 
     // convert any color that can be convert from an rgb compatible type to an rgb compatible type

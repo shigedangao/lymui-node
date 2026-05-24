@@ -7,6 +7,7 @@ use std::ffi::{CString, c_char, c_void};
 #[derive(Debug)]
 #[repr(C)]
 pub struct ColorResult {
+    pub cap: usize,
     pub len: usize,
     pub ptr: *const f64,
 }
@@ -53,11 +54,12 @@ pub fn get_color(
 
     match color_slice {
         ColorConversionResult::Color(color_slice) => {
+            let cap = color_slice.capacity();
             let boxed = color_slice.into_boxed_slice();
             let len = boxed.len();
             let ptr = Box::into_raw(boxed) as *const f64;
 
-            Ok((Some(ColorResult { len, ptr }), None))
+            Ok((Some(ColorResult { cap, len, ptr }), None))
         }
         ColorConversionResult::Hex(hex) => {
             let hex_c_str = CString::new(hex)?;
