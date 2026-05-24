@@ -312,4 +312,32 @@ mod tests {
             drop_grayscale(g_scale);
         }
     }
+
+    #[test]
+    fn expect_to_get_shade() {
+        let color_slice: [u8; 3] = [200, 100, 50];
+        let generator = unsafe {
+            get_generator(
+                color_slice.as_ptr() as *mut c_void,
+                ColorMapping::Rgb,
+                0.5,
+                GeneratorKind::Shade,
+            )
+        };
+
+        assert!(!generator.is_null());
+
+        unsafe {
+            let output = &*generator;
+            // With a 0.5 factor the shades run from f=1.0 down to 0.0: [original, half, black].
+            assert_eq!(output.len, 3);
+
+            let shades = std::slice::from_raw_parts(output.generated, output.len);
+            assert_eq!((shades[0].r, shades[0].g, shades[0].b), (200, 100, 50));
+            assert_eq!((shades[1].r, shades[1].g, shades[1].b), (100, 50, 25));
+            assert_eq!((shades[2].r, shades[2].g, shades[2].b), (0, 0, 0));
+
+            drop_generator(generator);
+        }
+    }
 }
