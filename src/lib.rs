@@ -115,7 +115,7 @@ pub extern "C" fn get_color(
 /// A pointer to the grayscale value of the given color data.
 #[unsafe(no_mangle)]
 pub extern "C" fn get_grayscale(data: *mut c_void, from: ColorMapping, kind: Grayscale) -> *mut u8 {
-    let Ok(converted_rgb) = from.get_rgb_from_color_space_rgb(data) else {
+    let Ok(converted_rgb) = from.get_rgb_from_color_space_rgb(data, &Lumens::None) else {
         return std::ptr::null_mut();
     };
 
@@ -145,6 +145,10 @@ pub extern "C" fn get_grayscale(data: *mut c_void, from: ColorMapping, kind: Gra
 /// * `factor` - The factor to use for the generator.
 /// * `kind` - The kind of generator to create.
 ///
+/// # Safety
+///
+/// The `data` pointer must be valid and not null which represents an array of color e.g for the RGB: [1, 2, 3].
+///
 /// # Returns
 ///
 /// A raw pointer to the generator, or `null` if the generator could not be created.
@@ -155,13 +159,13 @@ pub unsafe extern "C" fn get_generator(
     factor: c_double,
     kind: GeneratorKind,
 ) -> *mut Generator {
-    let Ok(converted_rgb) = from.get_rgb_from_color_space_rgb(data) else {
+    let Ok(converted_rgb) = from.get_rgb_from_color_space_rgb(data, &Lumens::None) else {
         return std::ptr::null_mut();
     };
 
     let res = match kind {
-        GeneratorKind::Shade => Shade::compute(converted_rgb, factor as f64).map(|v| v.0),
-        GeneratorKind::Tint => Tint::compute(converted_rgb, factor as f64).map(|v| v.0),
+        GeneratorKind::Shade => Shade::compute(converted_rgb, factor).map(|v| v.0),
+        GeneratorKind::Tint => Tint::compute(converted_rgb, factor).map(|v| v.0),
     };
 
     let Ok(generated) = res else {
@@ -196,6 +200,11 @@ pub unsafe extern "C" fn get_generator(
 /// # Arguments
 ///
 /// * `color` - The color to free.
+///
+/// # Safety
+///
+/// The `data` pointer must be valid and not null.
+/// The `hex` pointer must be valid and not null.
 #[unsafe(no_mangle)]
 pub unsafe extern "C" fn drop_color(color: Color) {
     if !color.data.is_null() {

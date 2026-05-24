@@ -6,6 +6,8 @@ use lymui::{
 use std::ffi::{CStr, c_void};
 use std::ops::Add;
 
+use crate::Lumens;
+
 /// Represents the color mapping to use when converting a color.
 #[derive(Debug, Clone, PartialEq)]
 #[repr(C)]
@@ -90,6 +92,7 @@ pub fn construct_rgb_from_xyz_slice<
     E: Add,
 >(
     ptr: *mut c_void,
+    lumens: &Lumens,
 ) -> Rgb {
     // Recreate the slice from the pointer which represents a color that can be convert directly to XYZ.
     let slice =
@@ -100,8 +103,15 @@ pub fn construct_rgb_from_xyz_slice<
     // Convert the color to XYZ.
     let xyz = tyy.into();
 
+    let lib_lumens = match lumens {
+        Lumens::None => Kind::D65,
+        Lumens::D65 => Kind::D65,
+        Lumens::D50 => Kind::D50,
+        Lumens::Adobe => Kind::Adobe,
+    };
+
     // Convert the XYZ color to RGB.
-    xyz.as_rgb(Kind::D65)
+    xyz.as_rgb(lib_lumens)
 }
 
 /// Converts a raw pointer to a color slice of the specified size.
@@ -133,7 +143,11 @@ impl ColorMapping {
     /// # Returns
     ///
     /// Returns an [`Rgb`] color.
-    pub(crate) fn get_rgb_from_color_space_rgb(&self, ptr: *mut c_void) -> Result<Rgb> {
+    pub(crate) fn get_rgb_from_color_space_rgb(
+        &self,
+        ptr: *mut c_void,
+        lumens: &Lumens,
+    ) -> Result<Rgb> {
         if *self == Self::Hex {
             let hex = unsafe { CStr::from_ptr(ptr as *const _) }
                 .to_string_lossy()
@@ -155,21 +169,21 @@ impl ColorMapping {
             Self::Hwb => construct_rgb_from_slice::<3, Hwb, f64>(ptr),
             Self::YCbCr => construct_rgb_from_slice::<3, Ycbcr, u8>(ptr),
             Self::Yuv => construct_rgb_from_slice::<3, Yuv, f64>(ptr),
-            ColorMapping::Xyz => construct_rgb_from_xyz_slice::<3, Xyz, f64>(ptr),
-            ColorMapping::Argb => construct_rgb_from_xyz_slice::<3, Argb, f64>(ptr),
-            ColorMapping::Hcl => construct_rgb_from_xyz_slice::<3, Hcl, f64>(ptr),
-            ColorMapping::Hlab => construct_rgb_from_xyz_slice::<3, Hlab, f64>(ptr),
-            ColorMapping::Lab => construct_rgb_from_xyz_slice::<3, Lab, f64>(ptr),
-            ColorMapping::LchLab => construct_rgb_from_xyz_slice::<3, Lchlab, f64>(ptr),
-            ColorMapping::Lchuv => construct_rgb_from_xyz_slice::<3, Lchuv, f64>(ptr),
-            ColorMapping::Luv => construct_rgb_from_xyz_slice::<3, Luv, f64>(ptr),
-            ColorMapping::Oklab => construct_rgb_from_xyz_slice::<3, OkLab, f64>(ptr),
-            ColorMapping::Oklch => construct_rgb_from_xyz_slice::<3, OkLch, f64>(ptr),
-            ColorMapping::REC709 => construct_rgb_from_xyz_slice::<3, Rec709, f64>(ptr),
-            ColorMapping::REC2020 => construct_rgb_from_xyz_slice::<3, Rec2020, f64>(ptr),
-            ColorMapping::REC2100 => construct_rgb_from_xyz_slice::<3, Rec2100, f64>(ptr),
-            ColorMapping::SRGB => construct_rgb_from_xyz_slice::<3, Srgb, f64>(ptr),
-            ColorMapping::Xyy => construct_rgb_from_xyz_slice::<3, Xyy, f64>(ptr),
+            Self::Xyz => construct_rgb_from_xyz_slice::<3, Xyz, f64>(ptr, lumens),
+            Self::Argb => construct_rgb_from_xyz_slice::<3, Argb, f64>(ptr, lumens),
+            Self::Hcl => construct_rgb_from_xyz_slice::<3, Hcl, f64>(ptr, lumens),
+            Self::Hlab => construct_rgb_from_xyz_slice::<3, Hlab, f64>(ptr, lumens),
+            Self::Lab => construct_rgb_from_xyz_slice::<3, Lab, f64>(ptr, lumens),
+            Self::LchLab => construct_rgb_from_xyz_slice::<3, Lchlab, f64>(ptr, lumens),
+            Self::Lchuv => construct_rgb_from_xyz_slice::<3, Lchuv, f64>(ptr, lumens),
+            Self::Luv => construct_rgb_from_xyz_slice::<3, Luv, f64>(ptr, lumens),
+            Self::Oklab => construct_rgb_from_xyz_slice::<3, OkLab, f64>(ptr, lumens),
+            Self::Oklch => construct_rgb_from_xyz_slice::<3, OkLch, f64>(ptr, lumens),
+            Self::REC709 => construct_rgb_from_xyz_slice::<3, Rec709, f64>(ptr, lumens),
+            Self::REC2020 => construct_rgb_from_xyz_slice::<3, Rec2020, f64>(ptr, lumens),
+            Self::REC2100 => construct_rgb_from_xyz_slice::<3, Rec2100, f64>(ptr, lumens),
+            Self::SRGB => construct_rgb_from_xyz_slice::<3, Srgb, f64>(ptr, lumens),
+            Self::Xyy => construct_rgb_from_xyz_slice::<3, Xyy, f64>(ptr, lumens),
             _ => unreachable!(),
         };
 

@@ -140,6 +140,10 @@ uint8_t *get_grayscale(void *data, enum ColorMapping from, enum Grayscale kind);
  * * `factor` - The factor to use for the generator.
  * * `kind` - The kind of generator to create.
  *
+ * # Safety
+ *
+ * The `data` pointer must be valid and not null which represents an array of color e.g for the RGB: [1, 2, 3].
+ *
  * # Returns
  *
  * A raw pointer to the generator, or `null` if the generator could not be created.
@@ -157,6 +161,11 @@ struct Generator *get_generator(void *data,
  * # Arguments
  *
  * * `color` - The color to free.
+ *
+ * # Safety
+ *
+ * The `data` pointer must be valid and not null.
+ * The `hex` pointer must be valid and not null.
  */
 void drop_color(struct Color color);
 

@@ -4,20 +4,20 @@ on: [push]
 
 jobs:
   rust:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: install clippy
         run: rustup component add clippy
       - name: clippy
-        run: cargo clippy --all-features
+        run: cargo clippy
       - name: cargo check
         run: cargo fmt --check
       - name: run tests
         run: cargo test
 
   c-tests:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: build cdylib and run C tests

@@ -35,7 +35,7 @@ pub fn get_color(
     lumens: Lumens,
 ) -> Result<(Option<ColorResult>, Option<*const c_char>)> {
     // Convert the raw color data to RGB using the specified color space.
-    let converted_rgb = from.get_rgb_from_color_space_rgb(data)?;
+    let converted_rgb = from.get_rgb_from_color_space_rgb(data, &lumens)?;
 
     // Convert the RGB color to the target color space using the specified lumens type.
     let lib_lumens = match lumens {
@@ -74,6 +74,10 @@ pub fn get_color(
 /// # Arguments
 ///
 /// * `color` - A pointer to the `ColorResult` to be freed.
+///
+/// # Safety
+///
+/// The `color` pointer must be valid and not null.
 pub unsafe fn drop_color_result(color: *mut ColorResult) {
     if !color.is_null() {
         let boxed_color = unsafe { Box::from_raw(color) };
