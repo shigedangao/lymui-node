@@ -42,6 +42,12 @@ int main(void) {
     printf("shade for g: %d \n", shade->generated[1].g);
     printf("shade for b: %d \n", shade->generated[1].b);
 
+    char wronghex[] = "#&";
+    Color *wrong = get_color(wronghex, Hex, Rgb, None);
+    printf("wrong rgb: %s \n", wrong == NULL ? "true" : "false");
+    Error err = get_error();
+    printf("error: %d \n", err);
+
     // drop the color when you're done with it -> free the memory
     drop_color(*hex);
     drop_generator(shade);

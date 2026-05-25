@@ -2,6 +2,10 @@ use crate::mapping::ColorMapping;
 use lymui::generator::{GeneratorOps, shade::Shade, tint::Tint};
 use lymui::rgb::FromRgb;
 use std::ffi::{CString, c_char, c_double, c_void};
+use std::sync::{LazyLock, Mutex};
+
+// LIB_ERROR define an error that can be used to communicate errors to the caller.
+static LIB_ERROR: LazyLock<Mutex<Error>> = LazyLock::new(|| Mutex::new(Error::NoError));
 
 pub mod color;
 pub mod mapping;
@@ -65,6 +69,15 @@ pub enum GeneratorKind {
     Tint,
 }
 
+/// Represents the error codes that can be returned by the library.
+#[derive(Clone, Copy, Debug)]
+#[repr(C)]
+pub enum Error {
+    NoError,
+    ColorConversionError,
+    GeneratorError,
+}
+
 /// Retrieves a color result based on the specified color mapping and lumens type.
 ///
 /// # Arguments
@@ -85,6 +98,8 @@ pub extern "C" fn get_color(
     lumens: Lumens,
 ) -> *mut Color {
     let Ok(color) = color::get_color(color, from, target, lumens) else {
+        set_error(Error::ColorConversionError);
+
         return std::ptr::null_mut();
     };
 
@@ -116,6 +131,8 @@ pub extern "C" fn get_color(
 #[unsafe(no_mangle)]
 pub extern "C" fn get_grayscale(data: *mut c_void, from: ColorMapping, kind: Grayscale) -> *mut u8 {
     let Ok(converted_rgb) = from.get_rgb_from_color_space_rgb(data, &Lumens::None) else {
+        set_error(Error::ColorConversionError);
+
         return std::ptr::null_mut();
     };
 
@@ -160,6 +177,8 @@ pub extern "C" fn get_generator(
     kind: GeneratorKind,
 ) -> *mut Generator {
     let Ok(converted_rgb) = from.get_rgb_from_color_space_rgb(data, &Lumens::None) else {
+        set_error(Error::ColorConversionError);
+
         return std::ptr::null_mut();
     };
 
@@ -169,6 +188,8 @@ pub extern "C" fn get_generator(
     };
 
     let Ok(generated) = res else {
+        set_error(Error::GeneratorError);
+
         return std::ptr::null_mut();
     };
 
@@ -191,6 +212,21 @@ pub extern "C" fn get_generator(
     std::mem::forget(generated_kind);
 
     Box::into_raw(generated_boxed)
+}
+
+/// Get the current error code exposed by the FFI.
+///
+/// # Returns
+///
+/// The current error code.
+#[unsafe(no_mangle)]
+pub extern "C" fn get_error() -> Error {
+    let lib_error = &*LIB_ERROR;
+
+    match lib_error.try_lock() {
+        Ok(lock) => *lock,
+        Err(_) => Error::NoError,
+    }
 }
 
 /// Frees the memory allocated for the given color.
@@ -274,6 +310,26 @@ pub unsafe extern "C" fn drop_grayscale(g_scale: *mut u8) {
     unsafe {
         drop(Box::from_raw(g_scale));
     }
+}
+
+/// Sets the error code in the library error mutex.
+///
+/// # Arguments
+///
+/// * `error` - The error code to set.
+fn set_error(error: Error) {
+    if LazyLock::get(&LIB_ERROR).is_none() {
+        // Force state initialization of the error lock if not already done. To be fair done on the lib_error line
+        // but that may seems more explicit to do it here as I'll forget.
+        let _ = LazyLock::force(&LIB_ERROR);
+    }
+
+    let lib_error = &*LIB_ERROR;
+    let Ok(mut guard) = lib_error.try_lock() else {
+        return;
+    };
+
+    *guard = error;
 }
 
 #[cfg(test)]

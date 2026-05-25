@@ -63,6 +63,15 @@ typedef enum GeneratorKind {
   Tint,
 } GeneratorKind;
 
+/**
+ * Represents the error codes that can be returned by the library.
+ */
+typedef enum Error {
+  NoError,
+  ColorConversionError,
+  GeneratorError,
+} Error;
+
 typedef struct ColorResult {
   uintptr_t cap;
   uintptr_t len;
@@ -152,6 +161,15 @@ struct Generator *get_generator(void *data,
                                 enum ColorMapping from,
                                 double factor,
                                 enum GeneratorKind kind);
+
+/**
+ * Get the current error code exposed by the FFI.
+ *
+ * # Returns
+ *
+ * The current error code.
+ */
+enum Error get_error(void);
 
 /**
  * Frees the memory allocated for the given color.
