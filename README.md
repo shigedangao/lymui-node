@@ -4,7 +4,7 @@ A thin C ABI wrapper over the [lymui](https://github.com/shigedangao/lymui) colo
 
 ## Features
 
-- Convert between a wide range of color spaces (RGB, CYMK, HSL, HSV, HWB, YCbCr, YUV, ANSI16/256, XYZ, ARGB, HCL, HLAB, LAB, LCH-LAB, LCHUV, LUV, Oklab, Oklch, REC709, REC2020, REC2100, sRGB, xyY, Hex).
+- Convert between a wide range of color spaces. See the list of supported color spaces [here](https://github.com/shigedangao/lymui#lymui-).
 - Compute grayscale values using several strategies (Lightness, Average, Luminosity, BT709, BT2100).
 - Generate shades and tints from a given color.
 - Optional reference white selection (`D50`, `D65`, `Adobe`) for XYZ-based conversions.

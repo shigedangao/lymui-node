@@ -184,7 +184,11 @@ impl ColorMapping {
             Self::REC2100 => construct_rgb_from_xyz_slice::<3, Rec2100, f64>(ptr, lumens),
             Self::SRGB => construct_rgb_from_xyz_slice::<3, Srgb, f64>(ptr, lumens),
             Self::Xyy => construct_rgb_from_xyz_slice::<3, Xyy, f64>(ptr, lumens),
-            _ => unreachable!(),
+            _ => {
+                return Err(anyhow::anyhow!(
+                    "Unable to convert the given color space to RGB"
+                ));
+            }
         };
 
         Ok(rgb)
@@ -258,7 +262,7 @@ impl ColorMapping {
             Self::Ansi256 => {
                 vec![Ansi::from_rgb(rgb, AnsiKind::C256).0 as f64]
             }
-            _ => unreachable!(),
+            _ => return Err(anyhow::anyhow!("Color type is not supported")),
         };
 
         Ok(ColorConversionResult::Color(color_vec))
